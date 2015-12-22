@@ -1,0 +1,911 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>mHTM.plot</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="mHTM-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://techtorials.me">nano_htm</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="mHTM-module.html">Package&nbsp;mHTM</a> ::
+        Module&nbsp;plot
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="mHTM.plot-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module plot</h1><p class="nomargin-top"><span class="codelink"><a href="mHTM.plot-pysrc.html">source&nbsp;code</a></span></p>
+<p>Plotting module.</p>
+  <p></p>
+<center><table border="0" cellpadding="0" cellspacing="0" class="graph">
+  <tr><td align="center">
+  <map id="package_tree_for_mhtm_6" name="package_tree_for_mhtm_6">
+<area shape="rect" id="node1_11" href="mHTM.datasets.loader-module.html" title="mHTM.datasets.loader" alt="" coords="35,91,118,113"/>
+<area shape="rect" id="node1_12" href="mHTM.datasets-module.html" title="mHTM.datasets" alt="" coords="26,56,127,123"/>
+<area shape="rect" id="node1_13" href="mHTM.examples.mnist_parallel-module.html" title="mHTM.examples.mnist_parallel" alt="" coords="145,91,234,113"/>
+<area shape="rect" id="node1_14" href="mHTM.examples.mnist_runner-module.html" title="mHTM.examples.mnist_runner" alt="" coords="242,91,326,113"/>
+<area shape="rect" id="node1_15" href="mHTM.examples.mnist_simple-module.html" title="mHTM.examples.mnist_simple" alt="" coords="334,91,419,113"/>
+<area shape="rect" id="node1_16" href="mHTM.examples-module.html" title="mHTM.examples" alt="" coords="135,56,429,123"/>
+<area shape="rect" id="node1_17" href="mHTM.parallel-module.html" title="mHTM.parallel" alt="" coords="437,79,486,123"/>
+<area shape="rect" id="node1_18" href="mHTM.plot-module.html" title="mHTM.plot" alt="" coords="494,79,523,123"/>
+<area shape="rect" id="node1_19" href="mHTM.prob-module.html" title="mHTM.prob" alt="" coords="26,144,266,167"/>
+<area shape="rect" id="node1_20" href="mHTM.region-module.html" title="mHTM.region" alt="" coords="274,144,523,167"/>
+<area shape="rect" id="node1_21" href="mHTM-module.html" title="mHTM" alt="" coords="17,21,533,176"/>
+<area shape="rect" id="node1" href="mHTM-module.html" title="mHTM" alt="" coords="5,5,543,181"/>
+</map>
+  <img src="package_tree_for_mhtm_6.gif" alt='Package Tree for mHTM' usemap="#package_tree_for_mhtm_6" ismap="ismap" class="graph-with-title" />
+  </td></tr>
+  <tr><td align='center'>
+<span class="graph-title">Package Tree for mHTM</span>
+  </td></tr>
+</table><br /></center>  <p></p>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.plot-module.html#compute_axis_bounds" class="summary-sig-name">compute_axis_bounds</a>(<span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">multiplier</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Compute the bounds for the axis.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.plot-pysrc.html#compute_axis_bounds">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.plot-module.html#compute_err" class="summary-sig-name">compute_err</a>(<span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">x_med</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">axis</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Compute the relative errors based off IQR.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.plot-pysrc.html#compute_err">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.plot-module.html#plot_epoch" class="summary-sig-name">plot_epoch</a>(<span class="summary-sig-arg">y_series</span>,
+        <span class="summary-sig-arg">series_names</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">y_errs</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">y_label</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">title</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">semilog</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">out_path</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">show</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">start_epoch</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Basic plotter function for plotting various types of data against 
+      training epochs.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.plot-pysrc.html#plot_epoch">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.plot-module.html#plot_error" class="summary-sig-name">plot_error</a>(<span class="summary-sig-arg">x_series</span>,
+        <span class="summary-sig-arg">y_series</span>,
+        <span class="summary-sig-arg">series_names</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">y_errs</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">x_label</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">y_label</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">title</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">semilog</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">out_path</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">show</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">xlim</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">ylim</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">ax</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">legend</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Basic plotter function for plotting data with error bars.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.plot-pysrc.html#plot_error">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.plot-module.html#plot_line" class="summary-sig-name">plot_line</a>(<span class="summary-sig-arg">x_series</span>,
+        <span class="summary-sig-arg">y_series</span>,
+        <span class="summary-sig-arg">series_names</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">x_label</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">y_label</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">title</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">semilog</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">out_path</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">show</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">xlim</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">ylim</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Basic plotter function for plotting a line graph.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.plot-pysrc.html#plot_line">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.plot-module.html#plot_image" class="summary-sig-name">plot_image</a>(<span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">shape</span>,
+        <span class="summary-sig-arg">title</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">out_path</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">show</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Plot a grayscale image.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.plot-pysrc.html#plot_image">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.plot-module.html#plot_grid_images" class="summary-sig-name">plot_grid_images</a>(<span class="summary-sig-arg">X</span>,
+        <span class="summary-sig-arg">shape</span>,
+        <span class="summary-sig-arg">nrows</span>,
+        <span class="summary-sig-arg">ncols</span>,
+        <span class="summary-sig-arg">title</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">labels</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">out_path</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">show</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Construct a grid of grayscale images.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.plot-pysrc.html#plot_grid_images">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.plot-module.html#plot_compare_images" class="summary-sig-name">plot_compare_images</a>(<span class="summary-sig-arg">x_series</span>,
+        <span class="summary-sig-arg">shape</span>,
+        <span class="summary-sig-arg">title</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">series_labels</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">out_path</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">show</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Construct a grid of grayscale images.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.plot-pysrc.html#plot_compare_images">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.plot-module.html#plot_surface" class="summary-sig-name">plot_surface</a>(<span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">y</span>,
+        <span class="summary-sig-arg">z</span>,
+        <span class="summary-sig-arg">x_label</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">y_label</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">z_label</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">title</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">out_path</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">show</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Basic plotter function for plotting surface plots</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.plot-pysrc.html#plot_surface">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.plot-module.html#plot_surface_video" class="summary-sig-name">plot_surface_video</a>(<span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">y</span>,
+        <span class="summary-sig-arg">z</span>,
+        <span class="summary-sig-arg">out_dir</span>,
+        <span class="summary-sig-arg">x_label</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">y_label</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">z_label</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">title</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">elev</span>=<span class="summary-sig-default">20</span>)</span><br />
+      Basic plotter function for plotting a bunch of views for a surface 
+      plot.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.plot-pysrc.html#plot_surface_video">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="mHTM.plot-module.html#params" class="summary-name">params</a> = <code title="{'axes.labelsize': 40,
+ 'axes.labelweight': 'bold',
+ 'axes.linewidth': 4,
+ 'axes.titlesize': 40,
+ 'axes.titleweight': 'bold',
+ 'backend': 'ps',
+ 'figure.dpi': 100,
+ 'figure.figsize': (20, 12),
+..."><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">axes.labelsize</code><code class="variable-quote">'</code><code class="variable-op">: </code>40<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">axes.labelweight</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">bold</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">a</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="os">os</span>,
+  <span title="itertools.cycle">cycle</span>,
+  <span title="itertools.izip">izip</span>,
+  <span title="numpy">np</span>,
+  <span title="matplotlib.pyplot">plt</span>,
+  <span title="matplotlib.lines">mlines</span>,
+  <span title="matplotlib.rcParams">rcParams</span>,
+  <span title="matplotlib.ticker.MaxNLocator">MaxNLocator</span>,
+  <span title="mpl_toolkits.mplot3d.Axes3D">Axes3D</span>,
+  <span title="matplotlib.gridspec">gridspec</span>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="compute_axis_bounds"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">compute_axis_bounds</span>(<span class="sig-arg">x</span>,
+        <span class="sig-arg">multiplier</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.plot-pysrc.html#compute_axis_bounds">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Compute the bounds for the axis. It is assumed that the data starts at
+  0, unless the data goes below zero. The bounds are based off the standard
+  deviation.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>x</code></strong> - The data to apply to the axis. If multiple values are supplied, 
+          the largest bounds are used.</li>
+        <li><strong class="pname"><code>multiplier</code></strong> - The multiplier to scale by. Recommended is 6 for Y axis and 1/6 
+          for X axis.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="compute_err"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">compute_err</span>(<span class="sig-arg">x</span>,
+        <span class="sig-arg">x_med</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">axis</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.plot-pysrc.html#compute_err">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Compute the relative errors based off IQR.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>x</code></strong> - A 2D numpy array containing the data across multiple iterations. 
+          Each row represents a unique instance of the data.</li>
+        <li><strong class="pname"><code>x_med</code></strong> - A 1D numpy array representing the median values.</li>
+        <li><strong class="pname"><code>axis</code></strong> - The axis around which to compute the data.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>A 2D numpy array containing the -y and +y errors.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="plot_epoch"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">plot_epoch</span>(<span class="sig-arg">y_series</span>,
+        <span class="sig-arg">series_names</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">y_errs</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">y_label</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">title</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">semilog</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">out_path</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">show</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">start_epoch</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.plot-pysrc.html#plot_epoch">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Basic plotter function for plotting various types of data against 
+  training epochs. Each item in the series should correspond to a single 
+  data point for that epoch.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>y_series</code></strong> - A tuple containing all of the desired series to plot.</li>
+        <li><strong class="pname"><code>series_names</code></strong> - A tuple containing the names of the series.</li>
+        <li><strong class="pname"><code>y_errs</code></strong> - The error in the y values. There should be one per series per 
+          datapoint. It is assumed this is the standard deviation, but any 
+          error will work.</li>
+        <li><strong class="pname"><code>y_label</code></strong> - The label to use for the y-axis.</li>
+        <li><strong class="pname"><code>title</code></strong> - The name of the plot.</li>
+        <li><strong class="pname"><code>semilog</code></strong> - If True the y-axis will be plotted using a log(10) scale.</li>
+        <li><strong class="pname"><code>out_path</code></strong> - The full path to where the image should be saved. The file 
+          extension of this path will be used as the format type. If this 
+          value is None then the plot will not be saved, but displayed 
+          only.</li>
+        <li><strong class="pname"><code>show</code></strong> - If True the plot will be show upon creation.</li>
+        <li><strong class="pname"><code>start_epoch</code></strong> - The epoch to start plotting at.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="plot_error"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">plot_error</span>(<span class="sig-arg">x_series</span>,
+        <span class="sig-arg">y_series</span>,
+        <span class="sig-arg">series_names</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">y_errs</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">x_label</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">y_label</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">title</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">semilog</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">out_path</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">show</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">xlim</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">ylim</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">ax</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">legend</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.plot-pysrc.html#plot_error">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Basic plotter function for plotting data with error bars.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>x_series</code></strong> - A tuple containing all of the desired series to plot.</li>
+        <li><strong class="pname"><code>y_series</code></strong> - A tuple containing all of the desired series to plot.</li>
+        <li><strong class="pname"><code>series_names</code></strong> - A tuple containing the names of the series.</li>
+        <li><strong class="pname"><code>y_errs</code></strong> - The error in the y values. There should be one per series per 
+          datapoint. It is assumed this is the standard deviation, but any 
+          error will work.</li>
+        <li><strong class="pname"><code>y_label</code></strong> - The label to use for the x-axis.</li>
+        <li><strong class="pname"><code>y_label</code></strong> - The label to use for the y-axis.</li>
+        <li><strong class="pname"><code>title</code></strong> - The name of the plot.</li>
+        <li><strong class="pname"><code>semilog</code></strong> - If True the y-axis will be plotted using a log(10) scale.</li>
+        <li><strong class="pname"><code>out_path</code></strong> - The full path to where the image should be saved. The file 
+          extension of this path will be used as the format type. If this 
+          value is None then the plot will not be saved, but displayed 
+          only.</li>
+        <li><strong class="pname"><code>show</code></strong> - If True the plot will be show upon creation.</li>
+        <li><strong class="pname"><code>xlim</code></strong> - A tuple containing the bounds to use for the x-axis; otherwise, 
+          if None, it is automatically scaled. If False the default is 
+          used.</li>
+        <li><strong class="pname"><code>ylim</code></strong> - A tuple containing the bounds to use for the y-axis; otherwise, 
+          if None, it is automatically scaled. If False the default is 
+          used.</li>
+        <li><strong class="pname"><code>ax</code></strong> - The axis to use.</li>
+        <li><strong class="pname"><code>legend</code></strong> - Boolean denoting if a legend should be made.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="plot_line"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">plot_line</span>(<span class="sig-arg">x_series</span>,
+        <span class="sig-arg">y_series</span>,
+        <span class="sig-arg">series_names</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">x_label</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">y_label</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">title</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">semilog</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">out_path</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">show</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">xlim</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">ylim</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.plot-pysrc.html#plot_line">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Basic plotter function for plotting a line graph.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>x_series</code></strong> - A tuple containing all of the desired series to plot.</li>
+        <li><strong class="pname"><code>y_series</code></strong> - A tuple containing all of the desired series to plot.</li>
+        <li><strong class="pname"><code>series_names</code></strong> - A tuple containing the names of the series.</li>
+        <li><strong class="pname"><code>y_label</code></strong> - The label to use for the x-axis.</li>
+        <li><strong class="pname"><code>y_label</code></strong> - The label to use for the y-axis.</li>
+        <li><strong class="pname"><code>title</code></strong> - The name of the plot.</li>
+        <li><strong class="pname"><code>semilog</code></strong> - If True the y-axis will be plotted using a log(10) scale.</li>
+        <li><strong class="pname"><code>out_path</code></strong> - The full path to where the image should be saved. The file 
+          extension of this path will be used as the format type. If this 
+          value is None then the plot will not be saved, but displayed 
+          only.</li>
+        <li><strong class="pname"><code>show</code></strong> - If True the plot will be show upon creation.</li>
+        <li><strong class="pname"><code>xlim</code></strong> - A tuple containing the bounds to use for the x-axis; otherwise, 
+          if None, it is automatically scaled. If False the default is 
+          used.</li>
+        <li><strong class="pname"><code>ylim</code></strong> - A tuple containing the bounds to use for the y-axis; otherwise, 
+          if None, it is automatically scaled. If False the default is 
+          used.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="plot_image"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">plot_image</span>(<span class="sig-arg">x</span>,
+        <span class="sig-arg">shape</span>,
+        <span class="sig-arg">title</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">out_path</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">show</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.plot-pysrc.html#plot_image">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Plot a grayscale image. It is assumed that the image has been 
+  normalized (0, 1).</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>x</code></strong> - A numpy array containing the image.</li>
+        <li><strong class="pname"><code>shape</code></strong> - The shape of the data. This should be a tuple of x and y 
+          dimensions.</li>
+        <li><strong class="pname"><code>title</code></strong> - The name of the plot.</li>
+        <li><strong class="pname"><code>out_path</code></strong> - The full path, including the extension, of where to save the 
+          plot. If this paramter is None, the image will not be saved.</li>
+        <li><strong class="pname"><code>show</code></strong> - If True the image will be shown.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="plot_grid_images"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">plot_grid_images</span>(<span class="sig-arg">X</span>,
+        <span class="sig-arg">shape</span>,
+        <span class="sig-arg">nrows</span>,
+        <span class="sig-arg">ncols</span>,
+        <span class="sig-arg">title</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">labels</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">out_path</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">show</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.plot-pysrc.html#plot_grid_images">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Construct a grid of grayscale images. It is assumed that the images 
+  have been normalized (0, 1).</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>X</code></strong> - A numpy array containing a set of images.</li>
+        <li><strong class="pname"><code>shape</code></strong> - The shape of the data. This should be a tuple of x and y 
+          dimensions.</li>
+        <li><strong class="pname"><code>nrows</code></strong> - The number of rows the grid should have.</li>
+        <li><strong class="pname"><code>ncols</code></strong> - The number of columns the grid should have.</li>
+        <li><strong class="pname"><code>title</code></strong> - The name of the plot.</li>
+        <li><strong class="pname"><code>labels</code></strong> - The labels for each image. If None, no labels will be made.</li>
+        <li><strong class="pname"><code>out_path</code></strong> - The full path, including the extension, of where to save the 
+          plot. If this parameter is None, the image will not be saved.</li>
+        <li><strong class="pname"><code>show</code></strong> - If True the image will be shown.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="plot_compare_images"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">plot_compare_images</span>(<span class="sig-arg">x_series</span>,
+        <span class="sig-arg">shape</span>,
+        <span class="sig-arg">title</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">series_labels</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">out_path</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">show</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.plot-pysrc.html#plot_compare_images">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Construct a grid of grayscale images. It is assumed that the images 
+  have been normalized (0, 1). The images will be plotted row-wise based 
+  off the order they were provided.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>x_series</code></strong> - A sequence of NumPY arrays containing a set of images.</li>
+        <li><strong class="pname"><code>shape</code></strong> - The shape of the data. This should be a tuple of x and y 
+          dimensions.</li>
+        <li><strong class="pname"><code>title</code></strong> - The name of the plot.</li>
+        <li><strong class="pname"><code>series_labels</code></strong> - The labels for each image in each series. If None, no labels will
+          be made.</li>
+        <li><strong class="pname"><code>out_path</code></strong> - The full path, including the extension, of where to save the 
+          plot. If this parameter is None, the image will not be saved.</li>
+        <li><strong class="pname"><code>show</code></strong> - If True the image will be shown.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="plot_surface"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">plot_surface</span>(<span class="sig-arg">x</span>,
+        <span class="sig-arg">y</span>,
+        <span class="sig-arg">z</span>,
+        <span class="sig-arg">x_label</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">y_label</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">z_label</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">title</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">out_path</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">show</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.plot-pysrc.html#plot_surface">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Basic plotter function for plotting surface plots</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>x</code></strong> - A sequence containing the x-axis data.</li>
+        <li><strong class="pname"><code>y</code></strong> - A sequence containing the y-axis data.</li>
+        <li><strong class="pname"><code>z</code></strong> - A sequence containing the z-axis data.</li>
+        <li><strong class="pname"><code>x_label</code></strong> - The label to use for the x-axis.</li>
+        <li><strong class="pname"><code>y_label</code></strong> - The label to use for the y-axis.</li>
+        <li><strong class="pname"><code>z_label</code></strong> - The label to use for the z-axis.</li>
+        <li><strong class="pname"><code>title</code></strong> - The name of the plot.</li>
+        <li><strong class="pname"><code>out_path</code></strong> - The full path to where the image should be saved. The file 
+          extension of this path will be used as the format type. If this 
+          value is None then the plot will not be saved, but displayed 
+          only.</li>
+        <li><strong class="pname"><code>show</code></strong> - If True the plot will be show upon creation.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="plot_surface_video"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">plot_surface_video</span>(<span class="sig-arg">x</span>,
+        <span class="sig-arg">y</span>,
+        <span class="sig-arg">z</span>,
+        <span class="sig-arg">out_dir</span>,
+        <span class="sig-arg">x_label</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">y_label</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">z_label</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">title</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">elev</span>=<span class="sig-default">20</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.plot-pysrc.html#plot_surface_video">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Basic plotter function for plotting a bunch of views for a surface 
+  plot.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>x</code></strong> - A sequence containing the x-axis data.</li>
+        <li><strong class="pname"><code>y</code></strong> - A sequence containing the y-axis data.</li>
+        <li><strong class="pname"><code>z</code></strong> - A sequence containing the z-axis data.</li>
+        <li><strong class="pname"><code>out_dir</code></strong> - The directory to save the plots in.</li>
+        <li><strong class="pname"><code>x_label</code></strong> - The label to use for the x-axis.</li>
+        <li><strong class="pname"><code>y_label</code></strong> - The label to use for the y-axis.</li>
+        <li><strong class="pname"><code>z_label</code></strong> - The label to use for the z-axis.</li>
+        <li><strong class="pname"><code>title</code></strong> - The name of the plot.</li>
+        <li><strong class="pname"><code>elev</code></strong> - The elevation to have the 3D plot at.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="params"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">params</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">axes.labelsize</code><code class="variable-quote">'</code><code class="variable-op">: </code>40<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">axes.labelweight</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">bold</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">axes.linewidth</code><code class="variable-quote">'</code><code class="variable-op">: </code>4<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">axes.titlesize</code><code class="variable-quote">'</code><code class="variable-op">: </code>40<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">axes.titleweight</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">bold</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">backend</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ps</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">figure.dpi</code><code class="variable-quote">'</code><code class="variable-op">: </code>100<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">figure.figsize</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">(</code>20<code class="variable-op">, </code>12<code class="variable-group">)</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="mHTM-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://techtorials.me">nano_htm</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Dec 22 13:47:31 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

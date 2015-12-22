@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>mHTM.examples.mnist_parallel</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="mHTM-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://techtorials.me">nano_htm</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="mHTM-module.html">Package&nbsp;mHTM</a> ::
+        <a href="mHTM.examples-module.html">Package&nbsp;examples</a> ::
+        Module&nbsp;mnist_parallel
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="mHTM.examples.mnist_parallel-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module mnist_parallel</h1><p class="nomargin-top"><span class="codelink"><a href="mHTM.examples.mnist_parallel-pysrc.html">source&nbsp;code</a></span></p>
+<p>Testing SP with MNIST using parameter optimization and doing 
+  iterations in parallel.</p>
+  <p></p>
+<center><table border="0" cellpadding="0" cellspacing="0" class="graph">
+  <tr><td align="center">
+  <map id="package_tree_for_mhtm_2" name="package_tree_for_mhtm_2">
+<area shape="rect" id="node1_11" href="mHTM.datasets.loader-module.html" title="mHTM.datasets.loader" alt="" coords="35,91,118,113"/>
+<area shape="rect" id="node1_12" href="mHTM.datasets-module.html" title="mHTM.datasets" alt="" coords="26,56,127,123"/>
+<area shape="rect" id="node1_13" href="mHTM.examples.mnist_parallel-module.html" title="mHTM.examples.mnist_parallel" alt="" coords="145,91,234,113"/>
+<area shape="rect" id="node1_14" href="mHTM.examples.mnist_runner-module.html" title="mHTM.examples.mnist_runner" alt="" coords="242,91,326,113"/>
+<area shape="rect" id="node1_15" href="mHTM.examples.mnist_simple-module.html" title="mHTM.examples.mnist_simple" alt="" coords="334,91,419,113"/>
+<area shape="rect" id="node1_16" href="mHTM.examples-module.html" title="mHTM.examples" alt="" coords="135,56,429,123"/>
+<area shape="rect" id="node1_17" href="mHTM.parallel-module.html" title="mHTM.parallel" alt="" coords="437,79,486,123"/>
+<area shape="rect" id="node1_18" href="mHTM.plot-module.html" title="mHTM.plot" alt="" coords="494,79,523,123"/>
+<area shape="rect" id="node1_19" href="mHTM.prob-module.html" title="mHTM.prob" alt="" coords="26,144,266,167"/>
+<area shape="rect" id="node1_20" href="mHTM.region-module.html" title="mHTM.region" alt="" coords="274,144,523,167"/>
+<area shape="rect" id="node1_21" href="mHTM-module.html" title="mHTM" alt="" coords="17,21,533,176"/>
+<area shape="rect" id="node1" href="mHTM-module.html" title="mHTM" alt="" coords="5,5,543,181"/>
+</map>
+  <img src="package_tree_for_mhtm_2.gif" alt='Package Tree for mHTM' usemap="#package_tree_for_mhtm_2" ismap="ismap" class="graph-with-title" />
+  </td></tr>
+  <tr><td align='center'>
+<span class="graph-title">Package Tree for mHTM</span>
+  </td></tr>
+</table><br /></center>  <p></p>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.examples.mnist_parallel-module.html#main" class="summary-sig-name">main</a>(<span class="summary-sig-arg">ntrain</span>=<span class="summary-sig-default">800</span>,
+        <span class="summary-sig-arg">ntest</span>=<span class="summary-sig-default">200</span>,
+        <span class="summary-sig-arg">niter</span>=<span class="summary-sig-default">10</span>,
+        <span class="summary-sig-arg">nsplits</span>=<span class="summary-sig-default">5</span>,
+        <span class="summary-sig-arg">global_inhibition</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">seed</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Build the information needed to perform CV on a subset of the MNIST 
+      dataset.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.examples.mnist_parallel-pysrc.html#main">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.examples.mnist_parallel-module.html#main_local" class="summary-sig-name">main_local</a>(<span class="summary-sig-arg">log_dir</span>,
+        <span class="summary-sig-arg">ntrain</span>=<span class="summary-sig-default">800</span>,
+        <span class="summary-sig-arg">ntest</span>=<span class="summary-sig-default">200</span>,
+        <span class="summary-sig-arg">niter</span>=<span class="summary-sig-default">5</span>,
+        <span class="summary-sig-arg">nsplits</span>=<span class="summary-sig-default">3</span>,
+        <span class="summary-sig-arg">global_inhibition</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">ncores</span>=<span class="summary-sig-default">4</span>,
+        <span class="summary-sig-arg">seed</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Perform CV on a subset of the MNIST dataset.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.examples.mnist_parallel-pysrc.html#main_local">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.examples.mnist_parallel-module.html#main_slurm" class="summary-sig-name">main_slurm</a>(<span class="summary-sig-arg">log_dir</span>,
+        <span class="summary-sig-arg">ntrain</span>=<span class="summary-sig-default">800</span>,
+        <span class="summary-sig-arg">ntest</span>=<span class="summary-sig-default">200</span>,
+        <span class="summary-sig-arg">niter</span>=<span class="summary-sig-default">5</span>,
+        <span class="summary-sig-arg">nsplits</span>=<span class="summary-sig-default">3</span>,
+        <span class="summary-sig-arg">global_inhibition</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">partition_name</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">debug</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">seed</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Perform CV on a subset of the MNIST dataset, using SLRUM.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.examples.mnist_parallel-pysrc.html#main_slurm">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="cPickle">cPickle</span>,
+  <span title="os">os</span>,
+  <span title="json">json</span>,
+  <span title="pkgutil">pkgutil</span>,
+  <span title="numpy">np</span>,
+  <span title="scipy.stats.uniform">uniform</span>,
+  <span title="scipy.stats.randint">randint</span>,
+  <span title="sklearn.grid_search.RandomizedSearchCV">RandomizedSearchCV</span>,
+  <span title="sklearn.svm.LinearSVC">LinearSVC</span>,
+  <a href="mHTM.region.SPRegion-class.html" title="mHTM.region.SPRegion">SPRegion</a>,
+  <a href="mHTM.parallel-module.html#create_runner" title="mHTM.parallel.create_runner">create_runner</a>,
+  <a href="mHTM.parallel-module.html#execute_runner" title="mHTM.parallel.execute_runner">execute_runner</a>,
+  <a href="mHTM.parallel.ParamGenerator-class.html" title="mHTM.parallel.ParamGenerator">ParamGenerator</a>,
+  <a href="mHTM.datasets.loader-module.html#load_mnist" title="mHTM.datasets.loader.load_mnist">load_mnist</a>,
+  <a href="mHTM.datasets.loader.MNISTCV-class.html" title="mHTM.datasets.loader.MNISTCV">MNISTCV</a>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="main"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">main</span>(<span class="sig-arg">ntrain</span>=<span class="sig-default">800</span>,
+        <span class="sig-arg">ntest</span>=<span class="sig-default">200</span>,
+        <span class="sig-arg">niter</span>=<span class="sig-default">10</span>,
+        <span class="sig-arg">nsplits</span>=<span class="sig-default">5</span>,
+        <span class="sig-arg">global_inhibition</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">seed</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.examples.mnist_parallel-pysrc.html#main">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Build the information needed to perform CV on a subset of the MNIST 
+  dataset.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>ntrain</code></strong> - The number of training samples to use.</li>
+        <li><strong class="pname"><code>ntest</code></strong> - The number of testing samples to use.</li>
+        <li><strong class="pname"><code>niter</code></strong> - The number of parameter iterations to use.</li>
+        <li><strong class="pname"><code>nsplits</code></strong> - The number of splits of the data to use.</li>
+        <li><strong class="pname"><code>global_inhibition</code></strong> - If True use global inhibition; otherwise, use local inhibition.</li>
+        <li><strong class="pname"><code>seed</code></strong> - The seed for the random number generators.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>The full set of X, the full set of Y, the keyword arguments for 
+          the classifier, the params for CV, and the CV.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="main_local"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">main_local</span>(<span class="sig-arg">log_dir</span>,
+        <span class="sig-arg">ntrain</span>=<span class="sig-default">800</span>,
+        <span class="sig-arg">ntest</span>=<span class="sig-default">200</span>,
+        <span class="sig-arg">niter</span>=<span class="sig-default">5</span>,
+        <span class="sig-arg">nsplits</span>=<span class="sig-default">3</span>,
+        <span class="sig-arg">global_inhibition</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">ncores</span>=<span class="sig-default">4</span>,
+        <span class="sig-arg">seed</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.examples.mnist_parallel-pysrc.html#main_local">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Perform CV on a subset of the MNIST dataset. Performs parallelizations
+  on a local machine.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>log_dir</code></strong> - The directory to store the results in.</li>
+        <li><strong class="pname"><code>ntrain</code></strong> - The number of training samples to use.</li>
+        <li><strong class="pname"><code>ntest</code></strong> - The number of testing samples to use.</li>
+        <li><strong class="pname"><code>niter</code></strong> - The number of parameter iterations to use.</li>
+        <li><strong class="pname"><code>nsplits</code></strong> - The number of splits of the data to use.</li>
+        <li><strong class="pname"><code>global_inhibition</code></strong> - If True use global inhibition; otherwise, use local inhibition.</li>
+        <li><strong class="pname"><code>ncores</code></strong> - The number of cores to use.</li>
+        <li><strong class="pname"><code>seed</code></strong> - The seed for the random number generators.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="main_slurm"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">main_slurm</span>(<span class="sig-arg">log_dir</span>,
+        <span class="sig-arg">ntrain</span>=<span class="sig-default">800</span>,
+        <span class="sig-arg">ntest</span>=<span class="sig-default">200</span>,
+        <span class="sig-arg">niter</span>=<span class="sig-default">5</span>,
+        <span class="sig-arg">nsplits</span>=<span class="sig-default">3</span>,
+        <span class="sig-arg">global_inhibition</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">partition_name</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">debug</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">seed</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.examples.mnist_parallel-pysrc.html#main_slurm">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Perform CV on a subset of the MNIST dataset, using SLRUM. Iterations 
+  will be run in complete parallel. Splits within an iteration will be run 
+  sequentially.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>log_dir</code></strong> - The directory to store the results in.</li>
+        <li><strong class="pname"><code>ntrain</code></strong> - The number of training samples to use.</li>
+        <li><strong class="pname"><code>ntest</code></strong> - The number of testing samples to use.</li>
+        <li><strong class="pname"><code>niter</code></strong> - The number of parameter iterations to use.</li>
+        <li><strong class="pname"><code>nsplits</code></strong> - The number of splits of the data to use.</li>
+        <li><strong class="pname"><code>global_inhibition</code></strong> - If True use global inhibition; otherwise, use local inhibition.</li>
+        <li><strong class="pname"><code>partition_name</code></strong> - The partition name of the cluster to use.</li>
+        <li><strong class="pname"><code>seed</code></strong> - The seed for the random number generators.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="mHTM-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://techtorials.me">nano_htm</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Dec 22 13:47:30 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,1228 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>mHTM.region.SPRegion</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="mHTM-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://techtorials.me">nano_htm</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="mHTM-module.html">Package&nbsp;mHTM</a> ::
+        <a href="mHTM.region-module.html">Module&nbsp;region</a> ::
+        Class&nbsp;SPRegion
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="mHTM.region.SPRegion-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class SPRegion</h1><p class="nomargin-top"><span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_mhtm_reg_2" name="uml_class_diagram_for_mhtm_reg_2">
+<area shape="rect" id="node1_14" href="mHTM.region.SPRegion-class.html#__init__" title="Initializes this SP Region." alt="" coords="17,130,1751,150"/>
+<area shape="rect" id="node1_15" href="mHTM.region.SPRegion-class.html#get_params" title="Get the parameters for this class." alt="" coords="17,150,1751,170"/>
+<area shape="rect" id="node1_16" href="mHTM.region.SPRegion-class.html#set_params" title="Set the parameters for this class." alt="" coords="17,170,1751,190"/>
+<area shape="rect" id="node1_17" href="mHTM.region.SPRegion-class.html#step" title="Step the SP for the provided input." alt="" coords="17,190,1751,210"/>
+<area shape="rect" id="node1_18" href="mHTM.region.SPRegion-class.html#execute" title="Step the SP for each xi in x." alt="" coords="17,210,1751,230"/>
+<area shape="rect" id="node1_19" href="mHTM.region.SPRegion-class.html#fit" title="Fit the SP on the data." alt="" coords="17,230,1751,250"/>
+<area shape="rect" id="node1_20" href="mHTM.region.SPRegion-class.html#predict" title="Get the prediction results." alt="" coords="17,250,1751,270"/>
+<area shape="rect" id="node1_21" href="mHTM.region.SPRegion-class.html#score" title="Compute the accuracy for y." alt="" coords="17,270,1751,290"/>
+<area shape="rect" id="node1_22" href="mHTM.region.SPRegion-class.html#get_probabilities" title="Get the probabilities associated with each feature." alt="" coords="17,290,1751,310"/>
+<area shape="rect" id="node1_23" href="mHTM.region.SPRegion-class.html#transform" title="Transform each value in x to be a probability." alt="" coords="17,310,1751,330"/>
+<area shape="rect" id="node1_24" href="mHTM.region.SPRegion-class.html#reduce_dimensions" title="Apply the dimensionality reduction on x." alt="" coords="17,330,1751,350"/>
+<area shape="rect" id="node1_25" href="mHTM.region.SPRegion-class.html#reconstruct_input" title="Reconstruct the original input using only the stored permanences and the &#160;set of active columns." alt="" coords="17,350,1751,370"/>
+<area shape="rect" id="node1" href="mHTM.region.SPRegion-class.html" title="Class for implementing a Spatial Pooler region." alt="" coords="5,97,1763,376"/>
+<area shape="rect" id="node2_26" href="mHTM.region.Region-class.html#learn" title="Get the learning state." alt="" coords="833,30,933,50"/>
+<area shape="rect" id="node2_27" href="mHTM.region.Region-class.html#save" title="Save the HTM." alt="" coords="833,53,933,73"/>
+<area shape="rect" id="node2" href="mHTM.region.Region-class.html" title="Base class for an HTM region." alt="" coords="821,5,945,79"/>
+</map>
+  <img src="uml_class_diagram_for_mhtm_reg_2.gif" alt='' usemap="#uml_class_diagram_for_mhtm_reg_2" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>Class for implementing a Spatial Pooler region. This implementation 
+  follows Numenta's original CLA whitepaper definition. It additionally 
+  meets the scikit-learn requirements. It also supports serialization.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.region.SPRegion-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ninputs</span>,
+        <span class="summary-sig-arg">ncolumns</span>=<span class="summary-sig-default">1024</span>,
+        <span class="summary-sig-arg">pct_active</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">nactive</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">global_inhibition</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">trim</span>=<span class="summary-sig-default">0.0001</span>,
+        <span class="summary-sig-arg">seed</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">max_boost</span>=<span class="summary-sig-default">10</span>,
+        <span class="summary-sig-arg">duty_cycle</span>=<span class="summary-sig-default">1000</span>,
+        <span class="summary-sig-arg">nsynapses</span>=<span class="summary-sig-default">10</span>,
+        <span class="summary-sig-arg">seg_th</span>=<span class="summary-sig-default">1</span>,
+        <span class="summary-sig-arg">syn_th</span>=<span class="summary-sig-default">0.5</span>,
+        <span class="summary-sig-arg">pinc</span>=<span class="summary-sig-default">0.03</span>,
+        <span class="summary-sig-arg">pdec</span>=<span class="summary-sig-default">0.05</span>,
+        <span class="summary-sig-arg">pwindow</span>=<span class="summary-sig-default">0.05</span>,
+        <span class="summary-sig-arg">random_permanence</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">nepochs</span>=<span class="summary-sig-default">1</span>,
+        <span class="summary-sig-arg">clf</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">log_dir</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Initializes this SP Region.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.region.SPRegion-class.html#_init" class="summary-sig-name" onclick="show_private();">_init</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Used to initialize the classifier.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion._init">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.region.SPRegion-class.html#get_params" class="summary-sig-name">get_params</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">deep</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Get the parameters for this class.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.get_params">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.region.SPRegion-class.html#set_params" class="summary-sig-name">set_params</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">**parameters</span>)</span><br />
+      Set the parameters for this class.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.set_params">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_get_num_cols"></a><span class="summary-sig-name">_get_num_cols</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get the number of k-columns to select within the neighborhood.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion._get_num_cols">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.region.SPRegion-class.html#_update_inhibition_radius" class="summary-sig-name" onclick="show_private();">_update_inhibition_radius</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Sets the inhibition radius based off the average receptive field 
+      size.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion._update_inhibition_radius">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.region.SPRegion-class.html#_compute_neighborhood" class="summary-sig-name" onclick="show_private();">_compute_neighborhood</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Compute the neighborhood for each column as a bit mask.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion._compute_neighborhood">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_update_active_duty_cycle"></a><span class="summary-sig-name">_update_active_duty_cycle</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Update the active duty cycle.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion._update_active_duty_cycle">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_update_overlap_duty_cycle"></a><span class="summary-sig-name">_update_overlap_duty_cycle</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Update the overlap duty cycle.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion._update_overlap_duty_cycle">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.region.SPRegion-class.html#_update_boost" class="summary-sig-name" onclick="show_private();">_update_boost</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">min_dc</span>)</span><br />
+      Update the boost.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion._update_boost">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.region.SPRegion-class.html#_phase1" class="summary-sig-name" onclick="show_private();">_phase1</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Execute phase 1 of the SP region.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion._phase1">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.region.SPRegion-class.html#_phase2" class="summary-sig-name" onclick="show_private();">_phase2</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Execute phase 2 of the SP region.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion._phase2">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.region.SPRegion-class.html#_phase3" class="summary-sig-name" onclick="show_private();">_phase3</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Execute phase 3 of the SP region.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion._phase3">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.region.SPRegion-class.html#step" class="summary-sig-name">step</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">x</span>)</span><br />
+      Step the SP for the provided input.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.step">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.region.SPRegion-class.html#execute" class="summary-sig-name">execute</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">store</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Step the SP for each xi in x.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.execute">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.region.SPRegion-class.html#fit" class="summary-sig-name">fit</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">y</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Fit the SP on the data.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.fit">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.region.SPRegion-class.html#predict" class="summary-sig-name">predict</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">x</span>)</span><br />
+      Get the prediction results.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.predict">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.region.SPRegion-class.html#score" class="summary-sig-name">score</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">y</span>,
+        <span class="summary-sig-arg">tr_x</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">tr_y</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">score_method</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">column</code><code class="variable-quote">'</code></span>)</span><br />
+      Compute the accuracy for y.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.score">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.region.SPRegion-class.html#get_probabilities" class="summary-sig-name">get_probabilities</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">store</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Get the probabilities associated with each feature.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.get_probabilities">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.region.SPRegion-class.html#transform" class="summary-sig-name">transform</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">x</span>)</span><br />
+      Transform each value in x to be a probability.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.transform">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.region.SPRegion-class.html#reduce_dimensions" class="summary-sig-name">reduce_dimensions</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">x</span>)</span><br />
+      Apply the dimensionality reduction on x.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.reduce_dimensions">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="mHTM.region.SPRegion-class.html#reconstruct_input" class="summary-sig-name">reconstruct_input</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">x</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Reconstruct the original input using only the stored permanences and 
+      the set of active columns.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.reconstruct_input">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="mHTM.region.Region-class.html">Region</a></code></b>:
+      <code><a href="mHTM.region.Region-class.html#save">save</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="mHTM.region.Region-class.html">Region</a></code></b> (private):
+      <code><a href="mHTM.region.Region-class.html#_log_stats" onclick="show_private();">_log_stats</a></code>,
+      <code><a href="mHTM.region.Region-class.html#_save_data" onclick="show_private();">_save_data</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="mHTM.region.Region-class.html">Region</a></code></b>:
+      <code><a href="mHTM.region.Region-class.html#learn">learn</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ninputs</span>,
+        <span class="sig-arg">ncolumns</span>=<span class="sig-default">1024</span>,
+        <span class="sig-arg">pct_active</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">nactive</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">global_inhibition</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">trim</span>=<span class="sig-default">0.0001</span>,
+        <span class="sig-arg">seed</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">max_boost</span>=<span class="sig-default">10</span>,
+        <span class="sig-arg">duty_cycle</span>=<span class="sig-default">1000</span>,
+        <span class="sig-arg">nsynapses</span>=<span class="sig-default">10</span>,
+        <span class="sig-arg">seg_th</span>=<span class="sig-default">1</span>,
+        <span class="sig-arg">syn_th</span>=<span class="sig-default">0.5</span>,
+        <span class="sig-arg">pinc</span>=<span class="sig-default">0.03</span>,
+        <span class="sig-arg">pdec</span>=<span class="sig-default">0.05</span>,
+        <span class="sig-arg">pwindow</span>=<span class="sig-default">0.05</span>,
+        <span class="sig-arg">random_permanence</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">nepochs</span>=<span class="sig-default">1</span>,
+        <span class="sig-arg">clf</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">log_dir</span>=<span class="sig-default">None</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Initializes this SP Region.</p>
+  <p>**** The below parameters are for the region ****</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>ninputs</code></strong> - The number of inputs that this region will work with. This value 
+          should be the same size as the number of inputs in the input 
+          region.</li>
+        <li><strong class="pname"><code>ncolumns</code></strong> - The number of columns to use. The region will be created to be 1D
+          with as many columns as specified.</li>
+        <li><strong class="pname"><code>pct_active</code></strong> - The percentage of how many columns should be active within an 
+          inhibition radius. If None, nactive will be used.</li>
+        <li><strong class="pname"><code>nactive</code></strong> - An alternative to pct_active, that uses a fixed number.</li>
+        <li><strong class="pname"><code>global_inhibition</code></strong> - Boolean to denote if global inhibition should be used.</li>
+        <li><strong class="pname"><code>trim</code></strong> - Set to False to disable. If a scalar, any permanence below that 
+          threshold will be set to 0.</li>
+        <li><strong class="pname"><code>seed</code></strong> - The random seed to use for the SP. Set to None to use the default
+          seed or provide any valid seed.
+          <p>**** The below parameters are for the columns ****</p></li>
+        <li><strong class="pname"><code>max_boost</code></strong> - The maximum boost.</li>
+        <li><strong class="pname"><code>duty_cycle</code></strong> - The duty cycle to use for boosting. A simple moving average will 
+          be used based off this many past iterations.
+          <p>**** The below parameters are for the segments ****</p></li>
+        <li><strong class="pname"><code>nsynapses</code></strong> - The number of synapses that should be connected to this segment.</li>
+        <li><strong class="pname"><code>seg_th</code></strong> - The number of synapses that must be active for the segment to be 
+          active.
+          <p>**** The below parameters are for the synapses ****</p></li>
+        <li><strong class="pname"><code>syn_th</code></strong> - The permanence threshold for when a connection is formed. This 
+          value should be between 0 and 1, exclusive.</li>
+        <li><strong class="pname"><code>pinc</code></strong> - Permanence increment amount.</li>
+        <li><strong class="pname"><code>pdec</code></strong> - Permanence decrement amount.</li>
+        <li><strong class="pname"><code>pwindow</code></strong> - The offset from &quot;syn_th&quot;, which is used to determine 
+          how the permanence should be initialized. The permanence will 
+          have an initial value between &quot;syn_th&quot; +/- 
+          &quot;pwindow&quot;.</li>
+        <li><strong class="pname"><code>random_permanence</code></strong> - If this parameter is True, the permanence will be randomly 
+          selected within the range bound by &quot;pwindow&quot;. If this 
+          parameter is a scalar, the permanence will be fixed to that 
+          value. Note that clamping automatically occurs, i.e. the 
+          permanence is not allowed to go above or below 1 or 0, 
+          respectively. If None, the permanence will be initialized based 
+          off the synapse's normalized distance from its input. It is 
+          highly advised to use the default setting of True. The other two 
+          options were added for exploratory purposes only. while using 
+          None better follows the original SP explanation, it will likely 
+          reduce in a very poor initialization, rendering many synapses 
+          useless.
+          <p>**** Parameters for fitting (training) the SP ****</p></li>
+        <li><strong class="pname"><code>nepochs</code></strong> - The number of epochs to train the SP for.</li>
+        <li><strong class="pname"><code>clf</code></strong> - An instance of the classifier to use. The classifier must follow 
+          the scikit-learn interface. If this parameter is 'None', the SP 
+          will not be used for classification.</li>
+        <li><strong class="pname"><code>log_dir</code></strong> - If not None, various items regarding the SP, including the actual
+          instance itself will be saved in the specified directory.</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_init"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_init</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion._init">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Used to initialize the classifier. This is pulled out to ensure that 
+  the class is compatible with scikit-learn.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_params"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_params</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">deep</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.get_params">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the parameters for this class.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>deep</code></strong> - This parameter is completely ignored. It is here to satisfy the 
+          interface requirements</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>The parameters for this object.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_params"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_params</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">**parameters</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.set_params">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set the parameters for this class.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>parameters</code></strong> - All of the parameters to be set. Refer to the class' __init__ 
+          method for more details.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>An instance to this object.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_update_inhibition_radius"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_update_inhibition_radius</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion._update_inhibition_radius">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sets the inhibition radius based off the average receptive field size.
+  The average receptive field size is the distance of the connected 
+  synapses with respect to to their input column. In other words, it is the
+  distance between a column and its input source averaged across all 
+  connected synapses. The distance used is the Euclidean distance. Refer to
+  the initialization of self.syn_dist for more details.</p>
+  <p>NOTE</p>
+  <ul>
+    <li>
+      This should only be called after phase 1.
+    </li>
+    <li>
+      The minimum inhibition radius is lower-bounded by 1.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_compute_neighborhood"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_compute_neighborhood</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion._compute_neighborhood">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Compute the neighborhood for each column as a bit mask. 1D is being 
+  used, so neighbors are selected along a number line with the ends 
+  clamped.</p>
+  <p>NOTE - This should be called after updating the inhibition radius.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_update_boost"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_update_boost</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">min_dc</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion._update_boost">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Update the boost. Boost linearly decreases with respect to the active 
+  duty cycle. If the active duty cycle is greater than the minimum duty 
+  cycle the boost is disabled (set to 1).</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>min_dc</code></strong> - The minimum duty cycles.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_phase1"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_phase1</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion._phase1">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Execute phase 1 of the SP region. This phase is used to compute the 
+  overlap.</p>
+  <p>Note - This should only be called once the input has been updated.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_phase2"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_phase2</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion._phase2">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Execute phase 2 of the SP region. This phase is used to compute the 
+  active columns.</p>
+  <p>Note - This should only be called after phase 1 has been called and 
+  after the inhibition radius and neighborhood have been updated.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_phase3"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_phase3</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion._phase3">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Execute phase 3 of the SP region. This phase is used to conduct 
+  learning.</p>
+  <p>Note - This should only be called after phase 2 has been called.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="step"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">step</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">x</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.step">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Step the SP for the provided input.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>x</code></strong> - The input to work with. This should be a NumPy array with the 
+          same shape as ninputs.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="execute"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">execute</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">x</span>,
+        <span class="sig-arg">store</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.execute">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Step the SP for each xi in x.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>x</code></strong> - The input to work with. This should be a 2D NumPy array with the 
+          shape as (nsamples, ninputs).</li>
+        <li><strong class="pname"><code>store</code></strong> - If True the predictions are stored.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>The predictions if store is True; otherwise, None.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="fit"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">fit</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">x</span>,
+        <span class="sig-arg">y</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.fit">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Fit the SP on the data.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>x</code></strong> - The input to work with. This should be a NumPy array with the 
+          same shape as ninputs.</li>
+        <li><strong class="pname"><code>y</code></strong> - This parameter is only used for fitting the classifier that the 
+          SP will be using.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="predict"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">predict</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">x</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.predict">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the prediction results.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>x</code></strong> - The data to predict. If this is 2D it is assumed that multiple 
+          predictions will be made; otherwise, a single prediction will be 
+          made.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>The predicted SDR.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="score"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">score</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">x</span>,
+        <span class="sig-arg">y</span>,
+        <span class="sig-arg">tr_x</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">tr_y</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">score_method</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">column</code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.score">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Compute the accuracy for y. Note that if no classifier was specified, 
+  this function will return None. This method must be called after fitting 
+  the SP.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>x</code></strong> - The data to predict. If this is 2D it is assumed that multiple 
+          predictions will be made; otherwise, a single prediction will be 
+          made.</li>
+        <li><strong class="pname"><code>y</code></strong> - The expected results. This should be the expected result from the
+          original data, not the expected output of the SP.</li>
+        <li><strong class="pname"><code>tr_x</code></strong> - The original data. This should be the same data that was used to 
+          train the SP.</li>
+        <li><strong class="pname"><code>tr_y</code></strong> - The training labels. Set to None to use the stored labels.</li>
+        <li><strong class="pname"><code>score_method</code></strong> - The method to use for computing the accuracy. This must be one 
+          the following: &quot;column&quot; - Uses the set of active 
+          columns to compute the accuracy, &quot;prob&quot; - Use the 
+          probabilistic version of the input, or &quot;reduction&quot; - 
+          Uses the dimensionality reduced version of the input. To use any 
+          method other than &quot;column&quot;, tr_x must be provided.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>The accuracy or None if either fitting was not performed or no 
+          classifier was provided.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_probabilities"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_probabilities</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">store</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.get_probabilities">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the probabilities associated with each feature. This technique 
+  uses the max across probabilities to form the global probabilities. This 
+  method should be called after fitting the SP.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>store</code></strong> - If True, the probabilities are stored internally. Set to False to
+          reduce memory.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Return the probabilities.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="transform"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">transform</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">x</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.transform">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Transform each value in x to be a probability. This method should be 
+  called after fitting the SP.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>x</code></strong> - The data to reduce. If it is a vector, it is assumed to be one 
+          sample containing the features. If it is a matrix, it is assumed 
+          that each row represents a sample.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>The probabilistic version of x.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="reduce_dimensions"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">reduce_dimensions</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">x</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.reduce_dimensions">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Apply the dimensionality reduction on x. This method should be called 
+  after fitting the SP.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>x</code></strong> - The data to reduce. If it is a vector, it is assumed to be one 
+          sample containing the features. If it is a matrix, it is assumed 
+          that each row represents a sample.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>The transformed version of x.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="reconstruct_input"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">reconstruct_input</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">x</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="mHTM.region-pysrc.html#SPRegion.reconstruct_input">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Reconstruct the original input using only the stored permanences and 
+  the set of active columns. The maximization of probabilities approach is 
+  used. This method must be called after fitting the SP.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>x</code></strong> - The set of active columns or None if the SP was never fitted.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="mHTM-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://techtorials.me">nano_htm</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Dec 22 13:47:31 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

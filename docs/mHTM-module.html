@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>mHTM</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://techtorials.me">nano_htm</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;mHTM
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="mHTM-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PACKAGE DESCRIPTION ==================== -->
+<h1 class="epydoc">Package mHTM</h1><p class="nomargin-top"><span class="codelink"><a href="mHTM-pysrc.html">source&nbsp;code</a></span></p>
+<p>math HTM (mHTM) is a Python build of hierarchical temporal memory 
+  (HTM). This build specifically utilizes the <a 
+  href="http://numenta.com/assets/pdf/whitepapers/hierarchical-temporal-memory-cortical-learning-algorithm-0.2.1-en.pdf)"
+  target="_top">cortical learning algorithms (CLA)</a>. A mathematical 
+  framework was developed for HTM. This library is built off that 
+  framework. The framework is currently only for the spatial pooler (SP); 
+  however, it is by no means limited to expand. This implementation was 
+  specifically designed to be a completely accurate representation of HTM. 
+  Additionally, care was taken to ensure that efficient computations are 
+  occurring.</p>
+  <p>We are currently in the process of publishing a paper that explains 
+  this model. Once this paper is available, it will be announced in this 
+  repo.</p>
+  <p>To aid in tying HTM into the machine learning community, this 
+  implementation was built to be compatible with <a 
+  href="http://scikit-learn.org/stable/" target="_top">Scikit-Learn</a>. If
+  you are familiar with Scikit-Learn, this API should feel natural. 
+  Additionally, because the Scikit-Learn interface is used, the SP in this 
+  implementation may be used in many of the pre-existing Scikit-Learn 
+  tools, namely those utilizing <a 
+  href="http://scikit-learn.org/stable/modules/cross_validation.html" 
+  target="_top">cross-validation (CV)</a>. A custom <a 
+  href="http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.ParameterSampler.html"
+  target="_top">parameter generator</a> was constructed, explicitly for 
+  that purpose.</p>
+  <p>The implementation of the SP is single-threaded; however, multiple 
+  forms of parallelizations for cross-validation and parameter optimization
+  exist. For a local machine, simply using one of Scikit-Learn's CV 
+  functions supporting parallelization should suffice. For a cluster 
+  environment, code is provided to create and launch jobs.</p>
+  <p>This package is platform independent and should run on any system 
+  containing the prerequisites. If you are using a cluster, the cluster 
+  must be running SLURM, and as such must be a valid Linux 
+  distribution.</p>
+  <h1 class="heading">Prerequisites</h1>
+    <ul>
+      <li>
+        <a href="https://www.python.org/downloads/release/python-279/" 
+        target="_top">Python 2.7.X</a>
+      </li>
+      <li>
+        <a href="http://www.numpy.org/" target="_top">Numpy</a>
+      </li>
+      <li>
+        <a href="http://matplotlib.org/" target="_top">matplotlib</a>
+      </li>
+      <li>
+        <a href="http://www.scipy.org/" target="_top">Scipy</a>
+      </li>
+      <li>
+        <a href="http://scikit-learn.org/stable/" 
+        target="_top">Scikit-Learn</a>
+      </li>
+      <li>
+        <a href="http://berkeleyanalytics.com/bottleneck" 
+        target="_top">Bottleneck</a>
+      </li>
+    </ul>
+  <h1 class="heading">Installation</h1>
+    <ol start="1">
+      <li>
+        Install all prerequisites
+        <ol start="1">
+          <li>
+            If you have <a 
+            href="https://pip.pypa.io/en/latest/installing.html" 
+            target="_top">pip</a>
+            <p><a 
+            name="index-pip_install_numpy_matplotlib_scipy_scikit_learn_bottleneck"></a><i
+            class="indexterm">pip install numpy matplotlib scipy 
+            scikit-learn bottleneck</i></p>
+          </li>
+          <li>
+            If you are on Windows
+            <p>You may download the the (unofficial) precompiled versions 
+            available from <a 
+            href="http://www.lfd.uci.edu/~gohlke/pythonlibs" 
+            target="_top">UCI</a>. Simply download the appropriate Python 
+            wheel and install it using pip, i.e. <a 
+            name="index-pip_install_my_file_whl"></a><i 
+            class="indexterm">pip install my_file.whl</i>, where <a 
+            name="index-my_file"></a><i class="indexterm">my_file</i> is 
+            the name of your <a name="index-whl"></a><i 
+            class="indexterm">whl</i> file.</p>
+          </li>
+        </ol>
+      </li>
+      <li>
+        Download this repo and execute <a 
+        name="index-python_setup_py_install"></a><i 
+        class="indexterm">python setup.py install</i>.
+      </li>
+    </ol>
+  <h1 class="heading">Usage</h1>
+    <p>The API is fully documented and available in the &quot;docs&quot; 
+    folder. Simply open &quot;index.html&quot; in your favorite web 
+    browser.</p>
+    <p>As a starting point, examples have been prepared for working with 
+    MNIST. The dataset is additionally, included. Refer to 
+    &quot;mnist_simple.py&quot; in &quot;src/examples&quot; for a basic 
+    introduction into the API. In that same folder, refer to 
+    &quot;mnist_parallel&quot; for examples for using parallelizations 
+    locally or an cluster.</p>
+    <p>The &quot;dev&quot; folder contains the latest code regarding new 
+    experiments. This content is subject to change at any point and is not 
+    guaranteed to work; however, it can also be used as a basis for 
+    exploring this library.</p>
+  <h1 class="heading">Development</h1>
+    <p>For building the docs, <a href="http://epydoc.sourceforge.net/" 
+    target="_top">Epydoc</a> is used. To generate new docs,</p>
+  <h1 class="heading">Citing this Work</h1>
+    <p>While this code is completely free of charge, it is highly 
+    appreciated that all uses of this code are cited (both in publications 
+    as well as within any modified code). Once the paper is published the 
+    citation should be made to follow that paper. For now, please use the 
+    following:</p>
+    <p>J. Mnatzaganian, Rochester Institute of Technology's NanoComputing 
+    Research Lab, &quot;math hierarchical temporal memory (mHTM),&quot; <a 
+    name="index-GitHub_Repository"></a><i class="indexterm">GitHub 
+    Repository</i>, 2015, Available at 
+    https://github.com/tehtechguy/mHTM.</p>
+  <h1 class="heading">Bug Reports and Support</h1>
+    <p>No official support is provided; however, support may be provided. 
+    To ensure all feedback is within the same location, please use the Wiki
+    for asking general questions and create issues if any bugs are 
+    found.</p>
+  <h1 class="heading">Author</h1>
+    <p>The original author of this code was James Mnatzaganian. For contact
+    info, as well as other details, see his corresponding <a 
+    href="http://techtorials.me" target="_top">website</a>.</p>
+    <p>This work was created at RIT's <a 
+    href="http://www.rit.edu/kgcoe/nanolab/" target="_top">NanoComputing 
+    Research Laboratory</a>.</p>
+  <h1 class="heading">Legal</h1>
+    <p>This code is licensed under the <a 
+    href="http://opensource.org/licenses/mit-license.php" target="_top">MIT
+    license</a>, with one caveat. Numenta owns patents on specific items. 
+    While this code was written without using any of Numenta's code, it is 
+    possible that those patent laws still apply. Before using this code, 
+    commercially, it is recommended to seek legal advice.</p>
+  <h1 class="heading">Connectivity</h1>
+    <p>The following image shows how everything is connected:</p>
+    <p></p>
+<center><table border="0" cellpadding="0" cellspacing="0" class="graph">
+  <tr><td align="center">
+  <map id="import_graph" name="import_graph">
+<area shape="rect" id="node1_11" href="mHTM-module.html" title="mHTM" alt="" coords="522,379,563,397"/>
+<area shape="rect" id="node1" href="mHTM-module.html" title="mHTM" alt="" coords="511,363,573,401"/>
+<area shape="rect" id="node2_12" href="mHTM.datasets-module.html" title="mHTM.datasets" alt="" coords="515,311,569,329"/>
+<area shape="rect" id="node2" href="mHTM.datasets-module.html" title="datasets" alt="" coords="505,295,579,333"/>
+<area shape="rect" id="node3_13" href="mHTM.datasets.loader-module.html" title="mHTM.datasets.loader" alt="" coords="497,90,589,107"/>
+<area shape="rect" id="node3" href="mHTM.datasets.loader-module.html" title="datasets.loader" alt="" coords="485,73,599,112"/>
+<area shape="rect" id="node5_14" href="mHTM.examples.mnist_parallel-module.html" title="mHTM.examples.mnist_parallel" alt="" coords="16,261,160,278"/>
+<area shape="rect" id="node5" href="mHTM.examples.mnist_parallel-module.html" title="examples.mnist_parallel" alt="" coords="5,244,171,283"/>
+<area shape="rect" id="node6_15" href="mHTM.examples.mnist_runner-module.html" title="mHTM.examples.mnist_runner" alt="" coords="306,193,445,210"/>
+<area shape="rect" id="node6" href="mHTM.examples.mnist_runner-module.html" title="examples.mnist_runner" alt="" coords="295,176,455,215"/>
+<area shape="rect" id="node7_16" href="mHTM.examples.mnist_simple-module.html" title="mHTM.examples.mnist_simple" alt="" coords="306,125,446,142"/>
+<area shape="rect" id="node7" href="mHTM.examples.mnist_simple-module.html" title="examples.mnist_simple" alt="" coords="295,108,456,147"/>
+<area shape="rect" id="node4_17" href="mHTM.examples-module.html" title="mHTM.examples" alt="" coords="513,22,573,39"/>
+<area shape="rect" id="node4" href="mHTM.examples-module.html" title="examples" alt="" coords="501,5,583,44"/>
+<area shape="rect" id="node8_18" href="mHTM.parallel-module.html" title="mHTM.parallel" alt="" coords="211,261,255,278"/>
+<area shape="rect" id="node8" href="mHTM.parallel-module.html" title="parallel" alt="" coords="200,244,265,283"/>
+<area shape="rect" id="node9_19" href="mHTM.plot-module.html" title="mHTM.plot" alt="" coords="530,158,554,175"/>
+<area shape="rect" id="node9" href="mHTM.plot-module.html" title="plot" alt="" coords="519,141,565,180"/>
+<area shape="rect" id="node10_20" href="mHTM.prob-module.html" title="mHTM.prob" alt="" coords="362,261,390,278"/>
+<area shape="rect" id="node10" href="mHTM.prob-module.html" title="prob" alt="" coords="351,244,400,283"/>
+<area shape="rect" id="node11_21" href="mHTM.region-module.html" title="mHTM.region" alt="" coords="523,243,562,261"/>
+<area shape="rect" id="node11" href="mHTM.region-module.html" title="region" alt="" coords="512,227,572,265"/>
+</map>
+  <img src="import_graph.gif" alt='Import Graph' usemap="#import_graph" ismap="ismap" class="graph-with-title" />
+  </td></tr>
+  <tr><td align='center'>
+<span class="graph-title">Import Graph</span>
+  </td></tr>
+</table><br /></center>    <p></p>
+  <h1 class="heading">Developer Notes</h1>
+    <p>The following notes are for developers only.</p>
+    <h2 class="heading">Installation</h2>
+      <ol start="1">
+        <li>
+          Download and install <a 
+          href="http://www.graphviz.org/Download..php" 
+          target="_top">graphviz</a>
+        </li>
+        <li>
+          Edit line 95 in <a name="index-dev_epydoc_config_txt"></a><i 
+          class="indexterm">dev/epydoc_config.txt</i> to point to the 
+          directory containing &quot;dot.exe&quot;. This is part of the 
+          graphviz installation.
+        </li>
+        <li>
+          Download this repo and execute <a 
+          name="index-python_setup_py_install"></a><i 
+          class="indexterm">python setup.py install</i>.
+        </li>
+        <li>
+          Download and install <a 
+          href="http://sourceforge.net/projects/epydoc/files" 
+          target="_top">Epydoc</a>
+        </li>
+      </ol>
+    <h2 class="heading">Generating the API</h2>
+      <p>From the mHTM folder, execute <a 
+      name="index-python_epydoc___config_epydoc_config_txt_mHTM"></a><i 
+      class="indexterm">python epydoc --config=epydoc_config.txt 
+      mHTM</i></p>
+
+<hr />
+<div class="fields">      <p><strong>Author:</strong>
+        <a href="http://techtorials.me" target="_top">James 
+        Mnatzaganian</a>
+      </p>
+      <p><strong>Organization:</strong>
+        <a href="http://www.rit.edu/kgcoe/nanolab/" 
+        target="_top">NanoComputing Research Laboratory</a>
+      </p>
+      <p><strong>Requires:</strong>
+        Python 2.7.X
+      </p>
+      <p><strong>Version:</strong>
+        1.0.0
+      </p>
+      <p><strong>License:</strong>
+        <a href="http://opensource.org/licenses/mit-license.php" 
+        target="_top">The MIT License</a>
+      </p>
+      <p><strong>Copyright:</strong>
+        &copy; 2015 James Mnatzaganian
+      </p>
+</div><!-- ==================== SUBMODULES ==================== -->
+<a name="section-Submodules"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Submodules</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Submodules"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr><td class="summary">
+  <ul class="nomargin">
+    <li> <strong class="uidlink"><a href="mHTM.parallel-module.html">mHTM.parallel</a></strong>: <em class="summary">Module for parallel processing.</em>    </li>
+    <li> <strong class="uidlink"><a href="mHTM.plot-module.html">mHTM.plot</a></strong>: <em class="summary">Plotting module.</em>    </li>
+    <li> <strong class="uidlink"><a href="mHTM.prob-module.html">mHTM.prob</a></strong>: <em class="summary">Module for computing various probabilities</em>    </li>
+    <li> <strong class="uidlink"><a href="mHTM.region-module.html">mHTM.region</a></strong>: <em class="summary">Implementation for a region in an HTM.</em>    </li>
+  </ul></td></tr>
+<tr bgcolor="#e8f0f8" >
+  <th colspan="2" class="group-header"
+    >&nbsp;&nbsp;&nbsp;&nbsp;Examples</th></tr>
+  <tr><td class="summary">
+  <ul class="nomargin">
+    <li> <strong class="uidlink"><a href="mHTM.examples-module.html">mHTM.examples</a></strong>: <em class="summary">Defines the examples package.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="mHTM.examples.mnist_parallel-module.html">mHTM.examples.mnist_parallel</a></strong>: <em class="summary">Testing SP with MNIST using parameter optimization and doing 
+        iterations in parallel.</em>    </li>
+    <li> <strong class="uidlink"><a href="mHTM.examples.mnist_runner-module.html">mHTM.examples.mnist_runner</a></strong>: <em class="summary">SLURM runner for MNIST.</em>    </li>
+    <li> <strong class="uidlink"><a href="mHTM.examples.mnist_simple-module.html">mHTM.examples.mnist_simple</a></strong>: <em class="summary">Testing SP with MNIST using a simple demonstration.</em>    </li>
+    </ul>
+    </li>
+  </ul></td></tr>
+<tr bgcolor="#e8f0f8" >
+  <th colspan="2" class="group-header"
+    >&nbsp;&nbsp;&nbsp;&nbsp;Datasets</th></tr>
+  <tr><td class="summary">
+  <ul class="nomargin">
+    <li> <strong class="uidlink"><a href="mHTM.datasets-module.html">mHTM.datasets</a></strong>: <em class="summary">Defines the datasets package.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="mHTM.datasets.loader-module.html">mHTM.datasets.loader</a></strong>: <em class="summary">Module for loading datasets.</em>    </li>
+    </ul>
+    </li>
+  </ul></td></tr>
+</table>
+
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://techtorials.me">nano_htm</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Dec 22 13:47:30 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
