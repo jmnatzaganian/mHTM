@@ -62,10 +62,7 @@ def p_a1(npsyns, ninputs):
 	@return: The computed probability.
 	"""
 	
-	p = 1
-	for i in xrange(npsyns):
-		p *= (1 - 1. / (ninputs - i))
-	return 1 - p
+	return (npsyns + 1.) / ninputs
 
 def p_a2(npsyns, ninputs):
 	"""
