@@ -4,12 +4,11 @@
 # Contact        : http://techtorials.me
 # Organization   : NanoComputing Research Lab - Rochester Institute of
 # Technology
-# http://www.rit.edu/kgcoe/facility/nanocomputing-research-laboratory
-# http://nano.ce.rit.edu
+# Website        : https://www.rit.edu/kgcoe/nanolab/
 # Date Created   : 12/18/15
 #	
 # Description    : Configuration file for epydoc
-# Python Version : 2.7.8
+# Python Version : 2.7.X
 #
 # Usage: python C:\Python27\Scripts\epydoc.py --config=epydoc_config.txt mHTM
 #

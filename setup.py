@@ -4,12 +4,11 @@
 # Contact        : http://techtorials.me
 # Organization   : NanoComputing Research Lab - Rochester Institute of
 # Technology
-# http://www.rit.edu/kgcoe/facility/nanocomputing-research-laboratory
-# http://nano.ce.rit.edu
+# Website        : https://www.rit.edu/kgcoe/nanolab/
 # Date Created   : 12/02/15
 #	
 # Description    : Installs the mHTM project
-# Python Version : 2.7.8
+# Python Version : 2.7.X
 #
 # License        : MIT License http://opensource.org/licenses/mit-license.php
 # Copyright      : (c) 2015 James Mnatzaganian

@@ -9,7 +9,7 @@
 # Date Created   : 10/30/15
 #	
 # Description    : Plotting module.
-# Python Version : 2.7.8
+# Python Version : 2.7.X
 #
 # License        : MIT License http://opensource.org/licenses/mit-license.php
 # Copyright      : (c) 2015 James Mnatzaganian

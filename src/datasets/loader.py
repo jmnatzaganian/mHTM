@@ -9,7 +9,7 @@
 # Date Created   : 12/03/15
 #	
 # Description    : Module for loading datasets.
-# Python Version : 2.7.8
+# Python Version : 2.7.X
 #
 # License        : MIT License http://opensource.org/licenses/mit-license.php
 # Copyright      : (c) 2015 James Mnatzaganian
