@@ -16,7 +16,7 @@
 """
 math HTM (mHTM) is a Python build of hierarchical temporal memory (HTM). This build specifically utilizes the U{cortical learning algorithms (CLA)<http://numenta.com/assets/pdf/whitepapers/hierarchical-temporal-memory-cortical-learning-algorithm-0.2.1-en.pdf)>}. A mathematical framework was developed for HTM. This library is built off that framework. The framework is currently only for the spatial pooler (SP); however, it is by no means limited to expand. This implementation was specifically designed to be a completely accurate representation of HTM. Additionally, care was taken to ensure that efficient computations are occurring.
 
-We are currently in the process of publishing a paper that explains this model. Once this paper is available, it will be announced in this repo.
+We have recently submitted a paper to IEEE TNNLS explaining this work. A preprint is available on U{arXiv<http://arxiv.org/abs/1601.06116>}.
 
 To aid in tying HTM into the machine learning community, this implementation was built to be compatible with U{Scikit-Learn<http://scikit-learn.org/stable/>}. If you are familiar with Scikit-Learn, this API should feel natural. Additionally, because the Scikit-Learn interface is used, the SP in this implementation may be used in many of the pre-existing Scikit-Learn tools, namely those utilizing U{cross-validation (CV)<http://scikit-learn.org/stable/modules/cross_validation.html>}. A custom U{parameter generator<http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.ParameterSampler.html>} was constructed, explicitly for that purpose.
 
@@ -60,9 +60,9 @@ Development
 Citing this Work
 ================
 	While this code is completely free of charge, it is highly appreciated that all
-	uses of this code are cited (both in publications as well as within any modified code). Once the paper is published the citation should be made to follow that paper. For now, please use the following:
-
-	J. Mnatzaganian, Rochester Institute of Technology's NanoComputing Research Lab, "math hierarchical temporal memory (mHTM)," X{GitHub Repository}, 2015, Available at https://github.com/tehtechguy/mHTM.
+	uses of this code are cited (both in publications as well as within any modified code). Once the IEEE TNNLS paper is approved please cite that work. For now, please cite the preprint:
+	
+	J. Mnatzaganian, E. Fokoue, and D. Kudithipudi, "A Mathematical Formalization of Hierarchical Temporal Memory Cortical Learning Algorithm's Spatial Pooler," arXiv preprint arXiv:1601.06116, 2016.
 
 Bug Reports and Support
 =======================
