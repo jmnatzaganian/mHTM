@@ -66,7 +66,7 @@ name: nano_htm
 css: white
 
 # The documented project's URL.
-url: http://techtorials.me
+url: https://github.com/tehtechguy/mHTM
 
 # HTML code for the project link in the navigation bar. If left unspecified,
 # the project link will be generated based on the project's name and URL.

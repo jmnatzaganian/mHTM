@@ -34,7 +34,7 @@
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            ><a class="navbar" target="_top" href="http://techtorials.me">nano_htm</a></th>
+            ><a class="navbar" target="_top" href="https://github.com/tehtechguy/mHTM">nano_htm</a></th>
           </tr></table></th>
   </tr>
 </table>
@@ -66,119 +66,118 @@
 <a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># Contact        : http://techtorials.me</tt> </tt>
 <a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment"># Organization   : NanoComputing Research Lab - Rochester Institute of</tt> </tt>
 <a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment"># Technology</tt> </tt>
-<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment"># http://www.rit.edu/kgcoe/facility/nanocomputing-research-laboratory</tt> </tt>
-<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment"># http://nano.ce.rit.edu</tt> </tt>
-<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment"># Date Created   : 12/02/15</tt> </tt>
-<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment">#       </tt> </tt>
-<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment"># Description    : Defines the project (main package).</tt> </tt>
-<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment"># Python Version : 2.7.X</tt> </tt>
-<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
-<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment"># License        : MIT License http://opensource.org/licenses/mit-license.php</tt> </tt>
-<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-comment"># Copyright      : (c) 2015 James Mnatzaganian</tt> </tt>
-<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"> </tt>
-<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
-<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring">math HTM (mHTM) is a Python build of hierarchical temporal memory (HTM). This build specifically utilizes the U{cortical learning algorithms (CLA)&lt;http://numenta.com/assets/pdf/whitepapers/hierarchical-temporal-memory-cortical-learning-algorithm-0.2.1-en.pdf)&gt;}. A mathematical framework was developed for HTM. This library is built off that framework. The framework is currently only for the spatial pooler (SP); however, it is by no means limited to expand. This implementation was specifically designed to be a completely accurate representation of HTM. Additionally, care was taken to ensure that efficient computations are occurring.</tt> </tt>
-<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">We are currently in the process of publishing a paper that explains this model. Once this paper is available, it will be announced in this repo.</tt> </tt>
-<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring">To aid in tying HTM into the machine learning community, this implementation was built to be compatible with U{Scikit-Learn&lt;http://scikit-learn.org/stable/&gt;}. If you are familiar with Scikit-Learn, this API should feel natural. Additionally, because the Scikit-Learn interface is used, the SP in this implementation may be used in many of the pre-existing Scikit-Learn tools, namely those utilizing U{cross-validation (CV)&lt;http://scikit-learn.org/stable/modules/cross_validation.html&gt;}. A custom U{parameter generator&lt;http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.ParameterSampler.html&gt;} was constructed, explicitly for that purpose.</tt> </tt>
-<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring">The implementation of the SP is single-threaded; however, multiple forms of parallelizations for cross-validation and parameter optimization exist. For a local machine, simply using one of Scikit-Learn's CV functions supporting parallelization should suffice. For a cluster environment, code is provided to create and launch jobs.</tt> </tt>
-<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">This package is platform independent and should run on any system containing the prerequisites. If you are using a cluster, the cluster must be running SLURM, and as such must be a valid Linux distribution.</tt> </tt>
-<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">Prerequisites</tt> </tt>
-<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring">=============</tt> </tt>
-<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">        - U{Python 2.7.X&lt;https://www.python.org/downloads/release/python-279/&gt;}</tt> </tt>
-<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring">        - U{Numpy&lt;http://www.numpy.org/&gt;}</tt> </tt>
-<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">        - U{matplotlib&lt;http://matplotlib.org/&gt;}</tt> </tt>
-<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">        - U{Scipy&lt;http://www.scipy.org/&gt;}</tt> </tt>
-<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring">        - U{Scikit-Learn&lt;http://scikit-learn.org/stable/&gt;}</tt> </tt>
-<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring">        - U{Bottleneck&lt;http://berkeleyanalytics.com/bottleneck&gt;}</tt> </tt>
-<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">Installation</tt> </tt>
-<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">============</tt> </tt>
-<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring">        1. Install all prerequisites</tt> </tt>
-<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">                1. If you have U{pip&lt;https://pip.pypa.io/en/latest/installing.html&gt;}</tt> </tt>
-<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">                </tt> </tt>
-<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">                        X{pip install numpy matplotlib scipy scikit-learn bottleneck}</tt> </tt>
-<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring">                </tt> </tt>
-<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">                2. If you are on Windows</tt> </tt>
-<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring">                </tt> </tt>
-<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">                        You may download the the (unofficial) precompiled versions available from U{UCI&lt;http://www.lfd.uci.edu/~gohlke/pythonlibs&gt;}. Simply download the appropriate Python wheel and install it using pip, i.e. X{pip install my_file.whl}, where X{my_file} is the name of your X{whl} file.</tt> </tt>
-<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring">        2. Download this repo and execute X{python setup.py install}.</tt> </tt>
-<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">Usage</tt> </tt>
-<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">=====</tt> </tt>
-<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">        The API is fully documented and available in the "docs" folder. Simply open "index.html" in your favorite web browser.</tt> </tt>
-<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
-<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">        As a starting point, examples have been prepared for working with MNIST. The dataset is additionally, included. Refer to "mnist_simple.py" in "src/examples" for a basic introduction into the API. In that same folder, refer to "mnist_parallel" for examples for using parallelizations locally or an cluster.</tt> </tt>
-<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
-<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring">        The "dev" folder contains the latest code regarding new experiments. This content is subject to change at any point and is not guaranteed to work; however, it can also be used as a basis for exploring this library.</tt> </tt>
-<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring">Development</tt> </tt>
-<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring">===========</tt> </tt>
-<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring">        For building the docs, U{Epydoc&lt;http://epydoc.sourceforge.net/&gt;} is used. To generate new docs, </tt> </tt>
-<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
-<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">Citing this Work</tt> </tt>
-<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring">================</tt> </tt>
-<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">        While this code is completely free of charge, it is highly appreciated that all</tt> </tt>
-<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring">        uses of this code are cited (both in publications as well as within any modified code). Once the paper is published the citation should be made to follow that paper. For now, please use the following:</tt> </tt>
-<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring">        J. Mnatzaganian, Rochester Institute of Technology's NanoComputing Research Lab, "math hierarchical temporal memory (mHTM)," X{GitHub Repository}, 2015, Available at https://github.com/tehtechguy/mHTM.</tt> </tt>
-<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">Bug Reports and Support</tt> </tt>
-<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">=======================</tt> </tt>
-<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">        No official support is provided; however, support may be provided. To ensure all feedback is within the same location, please use the Wiki for asking general questions and create issues if any bugs are found.</tt> </tt>
-<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">Author</tt> </tt>
-<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">======</tt> </tt>
-<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring">        The original author of this code was James Mnatzaganian. For contact info, as well as other details, see his corresponding U{website&lt;http://techtorials.me&gt;}.</tt> </tt>
-<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">        This work was created at RIT's U{NanoComputing Research Laboratory&lt;http://www.rit.edu/kgcoe/nanolab/&gt;}.</tt> </tt>
-<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring">Legal</tt> </tt>
-<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring">=====</tt> </tt>
-<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">        This code is licensed under the U{MIT license&lt;http://opensource.org/licenses/mit-license.php&gt;}, with one caveat. Numenta owns patents on specific items. While this code was written without using any of Numenta's code, it is possible that those patent laws still apply. Before using this code, commercially, it is recommended to seek legal advice.</tt> </tt>
-<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">Connectivity</tt> </tt>
-<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">============</tt> </tt>
-<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring">        The following image shows how everything is connected:</tt> </tt>
-<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring">        G{importgraph}</tt> </tt>
-<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring">Developer Notes</tt> </tt>
-<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring">===============</tt> </tt>
-<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring">        The following notes are for developers only.</tt> </tt>
-<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt class="py-docstring">        Installation</tt> </tt>
-<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring">        ------------</tt> </tt>
-<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">                1.  Download and install U{graphviz&lt;http://www.graphviz.org/Download..</tt> </tt>
-<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">                php&gt;}</tt> </tt>
-<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">                2.  Edit line 95 in X{dev/epydoc_config.txt} to point to the directory</tt> </tt>
-<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring">                containing "dot.exe". This is part of the graphviz installation.</tt> </tt>
-<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring">                3.  Download this repo and execute X{python setup.py install}.</tt> </tt>
-<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring">                4.  Download and install U{Epydoc&lt;http://sourceforge.net/projects/</tt> </tt>
-<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring">                epydoc/files&gt;}</tt> </tt>
-<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-docstring">        Generating the API</tt> </tt>
-<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-docstring">        ------------------</tt> </tt>
-<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-docstring">                From the mHTM folder, execute X{python epydoc --config=epydoc_config.txt mHTM}</tt> </tt>
-<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring">@group Examples: examples</tt> </tt>
-<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">@group Datasets: datasets</tt> </tt>
-<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">@author: U{James Mnatzaganian&lt;http://techtorials.me&gt;}</tt> </tt>
-<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">@organization: U{NanoComputing Research Laboratory&lt;http://www.rit.edu/kgcoe/nanolab/&gt;}</tt> </tt>
-<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring">@requires: Python 2.7.X</tt> </tt>
-<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">@version: 1.0.0</tt> </tt>
-<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">@license: U{The MIT License&lt;http://opensource.org/licenses/mit-license.php&gt;}</tt> </tt>
-<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">@copyright: S{copy} 2015 James Mnatzaganian</tt> </tt>
-<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
-<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"> </tt>
-<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-name">__docformat__</tt> <tt class="py-op">=</tt> <tt class="py-string">'epytext'</tt> </tt>
-<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment"># Website        : https://www.rit.edu/kgcoe/nanolab/</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment"># Date Created   : 12/02/15</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment">#       </tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment"># Description    : Defines the project (main package).</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment"># Python Version : 2.7.X</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment"># License        : MIT License http://opensource.org/licenses/mit-license.php</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment"># Copyright      : (c) 2015 James Mnatzaganian</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">math HTM (mHTM) is a Python build of hierarchical temporal memory (HTM). This build specifically utilizes the U{cortical learning algorithms (CLA)&lt;http://numenta.com/assets/pdf/whitepapers/hierarchical-temporal-memory-cortical-learning-algorithm-0.2.1-en.pdf)&gt;}. A mathematical framework was developed for HTM. This library is built off that framework. The framework is currently only for the spatial pooler (SP); however, it is by no means limited to expand. This implementation was specifically designed to be a completely accurate representation of HTM. Additionally, care was taken to ensure that efficient computations are occurring.</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">We have recently submitted a paper to IEEE TNNLS explaining this work. A preprint is available on U{arXiv&lt;http://arxiv.org/abs/1601.06116&gt;}.</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">To aid in tying HTM into the machine learning community, this implementation was built to be compatible with U{Scikit-Learn&lt;http://scikit-learn.org/stable/&gt;}. If you are familiar with Scikit-Learn, this API should feel natural. Additionally, because the Scikit-Learn interface is used, the SP in this implementation may be used in many of the pre-existing Scikit-Learn tools, namely those utilizing U{cross-validation (CV)&lt;http://scikit-learn.org/stable/modules/cross_validation.html&gt;}. A custom U{parameter generator&lt;http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.ParameterSampler.html&gt;} was constructed, explicitly for that purpose.</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">The implementation of the SP is single-threaded; however, multiple forms of parallelizations for cross-validation and parameter optimization exist. For a local machine, simply using one of Scikit-Learn's CV functions supporting parallelization should suffice. For a cluster environment, code is provided to create and launch jobs.</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">This package is platform independent and should run on any system containing the prerequisites. If you are using a cluster, the cluster must be running SLURM, and as such must be a valid Linux distribution.</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">Prerequisites</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">=============</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring">        - U{Python 2.7.X&lt;https://www.python.org/downloads/release/python-279/&gt;}</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">        - U{Numpy&lt;http://www.numpy.org/&gt;}</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring">        - U{matplotlib&lt;http://matplotlib.org/&gt;}</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">        - U{Scipy&lt;http://www.scipy.org/&gt;}</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">        - U{Scikit-Learn&lt;http://scikit-learn.org/stable/&gt;}</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring">        - U{Bottleneck&lt;http://berkeleyanalytics.com/bottleneck&gt;}</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring">Installation</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">============</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">        1. Install all prerequisites</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring">                1. If you have U{pip&lt;https://pip.pypa.io/en/latest/installing.html&gt;}</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">                </tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">                        X{pip install numpy matplotlib scipy scikit-learn bottleneck}</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">                </tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring">                2. If you are on Windows</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">                </tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring">                        You may download the the (unofficial) precompiled versions available from U{UCI&lt;http://www.lfd.uci.edu/~gohlke/pythonlibs&gt;}. Simply download the appropriate Python wheel and install it using pip, i.e. X{pip install my_file.whl}, where X{my_file} is the name of your X{whl} file.</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">        2. Download this repo and execute X{python setup.py install}.</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-docstring">Usage</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">=====</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">        The API is fully documented and available in the "docs" folder. Simply open "index.html" in your favorite web browser.</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring">        As a starting point, examples have been prepared for working with MNIST. The dataset is additionally, included. Refer to "mnist_simple.py" in "src/examples" for a basic introduction into the API. In that same folder, refer to "mnist_parallel" for examples for using parallelizations locally or an cluster.</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring">        The "dev" folder contains the latest code regarding new experiments. This content is subject to change at any point and is not guaranteed to work; however, it can also be used as a basis for exploring this library.</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring">Development</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring">===========</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring">        For building the docs, U{Epydoc&lt;http://epydoc.sourceforge.net/&gt;} is used. To generate new docs, </tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">Citing this Work</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">================</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring">        While this code is completely free of charge, it is highly appreciated that all</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">        uses of this code are cited (both in publications as well as within any modified code). Once the IEEE TNNLS paper is approved please cite that work. For now, please cite the preprint:</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring">        J. Mnatzaganian, E. Fokoue, and D. Kudithipudi, "A Mathematical Formalization of Hierarchical Temporal Memory Cortical Learning Algorithm's Spatial Pooler," arXiv preprint arXiv:1601.06116, 2016.</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">Bug Reports and Support</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">=======================</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">        No official support is provided; however, support may be provided. To ensure all feedback is within the same location, please use the Wiki for asking general questions and create issues if any bugs are found.</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">Author</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">======</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">        The original author of this code was James Mnatzaganian. For contact info, as well as other details, see his corresponding U{website&lt;http://techtorials.me&gt;}.</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring">        This work was created at RIT's U{NanoComputing Research Laboratory&lt;http://www.rit.edu/kgcoe/nanolab/&gt;}.</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring">Legal</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring">=====</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">        This code is licensed under the U{MIT license&lt;http://opensource.org/licenses/mit-license.php&gt;}, with one caveat. Numenta owns patents on specific items. While this code was written without using any of Numenta's code, it is possible that those patent laws still apply. Before using this code, commercially, it is recommended to seek legal advice.</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">Connectivity</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">============</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">        The following image shows how everything is connected:</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-docstring">        G{importgraph}</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring">Developer Notes</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring">===============</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring">        The following notes are for developers only.</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt class="py-docstring">        Installation</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt class="py-docstring">        ------------</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring">                1.  Download and install U{graphviz&lt;http://www.graphviz.org/Download..</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">                php&gt;}</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">                2.  Edit line 95 in X{dev/epydoc_config.txt} to point to the directory</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">                containing "dot.exe". This is part of the graphviz installation.</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring">                3.  Download this repo and execute X{python setup.py install}.</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring">                4.  Download and install U{Epydoc&lt;http://sourceforge.net/projects/</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring">                epydoc/files&gt;}</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring">        Generating the API</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-docstring">        ------------------</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-docstring">                From the mHTM folder, execute X{python epydoc --config=epydoc_config.txt mHTM}</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring">@group Examples: examples</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring">@group Datasets: datasets</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring">@author: U{James Mnatzaganian&lt;http://techtorials.me&gt;}</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">@organization: U{NanoComputing Research Laboratory&lt;http://www.rit.edu/kgcoe/nanolab/&gt;}</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">@requires: Python 2.7.X</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring">@version: 1.0.0</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">@license: U{The MIT License&lt;http://opensource.org/licenses/mit-license.php&gt;}</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">@copyright: S{copy} 2016 James Mnatzaganian</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-name">__docformat__</tt> <tt class="py-op">=</tt> <tt class="py-string">'epytext'</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -209,14 +208,14 @@ expandto(location.href);
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            ><a class="navbar" target="_top" href="http://techtorials.me">nano_htm</a></th>
+            ><a class="navbar" target="_top" href="https://github.com/tehtechguy/mHTM">nano_htm</a></th>
           </tr></table></th>
   </tr>
 </table>
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Tue Dec 22 13:47:31 2015
+    Generated by Epydoc 3.0.1 on Sun Jan 24 21:03:13 2016
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

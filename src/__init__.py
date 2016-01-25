@@ -111,7 +111,7 @@ Developer Notes
 @requires: Python 2.7.X
 @version: 1.0.0
 @license: U{The MIT License<http://opensource.org/licenses/mit-license.php>}
-@copyright: S{copy} 2015 James Mnatzaganian
+@copyright: S{copy} 2016 James Mnatzaganian
 """
 
 __docformat__ = 'epytext'
