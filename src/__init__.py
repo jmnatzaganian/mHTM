@@ -109,7 +109,7 @@ Developer Notes
 @author: U{James Mnatzaganian<http://techtorials.me>}
 @organization: U{NanoComputing Research Laboratory<http://www.rit.edu/kgcoe/nanolab/>}
 @requires: Python 2.7.X
-@version: 1.0.0
+@version: 0.9.0
 @license: U{The MIT License<http://opensource.org/licenses/mit-license.php>}
 @copyright: S{copy} 2016 James Mnatzaganian
 """
