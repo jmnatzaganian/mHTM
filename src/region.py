@@ -125,7 +125,7 @@ class SPRegion(Region):
 	def __init__(self,
 		# Parameters for the region
 		ninputs, ncolumns=1024, pct_active=None, nactive=None,
-		global_inhibition=True, trim=1e-4, seed=None,
+		global_inhibition=True, trim=1e-4, disable_boost=False, seed=None,
 		
 		# Parameters for the columns
 		max_boost=10, duty_cycle=1000,
@@ -162,6 +162,10 @@ class SPRegion(Region):
 				
 		@param trim: Set to False to disable. If a scalar, any permanence below
 		that threshold will be set to 0.
+		
+		@param disable_boost: Set to True to disable the boosting mechanism.
+		Doing so may result in a large performance gain as well as reducing
+		the memory requirements.
 		
 		@param seed: The random seed to use for the SP. Set to None to use the
 		default seed or provide any valid seed.
@@ -224,6 +228,7 @@ class SPRegion(Region):
 		self.nactive = nactive
 		self.global_inhibition = global_inhibition
 		self.trim = trim
+		self.disable_boost = disable_boost
 		self.seed = seed
 		
 		# Store the column params
@@ -322,16 +327,25 @@ class SPRegion(Region):
 		# Column configuration
 		####
 		
-		# Prepare the histories
-		self.overlap = np.zeros((self.ncolumns, self.duty_cycle), dtype='i')
-		self.y = np.zeros((self.ncolumns, self.duty_cycle), dtype='bool')
-		
-		# Prepare the boosts
-		self.boost = np.ones(self.ncolumns)
-		
-		# Prepare the duty cycles
-		self.active_dc = np.zeros(self.ncolumns)
-		self.overlap_dc = np.zeros(self.ncolumns)
+		# Determine if history is needed
+		if self.disable_boost is False:
+			# Prepare the histories
+			self.overlap = np.zeros((self.ncolumns, self.duty_cycle),
+				dtype='i')
+			self.y = np.zeros((self.ncolumns, self.duty_cycle), dtype='bool')
+			
+			# Prepare the boosts
+			self.boost = np.ones(self.ncolumns)
+			
+			# Prepare the duty cycles
+			self.active_dc = np.zeros(self.ncolumns)
+			self.overlap_dc = np.zeros(self.ncolumns)
+		else:
+			# Make much smaller objects that are still compatible
+			#   - Note: Shifting is still safe, since np manages it
+			self.overlap = np.zeros((self.ncolumns, 1), dtype='i')
+			self.y = np.zeros((self.ncolumns, 1), dtype='bool')
+			self.boost = 1
 		
 		# Prepare the neighborhood
 		self.neighbors = np.zeros((self.ncolumns, self.ncolumns), dtype='bool')
@@ -443,12 +457,12 @@ class SPRegion(Region):
 		return {'ninputs':self.ninputs, 'ncolumns':self.ncolumns,
 			'pct_active':self.pct_active, 'nactive':self.nactive,
 			'global_inhibition':self.global_inhibition, 'trim':self.trim,
-			'seed':self.seed, 'max_boost':self.max_boost,
-			'duty_cycle':self.duty_cycle, 'nsynapses':self.nsynapses,
-			'seg_th':self.seg_th, 'syn_th':self.syn_th, 'pinc':self.pinc,
-			'pdec':self.pdec, 'pwindow':self.pwindow,
-			'random_permanence':self.random_permanence, 'nepochs':self.nepochs,
-			'clf':self.clf, 'log_dir':self.log_dir}
+			'disable_boost':self.disable_boost, 'seed':self.seed,
+			'max_boost':self.max_boost, 'duty_cycle':self.duty_cycle,
+			'nsynapses':self.nsynapses, 'seg_th':self.seg_th,
+			'syn_th':self.syn_th, 'pinc':self.pinc, 'pdec':self.pdec,
+			'pwindow':self.pwindow, 'random_permanence':self.random_permanence,
+			'nepochs':self.nepochs, 'clf':self.clf, 'log_dir':self.log_dir}
 	
 	def set_params(self, **parameters):
 		"""
@@ -633,20 +647,21 @@ class SPRegion(Region):
 		self.p = np.clip(self.p + (self.c_pupdate * self.y[:, 0:1] *
 			self.x[self.syn_map] - self.pdec * self.y[:, 0:1]), 0, 1)
 		
-		# Update the boosting mechanisms
-		if self.global_inhibition:
-			min_dc = np.zeros(self.ncolumns)
-			min_dc.fill(self.c_mdc * bn.nanmax(self.active_dc))
-		else:
-			min_dc = self.c_mdc * bn.nanmax(self.neighbors * self.active_dc, 1)
-		self._update_active_duty_cycle()
-		self._update_boost(min_dc)
-		self._update_overlap_duty_cycle()
-		
-		# Boost permanences
-		mask = self.overlap_dc < min_dc
-		mask.resize(self.ncolumns, 1)
-		self.p = np.clip(self.p + self.c_sboost * mask, 0, 1)
+		if self.disable_boost is False:
+			# Update the boosting mechanisms
+			if self.global_inhibition:
+				min_dc = np.zeros(self.ncolumns)
+				min_dc.fill(self.c_mdc * bn.nanmax(self.active_dc))
+			else:
+				min_dc = self.c_mdc * bn.nanmax(self.neighbors * self.active_dc, 1)
+			self._update_active_duty_cycle()
+			self._update_boost(min_dc)
+			self._update_overlap_duty_cycle()
+			
+			# Boost permanences
+			mask = self.overlap_dc < min_dc
+			mask.resize(self.ncolumns, 1)
+			self.p = np.clip(self.p + self.c_sboost * mask, 0, 1)
 		
 		# Trim synapses
 		if self.trim is not False:
