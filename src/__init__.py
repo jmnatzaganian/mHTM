@@ -11,7 +11,7 @@
 # Python Version : 2.7.X
 #
 # License        : MIT License http://opensource.org/licenses/mit-license.php
-# Copyright      : (c) 2015 James Mnatzaganian
+# Copyright      : (c) 2016 James Mnatzaganian
 
 """
 math HTM (mHTM) is a Python build of hierarchical temporal memory (HTM). This build specifically utilizes the U{cortical learning algorithms (CLA)<http://numenta.com/assets/pdf/whitepapers/hierarchical-temporal-memory-cortical-learning-algorithm-0.2.1-en.pdf)>}. A mathematical framework was developed for HTM. This library is built off that framework. The framework is currently only for the spatial pooler (SP); however, it is by no means limited to expand. This implementation was specifically designed to be a completely accurate representation of HTM. Additionally, care was taken to ensure that efficient computations are occurring.

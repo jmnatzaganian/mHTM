@@ -12,7 +12,7 @@
 # Python Version : 2.7.X
 #
 # License        : MIT License http://opensource.org/licenses/mit-license.php
-# Copyright      : (c) 2015 James Mnatzaganian
+# Copyright      : (c) 2016 James Mnatzaganian
 
 """
 Plotting module.
