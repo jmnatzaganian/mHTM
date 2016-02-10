@@ -22,13 +22,14 @@ G{packagetree mHTM}
 __docformat__ = 'epytext'
 
 # Native imports
-import json, os, pkgutil, csv, cPickle
+import os
 
 # Third party imports
 import numpy as np
 
 # Program imports
 from mHTM.region import SPRegion
+from mHTM.plot import plot_line
 
 ###############################################################################
 ##### Classes
@@ -151,12 +152,94 @@ class SPMetrics(object):
 		
 		return (nabove + nbelow) / float(data.shape[1])
 
-if __name__ == '__main__':
-	# Create the dataset
-	ds = SPDataset(seed=123456789)
+###############################################################################
+##### Functions
+###############################################################################
+
+def main():
+	"""
+	Program entry.
 	
-	# Reference the metrics
+	Build an SP using SPDataset and see how it performs.
+	"""
+	
+	# Params
+	nsamples, nbits, pct_active = 500, 100, 0.4
+	ncolumns = 300
+	base_path = os.path.join(os.path.expanduser('~'), 'scratch')
+	log_dir = os.path.join(base_path, '1-1')
+	seed = 123456789
+	kargs = {
+		'ninputs': nbits,
+		'ncolumns': 300,
+		'nactive': 0.02 * ncolumns,
+		'global_inhibition': True,
+		'trim': 1e-4,
+		'disable_boost': True,
+		'seed': seed,
+		
+		'nsynapses': 20,
+		'seg_th': 2,
+		
+		'syn_th': 0.5,
+		'pinc': 0.01,
+		'pdec': 0.01,
+		'pwindow': 0.5,
+		'random_permanence': True,
+		
+		'nepochs': 1,
+		'log_dir': log_dir
+	}
+	
+	# Build items to store results
+	npoints = 100
+	pct_noises = np.linspace(0, pct_active / 2, npoints, False)
+	uniqueness_sp, uniqueness_data = np.zeros(npoints), np.zeros(npoints)
+	similarity_sp, similarity_data = np.zeros(npoints), np.zeros(npoints)
+	
+	# Metrics
 	metrics = SPMetrics()
 	
-	print metrics.compute_uniqueness(ds.data)
-	print metrics.compute_similarity(ds.data)
+	# Vary input noise
+	for i, pct_noise in enumerate(pct_noises):
+		# Build the dataset
+		ds = SPDataset(nsamples=nsamples, nbits=nbits, pct_active=pct_active,
+			pct_noise=pct_noise, seed=seed)
+		
+		# Get the dataset stats
+		uniqueness_data[i] = metrics.compute_uniqueness(ds.data)
+		similarity_data[i] = metrics.compute_similarity(ds.data,
+			confidence_interval=0.9)
+		
+		# Build the SP
+		sp = SPRegion(**kargs)
+		
+		# Train the region
+		sp.fit(ds.data)
+		
+		# Get the SP's output SDRs
+		sp_output = sp.predict(ds.data)
+		
+		# Get the stats
+		uniqueness_sp[i] = metrics.compute_uniqueness(sp_output)
+		similarity_sp[i] = metrics.compute_similarity(sp_output,
+			confidence_interval=0.9)
+	
+	# Make some plots
+	plot_line([pct_noises * 100, pct_noises * 100], [uniqueness_data * 100,
+		uniqueness_sp * 100], series_names=('Raw Data', 'SP Output'),
+		x_label='% Noise', y_label='Uniqueness [%]', xlim=False, ylim=False,
+		out_path=os.path.join(base_path, 'uniqueness.png'))
+	plot_line([pct_noises * 100, pct_noises * 100], [similarity_data * 100,
+		similarity_sp * 100], series_names=('Raw Data', 'SP Output'),
+		x_label='% Noise', y_label='Similarity [%]', xlim=False, ylim=False,
+		out_path=os.path.join(base_path, 'similarity.png'))
+
+if __name__ == '__main__':
+	main()
+	
+	# import cPickle
+	# with open(r'C:\Users\james\scratch\1-100\column_activations-train.pkl') as f:
+		# data = cPickle.load(f)
+	
+	# import pdb; pdb.set_trace()
