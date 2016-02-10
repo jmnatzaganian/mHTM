@@ -43,13 +43,9 @@ class SPDataset(object):
 	bits and the specified percent of active bits. The actual class SDR will be
 	chosen randomly. Using the desired amount of noise, bits will be randomly
 	flipped to populate the dataset.
-	
-	This class allows for an unbiased method for studying the SP. Custom
-	scoring metrics are included for determining how good the SP's output SDRs
-	are.
 	"""
 	
-	def __init__(self, nsamples=500, nbits=100, pct_active=0.5, pct_noise=0.2,
+	def __init__(self, nsamples=500, nbits=100, pct_active=0.4, pct_noise=0.1,
 		seed=None):
 		"""
 		Initialize the class.
@@ -94,6 +90,16 @@ class SPDataset(object):
 		for i in xrange(len(self.data)):
 			sel = self.prng.choice(self.nbits, noise, False)
 			self.data[i, sel] = np.bitwise_not(self.data[i, sel])
+	
+class SPMetrics(object):
+	"""
+	This class allows for an unbiased method for studying the SP. Custom
+	scoring metrics are included for determining how good the SP's output SDRs
+	are.
+	
+	The included metrics are currently only for a single class; however, it
+	should be possible to expand these to support multi-class.
+	"""
 	
 	@staticmethod
 	def compute_uniqueness(data):
@@ -147,7 +153,10 @@ class SPDataset(object):
 
 if __name__ == '__main__':
 	# Create the dataset
-	ds = SPDataset(pct_noise=0.02, seed=123456789)
+	ds = SPDataset(seed=123456789)
 	
-	print ds.compute_uniqueness(ds.data)
-	print ds.compute_similarity(ds.data)
+	# Reference the metrics
+	metrics = SPMetrics()
+	
+	print metrics.compute_uniqueness(ds.data)
+	print metrics.compute_similarity(ds.data)
