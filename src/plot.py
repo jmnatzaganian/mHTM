@@ -314,7 +314,7 @@ def plot_line(x_series, y_series, series_names=None, x_label=None,
 		ax.set_position([box.x0, box.y0 + box.height * 0.35, box.width,
 			box.height * 0.65])
 		leg = ax.legend(series_names, loc='upper center',
-			bbox_to_anchor=(0, -1.2, 1, 1), ncol=4, mode='expand',
+			bbox_to_anchor=(0, -1.22, 1, 1), ncol=4, mode='expand',
 			borderaxespad=0.)
 		leg.get_frame().set_linewidth(2)
 	
