@@ -37,11 +37,13 @@ from mHTM.region import SPRegion
 from mHTM.parallel import create_runner, execute_runner, ParamGenerator
 from mHTM.datasets.loader import load_mnist, MNISTCV
 
-def main(ntrain=800, ntest=200, niter=10, nsplits=5, global_inhibition=True,
-	seed=None):
+def main(log_dir, ntrain=800, ntest=200, niter=10, nsplits=5,
+	global_inhibition=True, seed=None):
 	"""
 	Build the information needed to perform CV on a subset of the MNIST
 	dataset.
+
+	@param log_dir: The directory to store the results in.
 	
 	@param ntrain: The number of training samples to use.
 	
@@ -140,7 +142,8 @@ def main_local(log_dir, ntrain=800, ntest=200, niter=5, nsplits=3,
 	"""
 	
 	# Run the initialization
-	x, y, kargs, params, cv = main(ntrain, ntest, niter, nsplits, seed)
+	x, y, kargs, params, cv = main(log_dir, ntrain, ntest, niter, nsplits,
+		seed)
 	
 	# Build the classifier for doing CV
 	clf = RandomizedSearchCV(
@@ -202,7 +205,7 @@ def main_slurm(log_dir, ntrain=800, ntest=200, niter=5, nsplits=3,
 	"""
 	
 	# Run the initialization
-	x, y, kargs, params, cv = main(ntrain, ntest, niter, nsplits,
+	x, y, kargs, params, cv = main(log_dir, ntrain, ntest, niter, nsplits,
 		global_inhibition, seed)
 	
 	# Create the runs
