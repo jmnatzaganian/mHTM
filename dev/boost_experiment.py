@@ -28,6 +28,7 @@ import cPickle, random, csv, os, time, json
 import numpy as np
 import bottleneck as bn
 import matplotlib.pyplot as plt
+from joblib import Parallel, delayed
 
 # Program imports
 from mHTM.region import SPRegion
@@ -86,41 +87,44 @@ def _phase3(self):
 	self.p = np.clip(self.p + (self.c_pupdate * self.y[:, 0:1] *
 		self.x[self.syn_map] - self.pdec * self.y[:, 0:1]), 0, 1)
 	
-	# Update the boosting mechanisms
-	if self.global_inhibition:
-		min_dc = np.zeros(self.ncolumns)
-		min_dc.fill(self.c_mdc * bn.nanmax(self.active_dc))
-	else:
-		min_dc = self.c_mdc * bn.nanmax(self.neighbors * self.active_dc, 1)
+	if self.disable_boost is False:
+		# Update the boosting mechanisms
+		if self.global_inhibition:
+			min_dc = np.zeros(self.ncolumns)
+			min_dc.fill(self.c_mdc * bn.nanmax(self.active_dc))
+		else:
+			min_dc = self.c_mdc * bn.nanmax(self.neighbors * self.active_dc, 1)
+		
+		## Save pre-overlap boost info
+		boost = list(self.boost)
+		
+		# Update boost
+		self._update_active_duty_cycle()
+		self._update_boost(min_dc)
+		self._update_overlap_duty_cycle()
 	
-	## Save pre-overlap boost info
-	boost = list(self.boost)
+		## Write out overlap boost changes
+		with open(os.path.join(self.out_path, 'overlap_boost.csv'), 'ab') as f:
+			writer = csv.writer(f)
+			writer.writerow([self.iter, bn.nanmean(boost != self.boost)])
 	
-	# Update boost
-	self._update_active_duty_cycle()
-	self._update_boost(min_dc)
-	self._update_overlap_duty_cycle()
+		# Boost permanences
+		mask = self.overlap_dc < min_dc
+		mask.resize(self.ncolumns, 1)
+		self.p = np.clip(self.p + self.c_sboost * mask, 0, 1)
 	
-	## Write out overlap boost changes
-	with open(os.path.join(self.out_path, 'overlap_boost.csv'), 'ab') as f:
-		writer = csv.writer(f)
-		writer.writerow([self.iter, bn.nanmean(boost != self.boost)])
-	
-	# Boost permanences
-	mask = self.overlap_dc < min_dc
-	mask.resize(self.ncolumns, 1)
-	self.p = np.clip(self.p + self.c_sboost * mask, 0, 1)
-	
-	## Write out permanence boost info
-	with open(os.path.join(self.out_path, 'permanence_boost.csv'), 'ab') as f:
-		writer = csv.writer(f)
-		writer.writerow([self.iter, bn.nanmean(mask)])
+		## Write out permanence boost info
+		with open(os.path.join(self.out_path, 'permanence_boost.csv'), 'ab') \
+			as f:
+			writer = csv.writer(f)
+			writer.writerow([self.iter, bn.nanmean(mask)])
 	
 	# Trim synapses
 	if self.trim is not False:
 		self.p[self.p < self.trim] = 0
 
-def main(ds, p, ncols=2048, duty_cycle=100, nepochs=10, seed=123456789):
+def main(ds, p, ncols=2048, duty_cycle=100, nepochs=10, global_inhibition=True,
+	seed=123456789):
 	"""
 	Run an experiment.
 	
@@ -133,6 +137,9 @@ def main(ds, p, ncols=2048, duty_cycle=100, nepochs=10, seed=123456789):
 	@param duty_cycle: The duty cycle.
 	
 	@param nepochs: The number of epochs
+	
+	@param global_inhibition: If True use global inhibition otherwise use local
+	inhibition.
 	
 	@param seed: The random seed.
 	"""
@@ -159,7 +166,7 @@ def main(ds, p, ncols=2048, duty_cycle=100, nepochs=10, seed=123456789):
 		'nactive': int(0.02 * ncols),
 		'duty_cycle': duty_cycle,
 		'max_boost': 10,
-		'global_inhibition': True,
+		'global_inhibition': global_inhibition,
 		'trim': 1e-4
 	}
 	
@@ -172,7 +179,7 @@ def main(ds, p, ncols=2048, duty_cycle=100, nepochs=10, seed=123456789):
 	# Train the region
 	t = time.time()
 	for i in xrange(nepochs):
-		print i
+		# print i
 		for j, x in enumerate(ds):
 			sp.execute(x)
 			sp.iter += 1
@@ -187,11 +194,14 @@ def main(ds, p, ncols=2048, duty_cycle=100, nepochs=10, seed=123456789):
 		f.write(json.dumps(kargs, sort_keys=True, indent=4,
 			separators=(',', ': ')))
 
-def vary_density(bp):
+def vary_density(bp, global_inhibition=True):
 	"""
 	Vary the density level.
 	
 	@pram bp: The base path.
+	
+	@param global_inhibition: If True use global inhibition otherwise use local
+	inhibition.
 	"""
 	
 	density_levels = np.linspace(.01, .99, 99)
@@ -208,15 +218,24 @@ def vary_density(bp):
 		make_data(p2, density=density, seed=123456789)
 		
 		# Repeat for good results
-		for i in xrange(10):
-			print '\n\n\t\t{0}\n'.format(i)
-			main(load_data(p2), os.path.join(p, str(i)), seed=i)
+		# for i in xrange(10):
+			# print '\n\n\t\t{0}\n'.format(i)
+			# main(load_data(p2), os.path.join(p, str(i)),
+				# global_inhibition=global_inhibition, seed=i)
+		Parallel(n_jobs=-1)(delayed(main)(load_data(p2),
+			os.path.join(p, str(i)), global_inhibition=global_inhibition,
+			seed=i) for i in xrange(10))
 
-def vary_dutycycle(bp, ds):
+def vary_dutycycle(bp, ds, global_inhibition=True):
 	"""
 	Vary the duty cycles.
 	
 	@pram bp: The base path.
+	
+	@param ds: The dataset to use.
+	
+	@param global_inhibition: If True use global inhibition otherwise use local
+	inhibition.
 	"""
 	
 	duty_cycles = (1, 10, 100, 1000, 10000)
@@ -229,7 +248,8 @@ def vary_dutycycle(bp, ds):
 	for dc in duty_cycles:
 		print '\n\n\n --------{0}-------- \n\n\n'.format(dc)
 		p = os.path.join(bp, str(dc))		
-		main(ds, p, duty_cycle=dc, nepochs=1)
+		main(ds, p, duty_cycle=dc, nepochs=1,
+			global_inhibition=global_inhibition)
 
 def plot_density_results(bp, bp2=None):
 	"""
@@ -396,19 +416,10 @@ def plot_single_run(bp):
 
 if __name__ == '__main__':
 	# Params
-	p1 = r'results\boost_experiments-full2'
-	p2 = r'results\boost_experiments-full2-local'
-	# p = r'results\go'
+	base_dir = os.path.join(os.path.expanduser('~'), 'scratch')
+	p1 = os.path.join(base_dir, 'boost_experiments-global')
+	p2 = os.path.join(base_dir, 'boost_experiments-local')
 	
-	# Make the data
-	# make_data('random.pkl', nitems=1000, width=1000, density=1-.15)
-	
-	# Get the data
-	# ds = load_data('random.pkl')
-	
-	# main(ds, p, duty_cycle=100, nepochs=1)
-	# vary_dutycycle(p, ds)
-	
-	# vary_density(p)
-	# plot_density_results(p1, p2)
-	plot_single_run(r'..\results\boost_experiments-full2\36')
+	# Experiment
+	vary_density(p2, False)
+	plot_density_results(p1, p2)

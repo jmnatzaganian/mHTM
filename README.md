@@ -12,6 +12,9 @@ The implementation of the SP is single-threaded; however, multiple forms of para
 This package is platform independent and should run on any system containing the prerequisites. If you are using a cluster, the cluster must be running SLURM, and as such must be a valid Linux distribution.
 
 ## Prerequisites
+### Required
+These prerequisites are needed for working with the base installation:
+
 * [Python 2.7.X](https://www.python.org/downloads/release/python-279/) (all other versions are untested)
 
 * [Numpy] (http://www.numpy.org/)
@@ -23,6 +26,15 @@ This package is platform independent and should run on any system containing the
 * [Scikit-Learn] (http://scikit-learn.org/stable/)
 
 * [Bottleneck] (http://berkeleyanalytics.com/bottleneck)
+
+### Optional
+These prerequisites are needed by some of the experimental code or for other development purposes:
+
+* [Joblib] (https://pythonhosted.org/joblib/index.html)
+
+* [Epydoc] (http://sourceforge.net/projects/epydoc/files)
+
+* [graphviz] (http://www.graphviz.org/Download..php)
 
 ## Installation
 1. Install all prerequisites

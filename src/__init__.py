@@ -26,12 +26,24 @@ This package is platform independent and should run on any system containing the
 
 Prerequisites
 =============
+	Required
+	--------
+	These prerequisites are needed for working with the base installation:
+	
 	- U{Python 2.7.X<https://www.python.org/downloads/release/python-279/>}
 	- U{Numpy<http://www.numpy.org/>}
 	- U{matplotlib<http://matplotlib.org/>}
 	- U{Scipy<http://www.scipy.org/>}
 	- U{Scikit-Learn<http://scikit-learn.org/stable/>}
 	- U{Bottleneck<http://berkeleyanalytics.com/bottleneck>}
+	
+	Optional
+	--------
+	These prerequisites are needed by some of the experimental code or for other development purposes:
+	
+	- U{Joblib<https://pythonhosted.org/joblib/index.html>}
+	- U{Epydoc<http://sourceforge.net/projects/epydoc/files>}
+	- U{graphviz<http://www.graphviz.org/Download..php>}
 
 Installation
 ============

@@ -324,7 +324,7 @@ if __name__ == '__main__':
 		# Launch the top jobs
 		# bp2 = 'results/full_mnist_auto-{0}'.format(type)
 		# top_paths = get_top_paths(bp)
-		# launch_top_runs([top_path], bp2, command, 'work')
+		# launch_top_runs(top_paths, bp2, command, False, 'work')
 		
 		# Find the top job
 		print get_top_path(bp)

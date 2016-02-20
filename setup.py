@@ -20,7 +20,7 @@ import shutil
 # Install the program
 setup(
 	name='mHTM',
-	version='0.9.1',
+	version='0.9.2',
 	description="HTM CLA Implementation",
 	author='James Mnatzaganian',
 	author_email='jamesmnatzaganian@outlook.com',
