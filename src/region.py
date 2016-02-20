@@ -622,7 +622,7 @@ class SPRegion(Region):
 				else:
 					# Desired number of candidates is above the desired
 					# activity level, so find the k-th largest
-					m = max(bn.argpartsort(-self.overlap[ix, 0], k)[k], 1)
+					m = max(-bn.partsort(-self.overlap[ix, 0], k + 1)[k], 1)
 				
 				# Set the column activity
 				if self.overlap[i, 0] >= m: self.y[i, 0] = True
