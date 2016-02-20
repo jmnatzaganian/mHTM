@@ -29,32 +29,6 @@ from itertools import izip
 import numpy as np
 import bottleneck as bn
 
-def load_htm(path):
-	"""
-	Load an HTM.
-	
-	@param path: The full path to where the saved HTM is located.
-	
-	@return: An HTM object corresponding to the previously saved one.
-	"""
-	
-	with open(path, 'rb') as f:
-		htm = cPickle.load(f)
-	return htm
-
-def load_pkl(path):
-	"""
-	Load previously saved pickled data from the specified path.
-	
-	@param path: The full path to where the data is located.
-	
-	@return: The saved data.
-	"""
-	
-	with open(path, 'rb') as f:
-		data = cPickle.load(f)
-	return data
-
 class Region(object):
 	"""
 	Base class for an HTM region.
@@ -76,6 +50,34 @@ class Region(object):
 		
 		self._learn = learn
 		
+	@staticmethod
+	def load_htm(path):
+		"""
+		Load an HTM.
+		
+		@param path: The full path to where the saved HTM is located.
+		
+		@return: An HTM object corresponding to the previously saved one.
+		"""
+		
+		with open(path, 'rb') as f:
+			htm = cPickle.load(f)
+		return htm
+	
+	@staticmethod
+	def load_data(path):
+		"""
+		Load previously saved pickled data from the specified path.
+		
+		@param path: The full path to where the data is located.
+		
+		@return: The saved data.
+		"""
+		
+		with open(path, 'rb') as f:
+			data = cPickle.load(f)
+		return data
+	
 	def save(self, name):
 		"""
 		Save the HTM. The save path will be in the log directory with the
