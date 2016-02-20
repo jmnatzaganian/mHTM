@@ -131,3 +131,66 @@ def load_mnist(threshold=255/2):
 		te_x = np.array(te_x, dtype='bool')
 	
 	return (tr_x, tr_y), (te_x, te_y)
+
+###############################################################################
+# SP dataset
+###############################################################################
+
+class SPDataset(object):
+	"""
+	Class for working with a dataset specifically designed for the SP. The
+	data is available once the object is initialized. Simply access it by
+	calling the "data" parameter, i.e. my_SPDataset.data.
+	
+	The dataset consists of a single class. It will consist of the number of
+	desired samples. Each sample is an SDR with the specified number of total
+	bits and the specified percent of active bits. The actual class SDR will be
+	chosen randomly. Using the desired amount of noise, bits will be randomly
+	flipped to populate the dataset.
+	"""
+	
+	def __init__(self, nsamples=500, nbits=100, pct_active=0.4, pct_noise=0.15,
+		seed=None):
+		"""
+		Initialize the class.
+		
+		@param nsamples: The number of samples to add to the dataset.
+		
+		@param nbits: The number of bits each sample should have.
+		
+		@param pct_active: The percentage of bits that will be active in the
+		base class SDR.
+		
+		@param pct_noise: The percentage of noise to add to the data.
+		
+		@param seed: The seed used to initialize the random number generator.
+		"""
+		
+		# Store the parameters
+		self.nsamples = nsamples
+		self.nbits = nbits
+		self.pct_active = pct_active
+		self.pct_noise = pct_noise
+		self.seed = seed
+		
+		# Convert percentages to integers
+		nactive = int(nbits * pct_active)
+		noise = int(nbits * pct_noise)
+		
+		# Keep a random number generator internally to ensure the global state
+		# is unaltered
+		self.prng = np.random.RandomState()
+		self.prng.seed(self.seed)
+		
+		# Create the base class SDR
+		self.input = np.zeros(self.nbits, dtype='bool')
+		self.input[self.prng.choice(self.nbits, nactive, False)] = 1
+		
+		# Initialize the dataset
+		self.data = np.repeat(self.input.reshape(1, self.nbits), self.nsamples,
+			axis=0)
+		
+		# Add noise to the dataset
+		for i in xrange(len(self.data)):
+			sel = self.prng.choice(self.nbits, noise, False)
+			self.data[i, sel] = np.bitwise_not(self.data[i, sel])
