@@ -179,7 +179,6 @@ def main(ds, p, ncols=2048, duty_cycle=100, nepochs=10, global_inhibition=True,
 	# Train the region
 	t = time.time()
 	for i in xrange(nepochs):
-		# print i
 		for j, x in enumerate(ds):
 			sp.execute(x)
 			sp.iter += 1
@@ -208,7 +207,7 @@ def vary_density(bp, global_inhibition=True):
 	
 	for density in density_levels:
 		d = int(density * 100)
-		print '\n\n\n --------{0}-------- \n\n\n'.format(d)
+		print d
 		p = os.path.join(bp, str(d))
 		p2 = os.path.join(p, 'data.pkl')
 		try:
@@ -218,10 +217,6 @@ def vary_density(bp, global_inhibition=True):
 		make_data(p2, density=density, seed=123456789)
 		
 		# Repeat for good results
-		# for i in xrange(10):
-			# print '\n\n\t\t{0}\n'.format(i)
-			# main(load_data(p2), os.path.join(p, str(i)),
-				# global_inhibition=global_inhibition, seed=i)
 		Parallel(n_jobs=-1)(delayed(main)(load_data(p2),
 			os.path.join(p, str(i)), global_inhibition=global_inhibition,
 			seed=i) for i in xrange(10))
@@ -421,5 +416,6 @@ if __name__ == '__main__':
 	p2 = os.path.join(base_dir, 'boost_experiments-local')
 	
 	# Experiment
-	vary_density(p2, False)
+	# vary_density(p1, True)
+	# vary_density(p2, False)
 	plot_density_results(p1, p2)

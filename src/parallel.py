@@ -23,6 +23,7 @@ __docformat__ = 'epytext'
 
 # Native imports
 import subprocess, time, os
+from itertools import product, izip
 
 # Third party imports
 from scipy.stats import randint
@@ -247,3 +248,76 @@ class ParamGenerator(object):
 			# Yield each item
 			for key in self.keys:
 				yield param[key]
+
+class ConfigGenerator(object):
+	"""
+	Build parameter configurations. This class creates full dictionary
+	configuration objects for the provided parameters.
+	
+	This class assumes that either iterables or static items are provided for
+	each parameter. In the case of multiple iterables all possible parameter
+	combinations are generated.
+	
+	Example:
+	base params: {'a':[0,1], 'b':[2,3]}
+	parameter sets: (a=0, b=2), (a=0, b=3), (a=1, b=2), (a=1, b=3)
+	"""
+	
+	def __init__(self, base_config, ntrials=1):
+		"""
+		Initialize this class.
+		
+		@param base_config: Dictionary containing the base configuration. All
+		desired parameters should be included in this dictionary.
+		
+		@param ntrials: The number of trials to perform for each configuration.
+		Each trial may use a different set of input data or be a different
+		random initialization. In the event that both are being used, provide
+		the product of those two numbers.
+		"""
+		
+		self.base_config = base_config
+		self.ntrials = ntrials
+	
+	def get_config(self):
+		"""
+		Create a generator for building the data.
+		"""
+		
+		# Split out iterables and non iterables
+		static_params, dynamic_params = {}, {}
+		for key, value in self.base_config.items():
+			if hasattr(value, '__iter__'):
+				dynamic_params[key] = list(value)
+			else:
+				if key != 'log_dir':
+					static_params[key] = value
+		
+		# Build a logging format suitable for sorting
+		try:
+			log_dir = self.base_config['log_dir']
+		except KeyError:
+			log_dir = None
+		if log_dir is not None:
+			# Compute the number of configurations
+			nconfigs = 0
+			for i in enumerate(product(*dynamic_params.values())):
+				nconfigs += 1
+			
+			# Make the log format
+			log_fmt = os.path.join(log_dir,
+				'{{0:0{0}d}}-'.format(len(str(nconfigs))) +
+				'{{0:0{0}d}}'.format(len(str(self.ntrials))).format(1))
+		
+		# Create all possible set of dynamic parameters
+		for i, items in enumerate(product(*dynamic_params.values()), 1):
+			config = static_params.copy()
+			
+			# Add all dynamic items
+			for item, param in izip(items, dynamic_params): 
+				config[param] = item
+			
+			# Make a useful log directory
+			if log_dir is not None: config['log_dir'] = log_fmt.format(i, 1)
+			
+			yield config
