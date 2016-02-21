@@ -263,6 +263,18 @@ class SPRegion(Region):
 		"""
 		
 		####
+		# Parameter checks
+		####
+		
+		# Do some simple parameter checks to make sure everything is OK
+		if self.nactive is None and self.pct_active is None:
+			raise '"nactive" or "pct_active" must be specified'
+		if self.nactive > self.ncolumns:
+			raise '"ncolumns" must be greater than "nactive"'
+		if nsynapses > ninputs:
+			raise '"nsynapses" must be less than "ninputs"'	
+		
+		####
 		# Directory configuration
 		####
 		
