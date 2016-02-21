@@ -41,12 +41,12 @@ def generate_seeds(nseeds=10, seed=123456789):
 	
 	@param seed: The seed to use to initialize this function.
 	
-	@return: A NumPY array containing the seeds.
+	@return: A list containing the seeds.
 	"""
 	
 	# Set the random state
 	np.random.seed(seed)
-	return (np.random.random_sample(nseeds) * 1e9).astype('i')
+	return [int(x) for x in (np.random.random_sample(nseeds) * 1e9)]
 
 def create_base_config(base_dir, experiment_name, global_inhibition=True,
 	seed=None):
