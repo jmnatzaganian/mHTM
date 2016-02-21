@@ -213,18 +213,19 @@ def first_order_effects(base_dir, nsamples=500, nbits=100, pct_active=0.4,
 	
 	# Configure the experiments being run - see inline comments for details
 	experiments = [
-		# First experiment
+		# Vary ncolumns
+		#  - The experiment is split up to properly use the cluster
 		[
 			# Experiment name
-			'ncolumns',
+			'ncols1',
 			
 			# Max time needed to perform one parameter set for this experiment
 			# times the number of trials. The first time is for global
 			# inhibition and the second time is for local inhibition.
-			['00-00:30:00', '00-01:00:00'],
+			['00-00:15:00', '00-02:00:00'],
 			
 			# Max memory needed for each trial
-			512,
+			128,
 			
 			# Parameter sets
 			[
@@ -234,23 +235,100 @@ def first_order_effects(base_dir, nsamples=500, nbits=100, pct_active=0.4,
 					'ncolumns',
 					
 					# Parameter's values
-					np.arange(5, 20, 5)
+					np.arange(10, 1010, 10)
 				]
 			]
 		],
+		['ncols2', ['00-00:15:00', '00-06:00:00'], 128,
+		[['ncolumns', np.arange(1010, 2010, 10)]]],
+		['ncols3', ['00-00:15:00', '00-10:00:00'], 128,
+		[['ncolumns', np.arange(2010, 3010, 10)]]],
+		['ncols4', ['00-00:15:00', '00-14:00:00'], 256,
+		[['ncolumns', np.arange(3010, 4010, 10)]]],
+		['ncols5', ['00-00:15:00', '00-18:00:00'], 256,
+		[['ncolumns', np.arange(4010, 5010, 10)]]],
+		['ncols6', ['00-00:30:00', '00-22:00:00'], 256,
+		[['ncolumns', np.arange(5010, 6010, 10)]]],
+		['ncols7', ['00-00:30:00', '01-02:00:00'], 512,
+		[['ncolumns', np.arange(6010, 7010, 10)]]],
+		['ncols8', ['00-00:30:00', '01-06:00:00'], 512,
+		[['ncolumns', np.arange(7010, 8010, 10)]]],
+		['ncols9', ['00-00:30:00', '01-10:00:00'], 512,
+		[['ncolumns', np.arange(8010, 9010, 10)]]],
+		['ncols10', ['00-00:30:00', '01-14:00:00'], 512,
+		[['ncolumns', np.arange(9010, 10010, 10)]]],
 		
-		# Second experiment
+		# Vary pct_active
 		[
-			'nactive',
-			['00-00:30:00', '00-01:00:00'],
-			512,
+			'pct_active',
+			['00-00:15:00', '00-00:30:00'],
+			128,
 			[
 				# First parameter
-				['nactive', np.arange(1, 4)],
+				['pct_active', np.linspace(0, 1, 300)],
 				
 				# Second parameter
+				['nactive', None]
+			]
+		],
+		
+		# Vary nactive
+		[
+			'nactive',
+			['00-00:15:00', '00-00:30:00'],
+			128,
+			[
+				['nactive', np.arange(1, 301)],
 				['pct_active', None]
 			]
+		],
+		
+		# Vary nsynapses
+		[
+			'nsynapses',
+			['00-00:15:00', '00-00:30:00'],
+			256,
+			[['nsynapses', np.arange(1, 101)]]
+		],
+		
+		# Vary seg_th
+		[
+			'seg_th',
+			['00-00:15:00', '00-00:30:00'],
+			128,
+			[['seg_th', np.arange(1, 21)]]
+		],
+		
+		# Vary pinc
+		[
+			'pinc',
+			['00-00:15:00', '00-00:30:00'],
+			128,
+			[['pinc', np.linspace(0, 1, 1000)]]
+		],
+		
+		# Vary pdec
+		[
+			'pdec',
+			['00-00:15:00', '00-00:30:00'],
+			128,
+			[['pdec', np.linspace(0, 1, 1000)]]
+		],
+		
+		# Vary pwindow
+		[
+			'pwindow',
+			['00-00:15:00', '00-00:30:00'],
+			128,
+			[['pwindow', np.linspace(0, 1, 1000)]]
+		],
+		
+		# Vary nepochs
+		[
+			'nepochs',
+			['00-00:30:00', '00-3:00:00'],
+			128,
+			[['nepochs', np.arange(1, 101)]]
 		]
 	]
 	
@@ -314,9 +392,9 @@ if __name__ == '__main__':
 		# Configure the basic settings
 		user_path = os.path.expanduser('~')
 		this_dir = os.path.join(user_path, 'mHTM', 'dev')
-		base_path = os.path.join(user_path, 'results')		
-		ntrials = 3
-		partition_name = 'debug'
+		base_path = os.path.join(user_path, 'results')
+		ntrials = 10
+		partition_name = 'work'
 		
 		# Start the first order experiments
 		first_order_effects(os.path.join(base_path, 'first_order'),

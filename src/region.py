@@ -269,9 +269,11 @@ class SPRegion(Region):
 		# Do some simple parameter checks to make sure everything is OK
 		if self.nactive is None and self.pct_active is None:
 			raise '"nactive" or "pct_active" must be specified'
+		if self.nactive is not None and self.pct_active is not None:
+			raise '"nactive" and "pct_active" are exclusive parameters'
 		if self.nactive > self.ncolumns:
 			raise '"ncolumns" must be greater than "nactive"'
-		if nsynapses > ninputs:
+		if self.nsynapses > self.ninputs:
 			raise '"nsynapses" must be less than "ninputs"'	
 		
 		####
