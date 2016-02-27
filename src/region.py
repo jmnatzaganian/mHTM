@@ -600,14 +600,14 @@ class SPRegion(Region):
 		self.y[:, 0] = 0
 		
 		# Calculate k
-		#   - For a column to be active its overlap must be above the overlap
-		#     value of the k-th largest column in its neighborhood.
+		#   - For a column to be active its overlap must be at least as large
+		#     as the overlap of the k-th largest column in its neighborhood.
 		k = self._get_num_cols()
 		
 		if self.global_inhibition:
 			# The neighborhood is all columns, thus the set of active columns
-			# is simply columns that have an overlap above the k-th largest
-			# in the entire region
+			# is simply columns that have an overlap >= the k-th largest in the
+			# entire region
 			
 			# Compute the winning column indexes
 			if self.learn:				
@@ -631,8 +631,8 @@ class SPRegion(Region):
 				# Compute the minimum top overlap
 				if ix.shape[0] <= k:
 					# Desired number of candidates is at or below the desired
-					# activity level, so find the overall max
-					m = max(bn.nanmax(self.overlap[ix, 0]), 1)
+					# activity level, so find the overall min
+					m = max(bn.nanmin(self.overlap[ix, 0]), 1)
 				else:
 					# Desired number of candidates is above the desired
 					# activity level, so find the k-th largest

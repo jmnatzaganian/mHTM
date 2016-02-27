@@ -31,7 +31,7 @@ def main():
 	seed = 123456789
 	np.random.seed(seed)
 	main_slurm(
-		log_dir='results/partial_mnist-local-fixed',
+		log_dir='results/partial_mnist-local-fixed2',
 		ntrain=800,
 		ntest=200,
 		niter=1000,
