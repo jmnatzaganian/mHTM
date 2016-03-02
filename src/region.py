@@ -613,10 +613,10 @@ class SPRegion(Region):
 			if self.learn:				
 				# Randomly break ties
 				ix = np.argpartition(-self.overlap[:, 0] -
-					self.prng.uniform(.1, .2, self.ncolumns), k)[:k]
+					self.prng.uniform(.1, .2, self.ncolumns), k - 1)[:k]
 			else:
 				# Choose the same set of columns each time
-				ix = np.argpartition(-self.overlap[:, 0], k)[:k]
+				ix = np.argpartition(-self.overlap[:, 0], k - 1)[:k]
 			
 			# Set the active columns
 			self.y[ix, 0] = self.overlap[ix, 0] > 0
@@ -636,7 +636,8 @@ class SPRegion(Region):
 				else:
 					# Desired number of candidates is above the desired
 					# activity level, so find the k-th largest
-					m = max(-bn.partsort(-self.overlap[ix, 0], k + 1)[k], 1)
+					m = max(-np.partition(-self.overlap[ix, 0], k - 1)[k - 1],
+						1)
 				
 				# Set the column activity
 				if self.overlap[i, 0] >= m: self.y[i, 0] = True

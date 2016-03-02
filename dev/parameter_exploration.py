@@ -132,57 +132,56 @@ def run_experiment(experiments, base_dir, nsamples=500, nbits=100,
 	# Prep each experiment for execution
 	for experiment_name, time_limit, memory_limit, params in experiments:
 		# Iterate through each type of inhibition type
-		# for i, global_inhibition in enumerate((True, False)):
-		i, global_inhibition = 1, False
-		# Get base configuration
-		base_config = create_base_config(base_dir, experiment_name,
-			global_inhibition)
-		
-		# Add the parameters
-		for param_name, param_value in params:
-			base_config[param_name] = param_value
-			config_gen = ConfigGenerator(base_config, ntrials)
-		
-		# Make the configurations
-		for config in config_gen.get_config():
-			# Make the base directory
-			dir = config['log_dir']
-			splits = os.path.basename(dir).split('-')
-			base_name = '-'.join(s for s in splits[:-1])
-			dir = os.path.join(os.path.dirname(dir), base_name)
-			try:
-				os.makedirs(dir)
-			except OSError:
-				pass
+		for i, global_inhibition in enumerate((True, False)):
+			# Get base configuration
+			base_config = create_base_config(base_dir, experiment_name,
+				global_inhibition)
 			
-			# Dump the config as JSON
-			s = json.dumps(config, sort_keys=True, indent=4,
-				separators=(',', ': ')).replace('},', '},\n')
-			with open(os.path.join(dir, 'config.json'), 'wb') as f:
-				f.write(s)
+			# Add the parameters
+			for param_name, param_value in params:
+				base_config[param_name] = param_value
+				config_gen = ConfigGenerator(base_config, ntrials)
 			
-			# Dump the dataset and the metrics
-			with open(os.path.join(dir, 'dataset.pkl'), 'wb') as f:
-				cPickle.dump(data, f, cPickle.HIGHEST_PROTOCOL)
-				cPickle.dump((uniqueness_data, overlap_data,
-					correlation_data), f, cPickle.HIGHEST_PROTOCOL)
-			
-			# Create the runner
-			this_path = os.path.join(this_dir, 'parameter_exploration.py')
-			command = 'python "{0}" "{1}" {2} {3}'.format(this_path, dir,
-				ntrials, seed)
-			runner_path = os.path.join(dir, 'runner.sh')
-			job_name = '{0}_{1}{2}'.format(experiment_name, 'G' if
-				global_inhibition else 'L', base_name)
-			stdio_path = os.path.join(dir, 'stdio.txt')
-			stderr_path = os.path.join(dir, 'stderr.txt')
-			create_runner(command=command, runner_path=runner_path,
-				job_name=job_name, partition_name=partition_name,
-				stdio_path=stdio_path, stderr_path=stderr_path,
-				time_limit=time_limit[i], memory_limit=memory_limit)
-			
-			# Execute the runner
-			execute_runner(runner_path)
+			# Make the configurations
+			for config in config_gen.get_config():
+				# Make the base directory
+				dir = config['log_dir']
+				splits = os.path.basename(dir).split('-')
+				base_name = '-'.join(s for s in splits[:-1])
+				dir = os.path.join(os.path.dirname(dir), base_name)
+				try:
+					os.makedirs(dir)
+				except OSError:
+					pass
+				
+				# Dump the config as JSON
+				s = json.dumps(config, sort_keys=True, indent=4,
+					separators=(',', ': ')).replace('},', '},\n')
+				with open(os.path.join(dir, 'config.json'), 'wb') as f:
+					f.write(s)
+				
+				# Dump the dataset and the metrics
+				with open(os.path.join(dir, 'dataset.pkl'), 'wb') as f:
+					cPickle.dump(data, f, cPickle.HIGHEST_PROTOCOL)
+					cPickle.dump((uniqueness_data, overlap_data,
+						correlation_data), f, cPickle.HIGHEST_PROTOCOL)
+				
+				# Create the runner
+				this_path = os.path.join(this_dir, 'parameter_exploration.py')
+				command = 'python "{0}" "{1}" {2} {3}'.format(this_path, dir,
+					ntrials, seed)
+				runner_path = os.path.join(dir, 'runner.sh')
+				job_name = '{0}_{1}{2}'.format(experiment_name, 'G' if
+					global_inhibition else 'L', base_name)
+				stdio_path = os.path.join(dir, 'stdio.txt')
+				stderr_path = os.path.join(dir, 'stderr.txt')
+				create_runner(command=command, runner_path=runner_path,
+					job_name=job_name, partition_name=partition_name,
+					stdio_path=stdio_path, stderr_path=stderr_path,
+					time_limit=time_limit[i], memory_limit=memory_limit)
+				
+				# Execute the runner
+				execute_runner(runner_path)
 
 def first_order_effects(base_dir, nsamples=500, nbits=100, pct_active=0.4,
 	pct_noise=0.15, seed=123456789, ntrials=10, partition_name='debug',
@@ -214,50 +213,50 @@ def first_order_effects(base_dir, nsamples=500, nbits=100, pct_active=0.4,
 	
 	# Configure the experiments being run - see inline comments for details
 	experiments = [
-		# Vary ncolumns
-		#  - The experiment is split up to properly use the cluster
-		[
-			# Experiment name
-			'ncols1',
+		# # Vary ncolumns
+		# #  - The experiment is split up to properly use the cluster
+		# [
+			# # Experiment name
+			# 'ncols1',
 			
-			# Max time needed to perform one parameter set for this experiment
-			# times the number of trials. The first time is for global
-			# inhibition and the second time is for local inhibition.
-			['00-00:15:00', '00-02:00:00'],
+			# # Max time needed to perform one parameter set for this experiment
+			# # times the number of trials. The first time is for global
+			# # inhibition and the second time is for local inhibition.
+			# ['00-00:15:00', '00-02:00:00'],
 			
-			# Max memory needed for each trial
-			128,
+			# # Max memory needed for each trial
+			# 128,
 			
-			# Parameter sets
-			[
-				# First parameter
-				[
-					# Parameter name
-					'ncolumns',
+			# # Parameter sets
+			# [
+				# # First parameter
+				# [
+					# # Parameter name
+					# 'ncolumns',
 					
-					# Parameter's values
-					np.arange(10, 1010, 10)
-				]
-			]
-		],
-		['ncols2', ['00-00:15:00', '00-06:00:00'], 128,
-		[['ncolumns', np.arange(1010, 2010, 10)]]],
-		['ncols3', ['00-00:15:00', '00-10:00:00'], 128,
-		[['ncolumns', np.arange(2010, 3010, 10)]]],
-		['ncols4', ['00-00:15:00', '00-14:00:00'], 256,
-		[['ncolumns', np.arange(3010, 4010, 10)]]],
-		['ncols5', ['00-00:15:00', '00-18:00:00'], 256,
-		[['ncolumns', np.arange(4010, 5010, 10)]]],
-		['ncols6', ['00-00:30:00', '00-22:00:00'], 256,
-		[['ncolumns', np.arange(5010, 6010, 10)]]],
-		['ncols7', ['00-00:30:00', '01-02:00:00'], 512,
-		[['ncolumns', np.arange(6010, 7010, 10)]]],
-		['ncols8', ['00-00:30:00', '01-06:00:00'], 512,
-		[['ncolumns', np.arange(7010, 8010, 10)]]],
-		['ncols9', ['00-00:30:00', '01-10:00:00'], 512,
-		[['ncolumns', np.arange(8010, 9010, 10)]]],
-		['ncols10', ['00-00:30:00', '01-14:00:00'], 512,
-		[['ncolumns', np.arange(9010, 10010, 10)]]],
+					# # Parameter's values
+					# np.arange(10, 1010, 10)
+				# ]
+			# ]
+		# ],
+		# ['ncols2', ['00-00:15:00', '00-06:00:00'], 128,
+		# [['ncolumns', np.arange(1010, 2010, 10)]]],
+		# ['ncols3', ['00-00:15:00', '00-10:00:00'], 128,
+		# [['ncolumns', np.arange(2010, 3010, 10)]]],
+		# ['ncols4', ['00-00:15:00', '00-14:00:00'], 256,
+		# [['ncolumns', np.arange(3010, 4010, 10)]]],
+		# ['ncols5', ['00-00:15:00', '00-18:00:00'], 256,
+		# [['ncolumns', np.arange(4010, 5010, 10)]]],
+		# ['ncols6', ['00-00:30:00', '00-22:00:00'], 256,
+		# [['ncolumns', np.arange(5010, 6010, 10)]]],
+		# ['ncols7', ['00-00:30:00', '01-02:00:00'], 512,
+		# [['ncolumns', np.arange(6010, 7010, 10)]]],
+		# ['ncols8', ['00-00:30:00', '01-06:00:00'], 512,
+		# [['ncolumns', np.arange(7010, 8010, 10)]]],
+		# ['ncols9', ['00-00:30:00', '01-10:00:00'], 512,
+		# [['ncolumns', np.arange(8010, 9010, 10)]]],
+		# ['ncols10', ['00-00:30:00', '01-14:00:00'], 512,
+		# [['ncolumns', np.arange(9010, 10010, 10)]]],
 		
 		# Vary pct_active
 		[
@@ -398,7 +397,7 @@ if __name__ == '__main__':
 		partition_name = 'work'
 		
 		# Start the first order experiments
-		first_order_effects(os.path.join(base_path, 'first_order2'),
+		first_order_effects(os.path.join(base_path, 'first_order'),
 			ntrials=ntrials, this_dir=this_dir, partition_name=partition_name)
 	elif len(sys.argv) == 4:
 		# Get the provided input

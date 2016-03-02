@@ -15,12 +15,27 @@
 
 # Native imports
 from distutils.core import setup
-import shutil
+from distutils.sysconfig import get_python_lib
+import shutil, os
+
+# Remove any old versions
+print 'Removing old versions...'
+py_libs = get_python_lib()
+for path in os.listdir(py_libs):
+	if path[:4] == 'mHTM':
+		full_path = os.path.join(py_libs, path)
+		if os.path.isfile(full_path):
+			try:
+				os.remove(full_path)
+			except OSError:
+				pass
+		else: shutil.rmtree(full_path, True)
 
 # Install the program
+print 'Installing...'
 setup(
 	name='mHTM',
-	version='0.10.0',
+	version='0.10.1',
 	description="HTM CLA Implementation",
 	author='James Mnatzaganian',
 	author_email='jamesmnatzaganian@outlook.com',
@@ -32,7 +47,5 @@ setup(
 	)
 
 # Remove the unnecessary build folder
-try:
-	shutil.rmtree('build')
-except:
-	pass
+print 'Cleaning up...'
+shutil.rmtree('build', True)
