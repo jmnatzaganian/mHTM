@@ -103,7 +103,7 @@ def create_runner(command, runner_path, template=runner_template,
 	with open(runner_path, 'wb') as f:
 		f.write(runner)
 
-def execute_runner(runner_path, queue_limit=5000):
+def execute_runner(runner_path, queue_limit=7000):
 	"""
 	Execute the runner script.
 	

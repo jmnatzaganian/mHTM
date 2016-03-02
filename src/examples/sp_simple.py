@@ -44,7 +44,7 @@ def main():
 	nsamples, nbits, pct_active = 500, 100, 0.4
 	ncolumns = 300
 	base_path = os.path.join(os.path.expanduser('~'), 'scratch', 'sp_simple')
-	seed = 123456789
+	seed = 532833024
 	kargs = {
 		'ninputs': nbits,
 		'ncolumns': 300,
@@ -80,6 +80,13 @@ def main():
 	
 	# Metrics
 	metrics = SPMetrics()
+	
+	pct_noise = .15
+	ds = SPDataset(nsamples=nsamples, nbits=nbits, pct_active=pct_active,
+			pct_noise=pct_noise, seed=seed)
+	sp = SPRegion(**kargs)
+	sp.fit(ds.data)
+	sp_output = sp.predict(ds.data)
 	
 	# Vary input noise
 	for i, pct_noise in enumerate(pct_noises):

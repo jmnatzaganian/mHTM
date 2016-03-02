@@ -238,7 +238,7 @@ def plot_error(x_series, y_series, series_names=None, y_errs=None,
 		leg.get_frame().set_linewidth(2)
 	
 	# Save the plot
-	plt.subplots_adjust(bottom=0.15, hspace=0.3)
+	plt.subplots_adjust(bottom=0.3, hspace=0.3)
 	if fig is not None:
 		fig.set_size_inches(19.20, 10.80)
 	if out_path is not None:

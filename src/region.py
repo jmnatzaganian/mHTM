@@ -612,11 +612,11 @@ class SPRegion(Region):
 			# Compute the winning column indexes
 			if self.learn:				
 				# Randomly break ties
-				ix = bn.argpartsort(-self.overlap[:, 0] -
+				ix = np.argpartition(-self.overlap[:, 0] -
 					self.prng.uniform(.1, .2, self.ncolumns), k)[:k]
 			else:
 				# Choose the same set of columns each time
-				ix = bn.argpartsort(-self.overlap[:, 0], k)[:k]
+				ix = np.argpartition(-self.overlap[:, 0], k)[:k]
 			
 			# Set the active columns
 			self.y[ix, 0] = self.overlap[ix, 0] > 0
@@ -669,7 +669,8 @@ class SPRegion(Region):
 				min_dc = np.zeros(self.ncolumns)
 				min_dc.fill(self.c_mdc * bn.nanmax(self.active_dc))
 			else:
-				min_dc = self.c_mdc * bn.nanmax(self.neighbors * self.active_dc, 1)
+				min_dc = self.c_mdc * bn.nanmax(self.neighbors *
+					self.active_dc, 1)
 			self._update_active_duty_cycle()
 			self._update_boost(min_dc)
 			self._update_overlap_duty_cycle()

@@ -360,11 +360,13 @@ def plot_density_results(bp, bp2=None):
 		plt.savefig('boost_sparseness.png', format='png',
 			facecolor=fig.get_facecolor(), edgecolor='none')
 
-def plot_single_run(bp):
+def plot_single_run(bp1, bp2):
 	"""
 	Create an error plot for a single run.
 	
-	@param bp: The base path.
+	@param bp1: The base path for global inhibition results.
+	
+	@param bp2: The base path for local inhibition results.
 	"""
 	
 	def read(p):
@@ -400,14 +402,39 @@ def plot_single_run(bp):
 					'permanence_boost.csv')))
 		return np.array(permanence)
 	
-	data = get_data(bp)
-	plot_error(show=True,
-		x_series=(np.arange(data.shape[1]),),
-		y_series=(np.median(data, 0),),
-		y_errs=(compute_err(data, axis=0), ),
-		xlim=(0, 20), ylim=(0, 100),
-		x_label='Iteration', y_label='% Columns Boosted'
-		)
+	# Get the data
+	data = [get_data(bp1)]
+	data.append(get_data(bp2))
+	
+	# Build the series
+	x_series = (np.arange(data[0].shape[1]), )
+	
+	# Make the main plot
+	fig = plt.figure(figsize=(21, 20), facecolor='white')
+	ax = fig.add_subplot(111)
+	ax.spines['top'].set_color('none')
+	ax.spines['bottom'].set_color('none')
+	ax.spines['left'].set_color('none')
+	ax.spines['right'].set_color('none')
+	ax.tick_params(labelcolor='w', top='off', bottom='off', left='off',
+		right='off')
+	ax.set_xlabel('Iteration')
+	ax.set_ylabel('% Columns Boosted')
+	
+	# Make subplots
+	ax1 = fig.add_subplot(211)
+	plot_error(show=False, legend=False, ax=ax1, title='Global Inhibition',
+		x_series=x_series, y_series=(np.median(data[0], 0), ),
+		y_errs=(compute_err(data[0], axis=0),), xlim=(0, 200), ylim=(0, 100))
+	ax2 = fig.add_subplot(212, sharex=ax1, sharey=ax1)
+	plot_error(show=False, ax=ax2, title='Local Inhibition', legend=False,
+		x_series=x_series, y_series=(np.median(data[1], 0), ),
+		y_errs=(compute_err(data[1], axis=0),), xlim=(0, 200), ylim=(0, 100))
+	
+	# Save it
+	plt.subplots_adjust(bottom=0.15, hspace=0.3)
+	plt.savefig('boost_permanence.png', format='png',
+		facecolor=fig.get_facecolor(), edgecolor='none')
 
 if __name__ == '__main__':
 	# Params
@@ -418,4 +445,7 @@ if __name__ == '__main__':
 	# Experiment
 	# vary_density(p1, True)
 	# vary_density(p2, False)
-	plot_density_results(p1, p2)
+	# plot_density_results(p1, p2)
+	
+	density = '26'
+	plot_single_run(os.path.join(p1, density), os.path.join(p2, density))
