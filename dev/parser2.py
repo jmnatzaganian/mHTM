@@ -125,6 +125,9 @@ def main(root_dir):
 	Parse out the experiment data into a user-friendly format.
 	
 	@param root_dir: The root of the directory tree.
+	
+	CAUTION: Known bug - If only one folder exists, this code will not produce
+	the output.
 	"""
 	
 	# Experiment map
@@ -155,7 +158,8 @@ def main(root_dir):
 	x = y = None
 	
 	# Process all of the items
-	for dir in get_sorted_dirs([os.path.join(root_dir, p) for p in os.listdir(root_dir)]):
+	for dir in get_sorted_dirs([os.path.join(root_dir, p) for p in
+		os.listdir(root_dir)]):
 		parameter_names, experiment_name = experiment_map[
 			os.path.basename(dir)]
 		
@@ -191,9 +195,9 @@ def main2(base_path):
 	}
 	
 	# Basic chart configuration
-	title = '% Overlap'
+	title = '% Uniqueness'
 	x_label = os.path.basename(base_path).split('.')[0]
-	y_label = '% Overlap'
+	y_label = '% Uniqueness'
 	series_names=('Input', 'SP')
 	xlim = False
 	ylim = (-5, 105)
@@ -205,18 +209,15 @@ def main2(base_path):
 	x = sorted(set(x[0])) # For now work with 1D
 	
 	# Pull out data for this plot
-	input_overlap = y[data_index['input_uniqueness']]
-	sp_overlap = y[data_index['sp_uniqueness']]
-	
-	print sp_overlap[29]
-	import sys; sys.exit()
+	input_uniqueness = y[data_index['input_uniqueness']]
+	sp_uniqueness = y[data_index['sp_uniqueness']]
 	
 	# Refactor the data
 	x_series = (x, x)
-	y_series = (np.median(input_overlap, axis=1) * 100,
-		np.median(sp_overlap, axis=1) * 100)
-	y_errs = (compute_err(input_overlap, axis=1) * 100,
-		compute_err(sp_overlap, axis=1) * 100)
+	y_series = (np.median(input_uniqueness, axis=1) * 100,
+		np.median(sp_uniqueness, axis=1) * 100)
+	y_errs = (compute_err(input_uniqueness, axis=1) * 100,
+		compute_err(sp_uniqueness, axis=1) * 100)
 	
 	# Make the plot
 	plot_error(x_series=x_series, y_series=y_series, series_names=series_names,
@@ -228,18 +229,21 @@ if __name__ == '__main__':
 	# Parse
 	####
 	
-	# results_dir = os.path.join(os.path.expanduser('~'), 'results')
+	results_dir = os.path.join(os.path.expanduser('~'), 'results')
 	experiment_name = 'first_order'
-	inhibition_type = 'global'
-	# root_dir = os.path.join(results_dir, experiment_name, inhibition_type)
-	# main(root_dir)
+	inhibition_types = ('global', 'local')
+	for inhibition_type in inhibition_types:
+		root_dir = os.path.join(results_dir, experiment_name, inhibition_type)
+		main(root_dir)
 
 	####
 	# Plot
 	####
 	
-	results_dir = os.path.join(os.path.expanduser('~'), 'scratch')
-	root_dir = os.path.join(results_dir, experiment_name, inhibition_type)
-	experiment = 'ncols'
-	base_path = os.path.join(root_dir, '{0}.pkl'.format(experiment))
-	main2(base_path)
+	# results_dir = os.path.join(os.path.expanduser('~'), 'scratch')
+	# experiment_name = 'first_order'
+	# inhibition_type = 'global'
+	# root_dir = os.path.join(results_dir, experiment_name, inhibition_type)
+	# experiment = 'ncols'
+	# base_path = os.path.join(root_dir, '{0}.pkl'.format(experiment))
+	# main2(base_path)

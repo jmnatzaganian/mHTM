@@ -443,9 +443,9 @@ if __name__ == '__main__':
 	p2 = os.path.join(base_dir, 'boost_experiments-local')
 	
 	# Experiment
-	# vary_density(p1, True)
-	# vary_density(p2, False)
-	# plot_density_results(p1, p2)
+	vary_density(p1, True)
+	vary_density(p2, False)
+	plot_density_results(p1, p2)
 	
 	density = '26'
 	plot_single_run(os.path.join(p1, density), os.path.join(p2, density))
