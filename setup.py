@@ -35,7 +35,7 @@ for path in os.listdir(py_libs):
 print 'Installing...'
 setup(
 	name='mHTM',
-	version='0.10.2',
+	version='0.10.3',
 	description="HTM CLA Implementation",
 	author='James Mnatzaganian',
 	author_email='jamesmnatzaganian@outlook.com',

@@ -304,7 +304,7 @@ def first_order_effects(base_dir, nsamples=500, nbits=100, pct_active=0.4,
 			'pinc',
 			['00-00:15:00', '00-00:45:00'],
 			128,
-			[['pinc', np.linspace(0, 0.1, 1000]]
+			[['pinc', np.linspace(0, 0.1, 1000)]]
 		],
 		
 		# Vary pdec
@@ -312,7 +312,7 @@ def first_order_effects(base_dir, nsamples=500, nbits=100, pct_active=0.4,
 			'pdec',
 			['00-00:15:00', '00-00:45:00'],
 			128,
-			[['pdec', np.linspace(0, 0.1, 1000]]
+			[['pdec', np.linspace(0, 0.1, 1000)]]
 		],
 		
 		# Vary pwindow
