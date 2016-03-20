@@ -170,8 +170,9 @@ def base_experiment(config, ntrials=1, seed=123456789):
 	
 	# Iterate across the trials:
 	for nt in xrange(ntrials):
-		# Make a new seed
-		config['seed'] = np.random.randint(1000000)
+		# Make a new seeod
+		seed2 = np.random.randint(1000000)
+		config['seed'] = seed2
 		
 		# Create the SP
 		sp = SPRegion(**config)
@@ -364,7 +365,7 @@ def slurm_prep(log_dir, niter=10000, partition_name='debug',
 			time_limit='00-00:45:00', memory_limit=512)
 		
 		# Execute the runner
-		# execute_runner(runner_path)
+		execute_runner(runner_path)
 
 if __name__ == '__main__':
 	# local = True
@@ -372,11 +373,11 @@ if __name__ == '__main__':
 	
 	user_path = os.path.expanduser('~')
 	
-	partition_name = 'debug'
-	# partition_name = 'work'
+	# partition_name = 'debug'
+	partition_name = 'work'
 	
-	niter = 10
-	# niter = 10000
+	# niter = 10
+	niter = 10000
 	
 	this_dir = os.path.join(user_path, 'mHTM', 'dev')
 	
@@ -389,7 +390,7 @@ if __name__ == '__main__':
 		if len(sys.argv) == 1:
 			log_dir = os.path.join(user_path, 'results',
 				'mnist_novelty_detection')
-			slurm_prep(log_dir, niter, partition_name)
+			slurm_prep(log_dir, niter, partition_name, this_dir)
 		else:
 			with open(os.path.join(sys.argv[1], 'config.json'), 'rb') as f:
 				config = json.load(f)
