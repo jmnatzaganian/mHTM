@@ -150,7 +150,7 @@ class SPDataset(object):
 	"""
 	
 	def __init__(self, nsamples=500, nbits=100, pct_active=0.4, pct_noise=0.15,
-		seed=None):
+		base_class=None, seed=None):
 		"""
 		Initialize the class.
 		
@@ -163,6 +163,9 @@ class SPDataset(object):
 		
 		@param pct_noise: The percentage of noise to add to the data.
 		
+		@param base_class: If provided, this class will be used as the base
+		class.
+		
 		@param seed: The seed used to initialize the random number generator.
 		"""
 		
@@ -172,9 +175,10 @@ class SPDataset(object):
 		self.pct_active = pct_active
 		self.pct_noise = pct_noise
 		self.seed = seed
+		self.base_class = base_class
 		
 		# Convert percentages to integers
-		nactive = int(nbits * pct_active)
+		self.nactive = int(nbits * pct_active)
 		noise = int(nbits * pct_noise)
 		
 		# Keep a random number generator internally to ensure the global state
@@ -183,12 +187,14 @@ class SPDataset(object):
 		self.prng.seed(self.seed)
 		
 		# Create the base class SDR
-		self.input = np.zeros(self.nbits, dtype='bool')
-		self.input[self.prng.choice(self.nbits, nactive, False)] = 1
+		if self.base_class is None:
+			self.base_class = np.zeros(self.nbits, dtype='bool')
+			self.base_class[self.prng.choice(self.nbits, self.nactive,
+				False)] = 1
 		
 		# Initialize the dataset
-		self.data = np.repeat(self.input.reshape(1, self.nbits), self.nsamples,
-			axis=0)
+		self.data = np.repeat(self.base_class.reshape(1, self.nbits),
+			self.nsamples, axis=0)
 		
 		# Add noise to the dataset
 		for i in xrange(len(self.data)):

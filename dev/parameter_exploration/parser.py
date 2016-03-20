@@ -1,4 +1,4 @@
-# parser2.py
+# parser.py
 #	
 # Author         : James Mnatzaganian
 # Contact        : http://techtorials.me
@@ -16,7 +16,23 @@
 """
 Module for parsing the parameter exploration results.
 
-See parser1.py for how the directory tree should be structured.
+####
+# Cluster parsing
+####
+
+<base_directory>
+	<param_iteration>
+		config.json  # SP parameters
+		cv.pkl       # CV splits
+	
+	<param_iteration>-<cv_iteration>
+		config.json  # SP parameters
+		stats.csv    # Time and accuracy using features
+		p.pkl        # SP permanences
+		syn_map.pkl  # SP synaptic map
+		sp.pkl       # SP instance
+		te_x.pkl     # SP output for each training sample
+		tr_x.pkl     # SP output for each testing sample
 
 G{packagetree mHTM}
 """
@@ -28,6 +44,7 @@ import csv, json, os, re, cPickle
 
 # Third party imports
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Program imports
 from mHTM.plot import plot_error, compute_err
@@ -194,56 +211,71 @@ def main2(base_path):
 		'sp_correlation':8
 	}
 	
-	# Basic chart configuration
-	title = '% Uniqueness'
-	x_label = os.path.basename(base_path).split('.')[0]
-	y_label = '% Uniqueness'
-	series_names=('Input', 'SP')
-	xlim = False
-	ylim = (-5, 105)
-	show = True
-	
 	# Get the data
 	with open(base_path, 'rb') as f:
 		x, y = cPickle.load(f)
-	x = sorted(set(x[0])) # For now work with 1D
+	x = sorted(set(x[-1])) # For now work with 1D
 	
 	# Pull out data for this plot
-	input_uniqueness = y[data_index['input_uniqueness']]
-	sp_uniqueness = y[data_index['sp_uniqueness']]
+	y1 = (y[data_index['input_uniqueness']], y[data_index['sp_uniqueness']])
+	y2 = (y[data_index['input_overlap']], y[data_index['sp_overlap']])
+	y3 = (y[data_index['input_correlation']], y[data_index['sp_correlation']])
 	
 	# Refactor the data
-	x_series = (x, x)
-	y_series = (np.median(input_uniqueness, axis=1) * 100,
-		np.median(sp_uniqueness, axis=1) * 100)
-	y_errs = (compute_err(input_uniqueness, axis=1) * 100,
-		compute_err(sp_uniqueness, axis=1) * 100)
+	x_series = (x, x, x)
+	med = lambda y: np.median(y, axis=1) * 100
+	err = lambda y: compute_err(y, axis=1) * 100
+	y1_series = map(med, y1)
+	y1_errs = map(err, y1)
+	y2_series = map(med, y2)
+	y2_errs = map(err, y2)
+	y3_series = map(med, y3)
+	y3_errs = map(err, y3)
 	
-	# Make the plot
-	plot_error(x_series=x_series, y_series=y_series, series_names=series_names,
-		y_errs=y_errs, x_label=x_label, y_label=y_label, title=title,
-		show=show, xlim=xlim, ylim=ylim)
+	# Make the main plot
+	fig = plt.figure(figsize=(21, 20), facecolor='white')
+	ax = fig.add_subplot(111)
+	ax.spines['top'].set_color('none')
+	ax.spines['bottom'].set_color('none')
+	ax.spines['left'].set_color('none')
+	ax.spines['right'].set_color('none')
+	ax.tick_params(labelcolor='w', top='off', bottom='off', left='off',
+		right='off')
+	
+	# Make subplots
+	ax1 = fig.add_subplot(311)
+	plot_error(show=False, legend=False, ax=ax1, title='Uniqueness',
+		x_series=x_series, y_series=y1_series, y_errs=y1_errs, ylim=(-5, 105))
+	ax2 = fig.add_subplot(312, sharex=ax1, sharey=ax1)
+	plot_error(show=False, legend=False, ax=ax2, title='Overlap',
+		x_series=x_series, y_series=y2_series, y_errs=y2_errs, ylim=(-5, 105))
+	ax3 = fig.add_subplot(313, sharex=ax1, sharey=ax1)
+	plot_error(show=False, legend=False, ax=ax3, title='Correlation',
+		x_series=x_series, y_series=y3_series, y_errs=y3_errs, ylim=(-5, 105))
+	plt.tight_layout(h_pad=2)
+	plt.show()
 
 if __name__ == '__main__':
 	####
 	# Parse
 	####
 	
-	results_dir = os.path.join(os.path.expanduser('~'), 'results')
-	experiment_name = 'first_order'
-	inhibition_types = ('global', 'local')
-	for inhibition_type in inhibition_types:
-		root_dir = os.path.join(results_dir, experiment_name, inhibition_type)
-		main(root_dir)
+	# results_dir = os.path.join(os.path.expanduser('~'), 'results')
+	# experiment_name = 'first_order'
+	# inhibition_types = ('global', 'local')
+	# for inhibition_type in inhibition_types:
+		# root_dir = os.path.join(results_dir, experiment_name, inhibition_type)
+		# main(root_dir)
 
 	####
 	# Plot
 	####
 	
-	# results_dir = os.path.join(os.path.expanduser('~'), 'scratch')
-	# experiment_name = 'first_order'
-	# inhibition_type = 'global'
-	# root_dir = os.path.join(results_dir, experiment_name, inhibition_type)
-	# experiment = 'ncols'
-	# base_path = os.path.join(root_dir, '{0}.pkl'.format(experiment))
-	# main2(base_path)
+	results_dir = os.path.join(os.path.expanduser('~'), 'scratch')
+	experiment_name = 'first_order'
+	inhibition_type = 'global'
+	root_dir = os.path.join(results_dir, experiment_name, inhibition_type)
+	for experiment in (os.listdir(root_dir)):
+		print experiment
+		base_path = os.path.join(root_dir, experiment)
+		main2(base_path)

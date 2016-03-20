@@ -386,6 +386,109 @@ def run_single_experiment(base_dir, ntrials=10, seed=123456789):
 		sp._log_stats('SP Correlation', 1 - metrics.compute_distance(
 			sp_output))
 
+def local_experiment():
+	"""
+	Run a single experiment, locally.
+	"""
+	
+	seed = 123456789
+	config = {
+		'ninputs': 100,
+		'trim': 1e-4,
+		'disable_boost': True,
+		'seed': seed,
+		'pct_active': None,
+		'random_permanence': True,
+		'pwindow': 0.5,
+		
+		'global_inhibition': True,
+		
+		'ncolumns': 200,
+		'nactive': 50,
+		
+		
+		'nsynapses': 100,
+		'seg_th': 5,
+		
+		'syn_th': 0.5,
+		
+		'pinc': 0.001,
+		'pdec': 0.001,
+		
+		'nepochs': 10,
+		
+		'log_dir': os.path.join(os.path.expanduser('~'), 'scratch',
+			'param_experiments', '1-1')
+	}
+	
+	# Get the data
+	nsamples, nbits, pct_active, pct_noise = 500, 100, 0.4, 0.15
+	ds = SPDataset(nsamples, nbits, pct_active, pct_noise, seed)
+	data = ds.data
+	
+	# Metrics
+	metrics = SPMetrics()
+	
+	# Get the metrics for the dataset
+	uniqueness_data = metrics.compute_uniqueness(data)
+	overlap_data = metrics.compute_overlap(data)
+	correlation_data = 1 - metrics.compute_distance(data)
+	
+	# Create the SP
+	sp = SPRegion(**config)
+	
+	# Fit the SP
+	sp.fit(data)
+	
+	# Get the SP's output
+	sp_output = sp.predict(data)
+	
+	# Get the metrics for the SP's results
+	sp_uniqueness = metrics.compute_uniqueness(sp_output)
+	sp_overlap = metrics.compute_overlap(sp_output)
+	sp_correlation = 1 - metrics.compute_distance(sp_output)
+	
+	# Log all of the metrics
+	sp._log_stats('Input Uniqueness', uniqueness_data)
+	sp._log_stats('Input Overlap', overlap_data)
+	sp._log_stats('Input Correlation', correlation_data)
+	sp._log_stats('SP Uniqueness', sp_uniqueness)
+	sp._log_stats('SP Overlap', sp_overlap)
+	sp._log_stats('SP Correlation', sp_correlation)
+
+	print 'Uniqueness:\t{0:2.4f}\t{1:2.4f}'.format(uniqueness_data,
+		sp_uniqueness)
+	print 'Overlap:\t{0:2.4f}\t{1:2.4f}'.format(overlap_data, sp_overlap)
+	print 'Correlation:\t{0:2.4f}\t{1:2.4f}'.format(correlation_data,
+		sp_correlation)
+	
+	# Get a new random input
+	ds2 = SPDataset(nsamples, nbits, pct_active, pct_noise, 123)
+	print '\n% Overlapping old class to new: \t{0:2.4f}%'.format(
+		(float(np.dot(ds.input, ds2.input)) / nbits) * 100)
+	
+	# Test the SP on the new dataset
+	sp_output2 = sp.predict(ds2.data)
+	
+	# Get average representation of first result
+	original_result = np.mean(sp_output, 0)
+	original_result[original_result >= 0.5] = 1
+	original_result[original_result < 1] = 0
+	
+	# Get averaged results for each metric type
+	sp_uniqueness2 = 0.
+	sp_overlap2 = 0.
+	sp_correlation2 = 0.
+	for item in sp_output2:
+		test = np.vstack((original_result, item))
+		sp_uniqueness2 = metrics.compute_uniqueness(test)
+		sp_overlap2 = metrics.compute_overlap(test)
+		sp_correlation2 = 1 - metrics.compute_distance(test)
+	sp_uniqueness2 /= len(sp_output2)
+	sp_overlap2 /= len(sp_output2)
+	sp_correlation2 /= len(sp_output2)
+	print sp_uniqueness2, sp_overlap2, sp_correlation2
+
 if __name__ == '__main__':
 	# Determine the mode of operation
 	if len(sys.argv) == 1:

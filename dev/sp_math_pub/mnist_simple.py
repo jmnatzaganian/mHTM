@@ -33,13 +33,13 @@ from mHTM.datasets.loader import load_mnist, MNISTCV
 from mHTM.region import SPRegion
 from mHTM.plot import plot_compare_images
 
-def main(ntrain=800, ntest=200, nsplits=1, seed=123456789):
+def main(ntrain=800, ntest=200, nsplits=1, seed=1234567):
 	# Set the configuration parameters for the SP
 	ninputs = 784
 	kargs = {
 		'ninputs': ninputs,
 		'ncolumns': ninputs,
-		'nactive': 30,
+		'nactive': 10,
 		'global_inhibition': True,
 		'trim': False,
 		'seed': seed,
@@ -82,23 +82,6 @@ def main(ntrain=800, ntest=200, nsplits=1, seed=123456789):
 		# Test the base classifier
 		clf = LinearSVC(random_state=seed)
 		clf.fit(x[tr], y[tr])
-		score = clf.score(x[te], y[te])
-		print 'SVM Only Accuracy: {0:.2f}%'.format(score * 100)
-		
-		# Test the region for the column method
-		score = sp.score(x[te], y[te])
-		print 'Column Accuracy: {0:.2f}%'.format(score * 100)
-		
-		# Test the region for the probabilistic method
-		score = sp.score(x[te], y[te], tr_x=x[tr], score_method='prob')
-		print 'Probabilistic Accuracy: {0:.2f}%'.format(score * 100)
-		
-		# Test the region for the dimensionality reduction method
-		score = sp.score(x[te], y[te], tr_x=x[tr], score_method='reduction')
-		ndims = len(sp.reduce_dimensions(x[0]))
-		print 'Input Reduced from {0} to {1}: {2:.1f}X reduction'.format(
-			ninputs, ndims, ninputs / float(ndims))
-		print 'Reduction Accuracy: {0:.2f}%'.format(score * 100)
 	
 	# Get a random set of unique inputs from the training set
 	inputs = np.zeros((10, ninputs))
@@ -113,12 +96,9 @@ def main(ntrain=800, ntest=200, nsplits=1, seed=123456789):
 	sp_inputs = sp.reconstruct_input(sp_pred)
 	
 	# Make a plot comparing the images
-	title = 'Input Reconstruction: Original (top), SP SDRs (middle), ' \
-		'SP Reconstruction (bottom)'
 	shape = (28, 28)
 	path = os.path.join(sp.log_dir, 'input_reconstruction.png')
-	plot_compare_images((inputs, sp_pred, sp_inputs), shape, title,
-		out_path=path)
+	plot_compare_images((inputs, sp_pred, sp_inputs), shape, out_path=path)
 
 if __name__ == '__main__':
 	main()

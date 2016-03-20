@@ -225,7 +225,7 @@ def plot_error(x_series, y_series, series_names=None, y_errs=None,
 			ax.get_xaxis().set_major_locator(MaxNLocator(integer=True))
 	else:
 		for x, y in zip(x_series, y_series):
-			ax.scatter(x, y, color=colors.next(), marker=markers.next())
+			ax.scatter(x, y, color=colors.next(), marker=markers.next(), s=120)
 	
 	# Create the legend
 	if series_names is not None and legend:

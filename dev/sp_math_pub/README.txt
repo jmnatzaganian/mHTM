@@ -1,0 +1,1 @@
+The scripts in this folder were used to generate the plots for the "A Mathematical Formalization of Hierarchical Temporal Memory's Spatial Pooler" publication.

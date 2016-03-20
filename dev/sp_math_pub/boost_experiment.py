@@ -327,7 +327,7 @@ def plot_density_results(bp, bp2=None):
 			'y_series':(np.median(overlap, 1), np.median(permanence, 1)),
 			'series_names':('Overlap Boosting', 'Permanence Boosting'),
 			'y_errs':(compute_err(overlap), compute_err(permanence)),
-			'xlim':(0, 100), 'ylim':(0, 30), 'title':title
+			'xlim':(0, 100), 'ylim':(0, 45), 'title':title
 			}
 	
 	data = get_all_data(bp)
@@ -443,9 +443,9 @@ if __name__ == '__main__':
 	p2 = os.path.join(base_dir, 'boost_experiments-local')
 	
 	# Experiment
-	vary_density(p1, True)
-	vary_density(p2, False)
-	plot_density_results(p1, p2)
+	# vary_density(p1, True)
+	# vary_density(p2, False)
+	# plot_density_results(p1, p2)
 	
 	density = '26'
 	plot_single_run(os.path.join(p1, density), os.path.join(p2, density))

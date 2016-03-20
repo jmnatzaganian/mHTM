@@ -208,6 +208,7 @@ class SPMetrics(object):
 		x = data.astype('f')
 		s = np.sum(x, 1)
 		max_overlap = np.min(s[np.argsort(s)[-2:]])
+		if max_overlap == 0: max_overlap = 1
 		
 		# Build the return object
 		m, n = data.shape
