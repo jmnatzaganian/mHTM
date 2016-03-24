@@ -496,15 +496,14 @@ def plot_surface(x, y, z, x_label=None, y_label=None, z_label=None,
 	"""
 	
 	# Construct the basic plot
-	fig  = plt.figure()
+	fig  = plt.figure(figsize=(32, 18), facecolor='w')
 	ax   = fig.add_subplot(111, projection='3d')
 	surf = ax.plot_surface(x, y, z, cmap=plt.cm.jet, rstride=1, cstride=1,
-		linewidth=0)
+		linewidth=0, vmin=0, vmax=100)
 	box = ax.get_position()
-	ax2 = plt.axes([(box.x0 + box.width)*1.05, box.y0, 0.02, box.height])
+	ax2 = plt.axes([(box.x0 + box.width) * 1.0, box.y0, 0.02, box.height])
 	plt.colorbar(surf, cax=ax2)
-	ax.view_init(azim=73, elev=28)
-	plt.subplots_adjust(left=-0.09, right=1.07, top=1.08, bottom=0.07)
+	ax.view_init(azim=-124, elev=38)
 	
 	# Add the labels
 	if title   is not None : plt.title(title)
@@ -513,9 +512,8 @@ def plot_surface(x, y, z, x_label=None, y_label=None, z_label=None,
 	if z_label is not None : ax.set_zlabel(z_label, labelpad=20)
 	
 	# Save the plot
-	fig.set_size_inches(14.80, 10.80)
 	if out_path is not None:
-		plt.savefig(out_path, format=out_path.split('.')[-1], dpi=100)
+		plt.savefig(out_path, format=out_path.split('.')[-1], dpi=200)
 	
 	# Show the plot and close it after the user is done
 	if show: plt.show()

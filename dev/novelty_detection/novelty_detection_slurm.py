@@ -47,7 +47,7 @@ def generate_seeds(nseeds=10, seed=123456789):
 	
 	# Set the random state
 	np.random.seed(seed)
-	return (np.random.random_sample(nseeds) * 1e9).astype('i')
+	return [int(x) for x in np.random.random_sample(nseeds) * 1e9]
 
 def create_base_config(log_dir,	seed=123456789):
 	"""
@@ -300,8 +300,8 @@ def slurm_prep(log_dir, partition_name='debug', this_dir=os.getcwd()):
 	
 	# Create the runs
 	i = 1
-	for noise in np.linspace(0, 1, 3):#101):
-		for overlap in np.arange(0, 3):#41):
+	for noise in np.linspace(0, 1, 101):
+		for overlap in np.arange(0, 41):
 			dir = os.path.join(log_dir, '{0}-{1}'.format(noise, overlap))
 			
 			# Create the base directory
