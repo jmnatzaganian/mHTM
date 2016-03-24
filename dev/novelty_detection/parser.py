@@ -5,16 +5,16 @@
 # Organization   : NanoComputing Research Lab - Rochester Institute of
 # Technology
 # Website        : https://www.rit.edu/kgcoe/nanolab/
-# Date Created   : 03/20/16
+# Date Created   : 03/23/16
 # 
-# Description    : Module for parsing the mnist novelty detection results.
+# Description    : Module for parsing the novelty detection results.
 # Python Version : 2.7.X
 #
 # License        : MIT License http://opensource.org/licenses/mit-license.php
 # Copyright      : (c) 2016 James Mnatzaganian
 
 """
- odule for parsing the mnist novelty detection results.
+Module for parsing the novelty detection results.
 
 ####
 # Cluster parsing
@@ -39,12 +39,25 @@ G{packagetree mHTM}
 __docformat__ = 'epytext'
 
 # Native imports
-import os, csv
+import os, cPickle, re
 
 # Third party imports
 import numpy as np
 
-def get_missing_results(bp):
+def natural_sort(items):
+	"""
+	Sort a set of strings in the format that a human would.
+	
+	@param items: The list of items to sort.
+	
+	@return: A new list with the sorted items.
+	"""
+	
+	convert = lambda text: int(text) if text.isdigit() else text.lower()
+	alphanum_key = lambda key : [convert(c) for c in re.split('([0-9]+)', key)]
+	return sorted(items, key = alphanum_key)
+
+def get_missing(bp):
 	"""
 	Find any missing results.
 	
@@ -68,9 +81,9 @@ def get_missing_results(bp):
 	
 	return missing
 
-def get_results(bp):
+def dump_results(bp):
 	"""
-	Get the results for the experiment.
+	Dump the results for the experiment.
 	
 	@param bp: The full path to the directory containing the runs.
 
@@ -78,84 +91,46 @@ def get_results(bp):
 	"""
 	
 	# Store the results
-	results = []
-	prev_param_iteration = None
-	paths = []
+	sp_x_results = []
+	sp_y_results = []
+	svm_x_results = []
+	svm_y_results = []
+	param = []
 	
 	# Get the data
-	for p in sorted(os.listdir(bp)):
+	for p in natural_sort(os.listdir(bp)):
 		# Only work with valid runs
 		try:
-			param_iteration, cv_iteration = [int(x) for x in p.split('-')]
+			noise, overlap = p.split('-')
 		except ValueError:
 			continue
+		param.append([float(noise), int(overlap)])
 		
-		# Read in the accuracy
-		with open(os.path.join(bp, p, 'stats.csv')) as f:
-			reader = csv.reader(f)
-			for row in reader:
-				key, value = row
-				if 'SP % Adjusted Score' == key:
-					accuracy = float(value)
+		# Read in the data
+		with open(os.path.join(bp, p, 'results.pkl')) as f:
+			sp_x, sp_y, svm_x, svm_y = cPickle.load(f)
 		
-		# Add to data structure
-		if prev_param_iteration == param_iteration:
-			results[-1].append(accuracy)
-		else:
-			prev_param_iteration = param_iteration
-			paths.append(os.path.join(bp, p.split('-')[0]))
-			results.append([accuracy])
+		# Add to data structures
+		sp_x_results.append(sp_x)
+		sp_y_results.append(sp_y)
+		svm_x_results.append(svm_x)
+		svm_y_results.append(svm_y)
 	
-	return np.array(results), paths
-
-def get_top_paths(bp, k=10):
-	"""
-	Get the top paths out of all of the runs.
-	
-	@param bp: The full path to the directory containing the runs.
-	
-	@param k: Select this many maximum from the results.
-	
-	@return: A list of the paths with the top results.
-	"""
-	
-	# Get top results for each type
-	top_paths = set()
-	accuracy, paths = get_results(bp, method)
-	for ix in accuracy.mean(1).argsort()[::-1][:k]:
-		top_paths.add(paths[ix])
-	
-	return sorted(top_paths)
-
-def get_top_path(bp):
-	"""
-	Get the top path out of all of the runs.
-	
-	@param bp: The full path to the directory containing the runs.
-	
-	@param k: Select this many maximum from the results.
-	
-	@return: A tuple containing the best path and its corresponding accuracy.
-	"""
-	
-	# Get top result
-	best, best_path = 0., None
-	accuracy, paths = get_results(bp)
-	avg_accuracy = accuracy.mean(1)
-	ix = avg_accuracy.argsort()[::-1][0]
-	result, path = avg_accuracy[ix], paths[ix]
-	if result > best:
-		best, best_path = result, path
-	
-	return best_path, accuracy
+	# Dump the results
+	with open(os.path.join(bp, 'full_results.pkl'), 'wb') as f:
+		cPickle.dump((np.array(sp_x_results), np.array(sp_y_results),
+			np.array(svm_x_results), np.array(svm_y_results), np.array(param)),
+			f, cPickle.HIGHEST_PROTOCOL)
 
 if __name__ == '__main__':
 	# Find any missing jobs
-	bp = 'results/mnist_novelty_detection'
-	missing = get_missing_results(bp)
+	user_path = os.path.expanduser('~')
+	p = os.path.join(user_path, 'results', 'novelty_detection')
+	
+	missing = get_missing(p)
 	if len(missing) > 0:
 		for item in missing:
 			print item
-		
-	# Find the top job
-	print get_top_path(bp)
+	else:
+		# Repackage everything
+		dump_results(p)

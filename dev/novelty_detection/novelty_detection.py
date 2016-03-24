@@ -81,8 +81,8 @@ def base_experiment(pct_noise=0.15, noverlap_bits=0, exp_name='1-1',
 		'nactive': 50,
 		
 		
-		'nsynapses': 100,
-		'seg_th': 5,
+		'nsynapses': 75,
+		'seg_th': 15,
 		
 		'syn_th': 0.5,
 		
@@ -111,7 +111,13 @@ def base_experiment(pct_noise=0.15, noverlap_bits=0, exp_name='1-1',
 	y_ds = SPDataset(ntest, nbits, pct_active, pct_noise, outlier_base, seed)
 	y_te = y_ds.data
 	
-	import pdb; pdb.set_trace()
+	if verbose:
+		print "\nBase class' test noise: {0:2.2f}".format(1 - (np.mean(x_te, 0)
+			* x_ds.base_class.astype('i')).sum() / 40.)
+		print "Outlier's class noise: {0:2.2f}".format(1 - (np.mean(y_te, 0) *
+			outlier_base.astype('i')).sum() / 40.)
+		print 'Overlap between two classes: {0}'.format(np.dot(
+			x_ds.base_class.astype('i'), outlier_base.astype('i')))
 	
 	# Metrics
 	metrics = SPMetrics()
@@ -185,7 +191,7 @@ def base_experiment(pct_noise=0.15, noverlap_bits=0, exp_name='1-1',
 		# Print the results
 		fmt_s = '{0}:\t{1:2.4f}\t{2:2.4f}\t{3:2.4f}\t{4:2.4f}\t{5:2.4f}\t{5:2.4f}'
 		if verbose:
-			print 'Description\tx_tr\tx_te\ty_te\tsp_x_tr\tsp_x_te\tsp_y_te'
+			print '\nDescription\tx_tr\tx_te\ty_te\tsp_x_tr\tsp_x_te\tsp_y_te'
 			print fmt_s.format('Uniqueness', u_x_tr, u_x_te, u_y_te, u_sp_x_tr,
 				u_sp_x_te, u_sp_y_te)
 			print fmt_s.format('Overlap', o_x_tr, o_x_te, o_y_te, o_sp_x_tr, o_sp_x_te,
@@ -307,37 +313,37 @@ def main(ntrials=10, seed=123456798):
 	noverlap_bits = np.arange(0, 41)
 	
 	# Vary the noise
-	# results = Parallel(n_jobs=-1)(delayed(base_experiment)(noise, 0,
-		# 'noise-{0}'.format(i), ntrials, False, seed) for i, noise in enumerate(
-		# pct_noises, 1))
-	# noise_x, noise_y, svm_noise_x, svm_noise_y = [], [], [], []
-	# noise_x_err1, noise_x_err2, noise_y_err1, noise_y_err2 = [], [], [], []
-	# svm_noise_x_err1, svm_noise_x_err2 = [], []
-	# svm_noise_y_err1, svm_noise_y_err2 = [], []
-	# for sp_x, sp_y, svm_x, svm_y in results:
-		# noise_x.append(np.median(sp_x))
-		# noise_y.append(np.median(sp_y))
-		# svm_noise_x.append(np.median(svm_x))
-		# svm_noise_y.append(np.median(svm_y))
-		# e = compute_err(sp_x, axis=None)
-		# noise_x_err1.append(e[0])
-		# noise_x_err2.append(e[1])
-		# e = compute_err(sp_y, axis=None)
-		# noise_y_err1.append(e[0])
-		# noise_y_err2.append(e[1])
-		# e = compute_err(svm_x, axis=None)
-		# svm_noise_x_err1.append(e[0])
-		# svm_noise_x_err2.append(e[1])
-		# e = compute_err(svm_y, axis=None)
-		# svm_noise_y_err1.append(e[0])
-		# svm_noise_y_err2.append(e[1])
-	# noise_x_err = (svm_noise_x_err1, svm_noise_x_err2)
-	# noise_y_err = (svm_noise_y_err1, svm_noise_y_err2)
-	# svm_noise_x_err = (svm_noise_x_err1, svm_noise_x_err2)
-	# svm_noise_y_err = (svm_noise_y_err1, svm_noise_y_err2)
+	results = Parallel(n_jobs=-1)(delayed(base_experiment)(noise, 0,
+		'noise-{0}'.format(i), ntrials, False, seed) for i, noise in enumerate(
+		pct_noises, 1))
+	noise_x, noise_y, svm_noise_x, svm_noise_y = [], [], [], []
+	noise_x_err1, noise_x_err2, noise_y_err1, noise_y_err2 = [], [], [], []
+	svm_noise_x_err1, svm_noise_x_err2 = [], []
+	svm_noise_y_err1, svm_noise_y_err2 = [], []
+	for sp_x, sp_y, svm_x, svm_y in results:
+		noise_x.append(np.median(sp_x))
+		noise_y.append(np.median(sp_y))
+		svm_noise_x.append(np.median(svm_x))
+		svm_noise_y.append(np.median(svm_y))
+		e = compute_err(sp_x, axis=None)
+		noise_x_err1.append(e[0])
+		noise_x_err2.append(e[1])
+		e = compute_err(sp_y, axis=None)
+		noise_y_err1.append(e[0])
+		noise_y_err2.append(e[1])
+		e = compute_err(svm_x, axis=None)
+		svm_noise_x_err1.append(e[0])
+		svm_noise_x_err2.append(e[1])
+		e = compute_err(svm_y, axis=None)
+		svm_noise_y_err1.append(e[0])
+		svm_noise_y_err2.append(e[1])
+	noise_x_err = (svm_noise_x_err1, svm_noise_x_err2)
+	noise_y_err = (svm_noise_y_err1, svm_noise_y_err2)
+	svm_noise_x_err = (svm_noise_x_err1, svm_noise_x_err2)
+	svm_noise_y_err = (svm_noise_y_err1, svm_noise_y_err2)
 	
 	# Vary the overlaps
-	results = Parallel(n_jobs=-1)(delayed(base_experiment)(0.15, overlap,
+	results = Parallel(n_jobs=-1)(delayed(base_experiment)(0.35, overlap,
 		'overlap-{0}'.format(i), ntrials, False, seed) for i, overlap in
 		enumerate(noverlap_bits, 1))
 	overlap_x, overlap_y, svm_overlap_x, svm_overlap_y = [], [], [], []
@@ -370,11 +376,11 @@ def main(ntrials=10, seed=123456798):
 	# # Save the results
 	p = os.path.join(os.path.expanduser('~'), 'scratch', 'novelty_experiments')
 	with open(os.path.join(p, 'results.pkl'), 'wb') as f:
-		# cPickle.dump((noise_x, noise_y), f, cPickle.HIGHEST_PROTOCOL)
-		# cPickle.dump((svm_noise_x, svm_noise_y), f, cPickle.HIGHEST_PROTOCOL)
-		# cPickle.dump((noise_x_err, noise_y_err), f, cPickle.HIGHEST_PROTOCOL)
-		# cPickle.dump((svm_noise_x_err, svm_noise_y_err), f,
-			# cPickle.HIGHEST_PROTOCOL)
+		cPickle.dump((noise_x, noise_y), f, cPickle.HIGHEST_PROTOCOL)
+		cPickle.dump((svm_noise_x, svm_noise_y), f, cPickle.HIGHEST_PROTOCOL)
+		cPickle.dump((noise_x_err, noise_y_err), f, cPickle.HIGHEST_PROTOCOL)
+		cPickle.dump((svm_noise_x_err, svm_noise_y_err), f,
+			cPickle.HIGHEST_PROTOCOL)
 		cPickle.dump((overlap_x, overlap_y), f, cPickle.HIGHEST_PROTOCOL)
 		cPickle.dump((svm_overlap_x, svm_overlap_y), f,
 			cPickle.HIGHEST_PROTOCOL)		
@@ -384,14 +390,14 @@ def main(ntrials=10, seed=123456798):
 			cPickle.HIGHEST_PROTOCOL)
 	
 	# Make the plots
-	# plot_error((pct_noises * 100, pct_noises * 100), (noise_x, svm_noise_x),
-		# ('SP', 'SVM'), (noise_x_err, svm_noise_x_err), '% Noise', '% Error',
-		# 'Noise: Base Class', out_path=os.path.join(p, 'noise_base.png'),
-		# xlim=(-5, 105), ylim=(-5, 105), show=False)
-	# plot_error((pct_noises * 100, pct_noises * 100), (noise_y, svm_noise_y),
-		# ('SP', 'SVM'), (noise_y_err, svm_noise_y_err), '% Noise', '% Error',
-		# 'Noise: Novelty Class', out_path=os.path.join(p, 'noise_novelty.png'),
-		# xlim=(-5, 105), ylim=(-5, 105), show=False)
+	plot_error((pct_noises * 100, pct_noises * 100), (noise_x, svm_noise_x),
+		('SP', 'SVM'), (noise_x_err, svm_noise_x_err), '% Noise', '% Error',
+		'Noise: Base Class', out_path=os.path.join(p, 'noise_base.png'),
+		xlim=(-5, 105), ylim=(-5, 105), show=False)
+	plot_error((pct_noises * 100, pct_noises * 100), (noise_y, svm_noise_y),
+		('SP', 'SVM'), (noise_y_err, svm_noise_y_err), '% Noise', '% Error',
+		'Noise: Novelty Class', out_path=os.path.join(p, 'noise_novelty.png'),
+		xlim=(-5, 105), ylim=(-5, 105), show=False)
 	noverlap_pct = noverlap_bits / 40. * 100
 	plot_error((noverlap_pct, noverlap_pct), (overlap_x, svm_overlap_x),
 		('SP', 'SVM'), (overlap_x_err, svm_overlap_x_err),
@@ -405,5 +411,8 @@ def main(ntrials=10, seed=123456798):
 		ylim=(-5, 105),show=False)
 
 if __name__ == '__main__':
-	base_experiment(ntrials=1, noverlap_bits=25)
-	# main()
+	# for noise in np.linspace(0, 1, 101):
+		# for overlap in np.arange(0, 11):
+			# print 'Noise = {0}; Overlap = {1}'.format(noise, overlap)
+			# base_experiment(ntrials=1, pct_noise=noise, noverlap_bits=overlap)
+	main(ntrials=1)
