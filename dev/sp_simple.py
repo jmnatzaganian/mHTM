@@ -91,7 +91,7 @@ def base_experiment(log_dir, seed = 123456789):
 	np.random.seed(seed)
 	
 	# Build items to store results
-	npoints = 101
+	npoints = 11
 	pct_noises = np.linspace(0, 1, npoints)
 	u_sp, u_ip = np.zeros(npoints), np.zeros(npoints)
 	o_sp, o_ip = np.zeros(npoints), np.zeros(npoints)
@@ -121,7 +121,8 @@ def base_experiment(log_dir, seed = 123456789):
 		
 		# Get the stats
 		u_sp[i] = metrics.compute_uniqueness(sp_output) * 100
-		o_sp[i] = metrics.compute_overlap(sp_output) * 100
+		o_sp[i] = (metrics.compute_overlap(sp_output) +
+			metrics.compute_overlap(np.logical_not(sp_output))) * 50
 		
 		# Log everything
 		sp._log_stats('% Input Uniqueness', u_ip[i])
@@ -131,7 +132,7 @@ def base_experiment(log_dir, seed = 123456789):
 	
 	return u_sp, u_ip, o_sp, o_ip
 
-def main(base_path, ntrials=10, seed=123456789):
+def main(base_path, ntrials=4, seed=123456789):
 	"""
 	Run the experiments.
 	
@@ -143,7 +144,7 @@ def main(base_path, ntrials=10, seed=123456789):
 	"""
 	
 	# X-Axis data
-	npoints = 101
+	npoints = 11
 	pct_noises = np.linspace(0, 1, npoints)
 	x = (pct_noises * 100, pct_noises * 100)
 	
