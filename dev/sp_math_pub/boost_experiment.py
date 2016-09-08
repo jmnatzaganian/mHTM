@@ -356,9 +356,10 @@ def plot_density_results(bp, bp2=None):
 			title='Local Inhibition'))
 		
 		# Save it
-		plt.subplots_adjust(bottom=0.15, hspace=0.3)
-		plt.savefig('boost_sparseness.png', format='png',
-			facecolor=fig.get_facecolor(), edgecolor='none')
+		plt.show()
+		# plt.subplots_adjust(bottom=0.15, hspace=0.3)
+		# plt.savefig('boost_sparseness.png', format='png',
+			# facecolor=fig.get_facecolor(), edgecolor='none')
 
 def plot_single_run(bp1, bp2):
 	"""
@@ -432,9 +433,10 @@ def plot_single_run(bp1, bp2):
 		y_errs=(compute_err(data[1], axis=0),), xlim=(0, 200), ylim=(0, 100))
 	
 	# Save it
-	plt.subplots_adjust(bottom=0.15, hspace=0.3)
-	plt.savefig('boost_permanence.png', format='png',
-		facecolor=fig.get_facecolor(), edgecolor='none')
+	plt.show()
+	# plt.subplots_adjust(bottom=0.15, hspace=0.3)
+	# plt.savefig('boost_permanence.png', format='png',
+		# facecolor=fig.get_facecolor(), edgecolor='none')
 
 if __name__ == '__main__':
 	# Params

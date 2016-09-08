@@ -27,15 +27,30 @@ from itertools import izip
 
 # Third party imports
 import numpy as np
-import matplotlib.pyplot as plt
+from numpy.lib.stride_tricks import as_strided
+# import matplotlib.pyplot as plt
 from sklearn.svm import LinearSVC
-from scipy.misc import imread
-import matplotlib.gridspec as gridspec
-from sklearn.feature_extraction.image import extract_patches_2d
+# from scipy.misc import imread
+# import matplotlib.gridspec as gridspec
+# from sklearn.feature_extraction.image import extract_patches_2d
+from joblib import Parallel, delayed
 
 # Program imports
-from mHTM.region import SPRegion, load
-from mHTM.datasets.loader import load_mnist
+from mHTM.region import SPRegion
+from mHTM.datasets.loader import load_mnist, MNISTCV
+
+def get_windows(x, window_size):
+	# Dimensions of new array
+	shape = tuple(np.array(x.shape) / window_size) + (window_size, window_size)
+	
+	# The strides
+	strides = tuple(np.array(x.strides) * window_size) + x.strides
+	
+	# The new array
+	windows = as_strided(x, shape=shape, strides=strides)
+	
+	# flatten the first two and last two dimensions
+	return windows.reshape(shape[0] * shape[1], shape[2] * shape[3])
 
 def plot_weights(input, weights, nrows, ncols, shape, out_path=None,
 	show=True):
@@ -228,5 +243,156 @@ def score_grid():
 	clf.fit(tr_x2, tr_y)
 	print 'SVM Accuracy : {0:2.2f} %'.format(clf.score(te_x2, te_y) * 100)
 
+def execute(sp, tr, te):
+	# Trains
+	sp.fit(tr)
+	
+	# Test
+	tr_x = sp.predict(tr)
+	te_x = sp.predict(te)
+	
+	# Save predictions
+	sp._save_data("predictions", (tr_x, te_x))
+
+def first_level(log_dir, ntrain=800, ntest=200, nsplits=1, seed=123456789):
+	# Details of the filter
+	win_size = 7
+	total_win_size = win_size * win_size
+	nwindows = 16
+	
+	# SP arguments
+	kargs = {
+		'ninputs': total_win_size,
+		'ncolumns': 200,
+		'nactive': 50,
+		'global_inhibition': True,
+		'trim': 1e-4,
+		'disable_boost': True,
+		'seed': seed,
+		
+		'nsynapses': 35,
+		'seg_th': 5,
+		
+		'syn_th': 0.5,
+		'pinc': 0.001,
+		'pdec': 0.001,
+		'pwindow': 0.5,
+		'random_permanence': True,
+		
+		'nepochs': 10,
+		'log_dir': os.path.join(log_dir, '1-1')
+	}
+	
+	# Get the data
+	(tr_x, tr_y), (te_x, te_y) = load_mnist()
+	x, y = np.vstack((tr_x, te_x)), np.hstack((tr_y, te_y))
+	
+	# Split the data for CV
+	tr, te = MNISTCV(tr_y, te_y, ntrain, ntest, nsplits, seed).gen.next()
+	tr, te = tr[:ntrain], te[:ntest]
+	
+	# Store the labels to disk
+	with open(os.path.join(log_dir, 'labels.pkl'), 'wb') as f:
+		cPickle.dump((y[tr], y[te]), f, cPickle.HIGHEST_PROTOCOL)
+	del tr_y; del te_y; del y;
+	
+	# Build the training data
+	train_data = np.zeros((nwindows, ntrain, total_win_size), dtype='bool')
+	for i in xrange(ntrain):
+		xi = x[tr[i]]
+		for j, window in enumerate(get_windows(xi.reshape(28, 28), win_size)):
+			train_data[j, i] = window
+	
+	# Build the testing data
+	test_data = np.zeros((nwindows, ntest, total_win_size), dtype='bool')
+	for i in xrange(ntest):
+		xi = x[te[i]]
+		for j, window in enumerate(get_windows(xi.reshape(28, 28), win_size)):
+			test_data[j, i] = window
+	del tr_x; del te_x; del x
+	
+	# Make the SPs
+	sps = [SPRegion(**kargs) for _ in xrange(nwindows)]
+	
+	# Execute the SPs in parallel
+	Parallel(n_jobs=-1)(delayed(execute)(sp, tr, te) for sp, tr, te in izip(
+		sps, train_data, test_data))
+
+def second_level(log_dir, seed=123456789):
+	# Get the paths to the data
+	paths = []
+	for d in os.listdir(log_dir):
+		p = os.path.join(log_dir, d)
+		if os.path.isdir(p): paths.append(os.path.join(p, 'predictions.pkl'))
+	paths = sorted(paths)[:16]
+	
+	# Read in the first item, to determine the shape of the data
+	tr, te = SPRegion.load_data(paths[0])
+	ntrain, ntest = len(tr), len(te)
+	n_base_cols = tr.shape[-1]
+	ninputs = n_base_cols * len(paths)
+	
+	# Read in all of the data
+	tr_x = np.zeros((ntrain, ninputs), dtype='bool')
+	te_x = np.zeros((ntest, ninputs), dtype='bool')
+	for i, p in enumerate(paths):
+		tr, te = SPRegion.load_data(p)
+		tr_x[:, i*n_base_cols:(i+1)*n_base_cols] = tr
+		te_x[:, i*n_base_cols:(i+1)*n_base_cols] = te
+	
+	# Read in the labels
+	tr_y, te_y = SPRegion.load_data(os.path.join(log_dir, 'labels.pkl'))
+	
+	# SP arguments
+	ncolumns = 4096
+	kargs = {
+		'ninputs': ninputs,
+		'ncolumns': ncolumns,
+		'nactive': int(ncolumns*0.2),
+		'global_inhibition': True,
+		'trim': 1e-4,
+		'disable_boost': True,
+		'seed': seed,
+		
+		'nsynapses': 100,
+		'seg_th': 0,
+		
+		'syn_th': 0.5,
+		'pinc': 0.001,
+		'pdec': 0.001,
+		'pwindow': 0.5,
+		'random_permanence': True,
+		
+		'nepochs': 10,
+		'log_dir': os.path.join(log_dir, '2-1'),
+		'clf': LinearSVC(random_state=seed)
+	}
+	
+	# Create the SP
+	sp = SPRegion(**kargs)
+	
+	# Train the SP
+	sp.fit(tr_x, tr_y)
+	
+	# Score the SP
+	print sp.score(te_x, te_y)
+
+def parallel_grid(log_dir, ntrain=800, ntest=200, nsplits=1, seed=123456789):
+	# Make a new directory for this experiment
+	new_dir = os.path.join(log_dir, time.strftime('%Y%m%d-%H%M%S' ,
+		time.localtime()))
+	os.makedirs(new_dir)
+	
+	# Seed numpy
+	np.random.seed(seed)
+	
+	# Execute the first level
+	first_level(new_dir, ntrain=800, ntest=200, nsplits=1, seed=123456789)
+	
+	# Execute the second level
+	second_level(new_dir, seed=123456789)
+
 if __name__ == '__main__':
-	pass
+	out_path = os.path.join(os.path.expanduser('~'), 'scratch', 'grid')
+	parallel_grid(out_path)
+	# second_level(r'C:\Users\james\scratch\grid\20160611-153835')
