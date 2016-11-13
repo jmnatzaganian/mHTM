@@ -268,13 +268,14 @@ class SPRegion(Region):
 		
 		# Do some simple parameter checks to make sure everything is OK
 		if self.nactive is None and self.pct_active is None:
-			raise '"nactive" or "pct_active" must be specified'
+			raise Exception('"nactive" or "pct_active" must be specified')
 		if self.nactive is not None and self.pct_active is not None:
-			raise '"nactive" and "pct_active" are exclusive parameters'
+			raise Exception('"nactive" and "pct_active" are exclusive'
+				'parameters')
 		if self.nactive > self.ncolumns:
-			raise '"ncolumns" must be greater than "nactive"'
+			raise Exception('"ncolumns" must be greater than "nactive"')
 		if self.nsynapses > self.ninputs:
-			raise '"nsynapses" must be less than "ninputs"'	
+			raise Exception('"nsynapses" must be less than "ninputs"')
 		
 		####
 		# Directory configuration
@@ -346,8 +347,7 @@ class SPRegion(Region):
 		# Determine if history is needed
 		if self.disable_boost is False:
 			# Prepare the histories
-			self.overlap = np.zeros((self.ncolumns, self.duty_cycle),
-				dtype='i')
+			self.overlap = np.zeros((self.ncolumns, self.duty_cycle))
 			self.y = np.zeros((self.ncolumns, self.duty_cycle), dtype='bool')
 			
 			# Prepare the boosts
@@ -359,6 +359,8 @@ class SPRegion(Region):
 		else:
 			# Make much smaller objects that are still compatible
 			#   - Note: Shifting is still safe, since np manages it
+			#	- Note: Integer type is fine, since overlap will only ever be
+			#           an integer.
 			self.overlap = np.zeros((self.ncolumns, 1), dtype='i')
 			self.y = np.zeros((self.ncolumns, 1), dtype='bool')
 			self.boost = 1
@@ -610,13 +612,7 @@ class SPRegion(Region):
 			# entire region
 			
 			# Compute the winning column indexes
-			if self.learn:				
-				# Randomly break ties
-				ix = np.argpartition(-self.overlap[:, 0] -
-					self.prng.uniform(.1, .2, self.ncolumns), k - 1)[:k]
-			else:
-				# Choose the same set of columns each time
-				ix = np.argpartition(-self.overlap[:, 0], k - 1)[:k]
+			ix = np.argpartition(-self.overlap[:, 0], k - 1)[:k]
 			
 			# Set the active columns
 			self.y[ix, 0] = self.overlap[ix, 0] > 0

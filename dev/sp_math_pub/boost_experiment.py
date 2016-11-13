@@ -203,18 +203,18 @@ def vary_density(bp, global_inhibition=True):
 	inhibition.
 	"""
 	
-	density_levels = np.linspace(.01, .99, 99)
+	# density_levels = np.arange(1, 100, 1)
+	density_levels = np.arange(28, 100, 1)
 	
 	for density in density_levels:
-		d = int(density * 100)
-		print d
-		p = os.path.join(bp, str(d))
+		print density
+		p = os.path.join(bp, str(density))
 		p2 = os.path.join(p, 'data.pkl')
 		try:
 			os.makedirs(p)
 		except OSError:
 			pass
-		make_data(p2, density=density, seed=123456789)
+		make_data(p2, density=density/100., seed=123456789)
 		
 		# Repeat for good results
 		Parallel(n_jobs=-1)(delayed(main)(load_data(p2),
@@ -356,10 +356,10 @@ def plot_density_results(bp, bp2=None):
 			title='Local Inhibition'))
 		
 		# Save it
-		plt.show()
-		# plt.subplots_adjust(bottom=0.15, hspace=0.3)
-		# plt.savefig('boost_sparseness.png', format='png',
-			# facecolor=fig.get_facecolor(), edgecolor='none')
+		# plt.show()
+		plt.subplots_adjust(bottom=0.15, hspace=0.3)
+		plt.savefig('boost_sparseness.png', format='png',
+			facecolor=fig.get_facecolor(), edgecolor='none')
 
 def plot_single_run(bp1, bp2):
 	"""
@@ -433,21 +433,21 @@ def plot_single_run(bp1, bp2):
 		y_errs=(compute_err(data[1], axis=0),), xlim=(0, 200), ylim=(0, 100))
 	
 	# Save it
-	plt.show()
-	# plt.subplots_adjust(bottom=0.15, hspace=0.3)
-	# plt.savefig('boost_permanence.png', format='png',
-		# facecolor=fig.get_facecolor(), edgecolor='none')
+	# plt.show()
+	plt.subplots_adjust(bottom=0.15, hspace=0.3)
+	plt.savefig('boost_permanence.png', format='png',
+		facecolor=fig.get_facecolor(), edgecolor='none')
 
 if __name__ == '__main__':
 	# Params
 	base_dir = os.path.join(os.path.expanduser('~'), 'scratch')
-	p1 = os.path.join(base_dir, 'boost_experiments-global')
-	p2 = os.path.join(base_dir, 'boost_experiments-local')
+	p1 = os.path.join(base_dir, 'boost_experiments-global-2')
+	p2 = os.path.join(base_dir, 'boost_experiments-local-2')
 	
 	# Experiment
-	# vary_density(p1, True)
-	# vary_density(p2, False)
-	# plot_density_results(p1, p2)
+	vary_density(p1, True)
+	vary_density(p2, False)
+	plot_density_results(p1, p2)
 	
 	density = '26'
 	plot_single_run(os.path.join(p1, density), os.path.join(p2, density))

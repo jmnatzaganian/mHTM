@@ -214,7 +214,7 @@ def plot_error(x_series, y_series, series_names=None, y_errs=None,
 			plt.ylim(*ylim)
 		else:
 			plt.ylim(*compute_axis_bounds(y_series, 6))
-	colors  = cycle(['b', 'g', 'r', 'c', 'm', 'y', 'k'])
+	colors  = cycle(['g', 'b', 'r', 'c', 'm', 'y', 'k'])
 	markers = cycle(mlines.Line2D.filled_markers)
 	
 	# Add the data
@@ -459,7 +459,7 @@ def plot_compare_images(x_series, shape, title=None, series_labels=None,
 	
 	# Save the plot
 	if out_path is not None:
-		plt.savefig(out_path, format=out_path.split('.')[-1])
+		plt.savefig(out_path, format=out_path.split('.')[-1], dpi = 100)
 	
 	# Show the plot and close it after the user is done
 	if show: plt.show()

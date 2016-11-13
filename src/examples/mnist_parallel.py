@@ -151,7 +151,7 @@ def main_local(log_dir, ntrain=800, ntest=200, niter=5, nsplits=3,
 		param_distributions=params,
 		n_iter=niter, # Total runs
 		n_jobs=ncores, # Use this many number of cores
-		pre_dispatch=2 * ncores, # Give each core two jobs at a time
+		pre_dispatch=1 * ncores, # Give each core two jobs at a time
 		iid=True, # Data is iid across folds
 		cv=cv, # The CV split for the data
 		refit=False, # Disable fitting best estimator on full dataset
