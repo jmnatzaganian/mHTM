@@ -22,12 +22,13 @@ G{packagetree mHTM}
 # Native imports
 from itertools import izip
 import os
+import cPickle
 
 # Third-Party imports
 import numpy as np
 
 # Program imports
-from plot import plot_surface_video, plot_surface
+from mHTM.plot import plot_surface_video, plot_surface
 
 def compute_boost(duty_cycle, min_duty_cycle, max_boost=10):
 	"""
@@ -58,23 +59,39 @@ def plot_boost(out_dir, duty_cycle=1000., max_boost=10):
 	@param max_boost: The max boost to use.
 	"""
 	
-	# Compute the range of values
-	duty_cycles = np.arange(0, duty_cycle + 1) / duty_cycle
-	min_duty_cycles = np.linspace(0, 1, duty_cycle + 1)
+	azim = 73
+	elev = 28
 	
-	# Make it into a mesh
-	x, y = np.meshgrid(duty_cycles, min_duty_cycles)
+	if not os.path.exists(out_dir):
+		os.makedirs(out_dir)
 	
-	# Evaluate the boost at each instance
-	z = np.array([[compute_boost(xii, yii, max_boost) for xii, yii in
-		izip(xi, yi)] for xi, yi in izip(x, y)])
+	data_path = os.path.join(out_dir, 'data.pkl')
+	img_path = os.path.join(out_dir, 'boost.png')
+	if not os.path.exists(data_path):	
+		# Compute the range of values
+		duty_cycles = np.arange(0, duty_cycle + 1) / duty_cycle
+		min_duty_cycles = np.linspace(0, 1, duty_cycle + 1)
+		
+		# Make it into a mesh
+		x, y = np.meshgrid(duty_cycles, min_duty_cycles)
+		
+		# Evaluate the boost at each instance
+		z = np.array([[compute_boost(xii, yii, max_boost) for xii, yii in
+			izip(xi, yi)] for xi, yi in izip(x, y)])
+		
+		with open(data_path, 'wb') as f:
+			cPickle.dump((x, y, z), f, cPickle.HIGHEST_PROTOCOL)
+	else:
+		with open(data_path, 'rb') as f:
+			x, y, z = cPickle.load(f)
 	
 	# Save the plots
 	plot_surface(x, y, z, 'Active Duty Cycle', 'Minimum Active\nDuty Cycle',
-		'Boost', None, 'boost.png', False)
+		'Boost', None, img_path, False, azim, elev, vmin=None, vmax=None)
 	# plot_surface_video(x, y, z, out_dir, 'Duty Cycle', 'Minimum Duty Cycle',
 		# 'Boost')
 
 if __name__ == '__main__':
-	dir = os.path.join('results', 'Boost experiments', '1000_10')
-	plot_boost(dir, duty_cycle=1000.)
+	base_dir = os.path.join(
+		os.path.expanduser('~'), 'scratch', 'boost_experiment')
+	plot_boost(base_dir, duty_cycle=1000.)

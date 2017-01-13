@@ -470,7 +470,8 @@ def plot_compare_images(x_series, shape, title=None, series_labels=None,
 ###############################################################################
 
 def plot_surface(x, y, z, x_label=None, y_label=None, z_label=None,
-	title=None, out_path=None, show=True):
+	title=None, out_path=None, show=True, azim=-124, elev=38, vmin=0,
+	vmax=100):
 	"""
 	Basic plotter function for plotting surface plots
 	
@@ -493,23 +494,38 @@ def plot_surface(x, y, z, x_label=None, y_label=None, z_label=None,
 	None then the plot will not be saved, but displayed only.
 	
 	@param show: If True the plot will be show upon creation.
+	
+	@param azim: The azimuth to use in the plot.
+	
+	@param elev: The elevation to use in the plot.
+	
+	@param vmin: The minimum color value.
+	
+	@param vmax: The maximum color value.
 	"""
 	
 	# Construct the basic plot
 	fig  = plt.figure(figsize=(32, 18), facecolor='w')
 	ax   = fig.add_subplot(111, projection='3d')
 	surf = ax.plot_surface(x, y, z, cmap=plt.cm.jet, rstride=1, cstride=1,
-		linewidth=0, vmin=0, vmax=100)
+		linewidth=0, vmin=vmin, vmax=vmax)
 	box = ax.get_position()
 	ax2 = plt.axes([(box.x0 + box.width) * 1.0, box.y0, 0.02, box.height])
 	plt.colorbar(surf, cax=ax2)
-	ax.view_init(azim=-124, elev=38)
+	ax.view_init(azim=azim, elev=elev)
 	
 	# Add the labels
 	if title   is not None : plt.title(title)
 	if x_label is not None : ax.set_xlabel(x_label, labelpad=50)
 	if y_label is not None : ax.set_ylabel(y_label, labelpad=60)
 	if z_label is not None : ax.set_zlabel(z_label, labelpad=20)
+	# if x_label is not None : ax.set_xlabel(x_label, labelpad=70)
+	# if y_label is not None : ax.set_ylabel(y_label, labelpad=90)
+	# if z_label is not None : ax.set_zlabel(z_label, labelpad=30)
+	# plt.setp(ax.get_xticklabels(), rotation=5, horizontalalignment='left')
+	# plt.setp(ax.get_yticklabels(), rotation=5, horizontalalignment='right')
+	# plt.setp(ax.get_zticklabels(), rotation=5, horizontalalignment='right',
+		# verticalalignment='center')
 	
 	# Save the plot
 	if out_path is not None:
