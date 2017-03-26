@@ -51,10 +51,11 @@ These prerequisites are needed by some of the experimental code or for other dev
 * [graphviz](http://www.graphviz.org/Download..php)
 
 ## Installation
+### Without virutalenv
 1. Install all prerequisites
     1. If you have [pip](https://pip.pypa.io/en/latest/installing.html)
     
-            pip install numpy matplotlib scipy scikit-learn bottleneck
+            pip install -r requirements.txt
 	
     2. If you are on Windows  
         You may download the the (unofficial) precompiled versions available
